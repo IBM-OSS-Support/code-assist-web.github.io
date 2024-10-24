@@ -20,8 +20,10 @@ Works well with basic chat questions, but is inconsistent, does not read full co
 
 2. Granite-code:8b-dense
 
+Better than granite-code:8b, but the some problems with granite-code:8b is also in this model (inconsistency and incomplete code generation)
 
 3. Llama3.1
+
 
 
 4. Codestral-mamba
