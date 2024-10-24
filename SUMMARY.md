@@ -40,3 +40,4 @@ Unusable and unstable. Prints the question in the result before printing the ans
 
 No model is completely consistent. For granite, in a few cases, the result is better than codestral. But since the results are inconsistent, the overall performance is worse.
 Comparisons are focused on completeness of response and consistency between iterations.
+For more details please refer to [chat-results](https://github.com/IBM-GC/vscode-granite-testcases/tree/main/chat-results)
