@@ -15,6 +15,12 @@
 
 
 ### Summary:
+Over all ranking
+#1 Codestral Mamba
+#2 Lama3.1:8b
+#3 Granite-code=8b-dense-instruct
+#4 Granite-code-8b-instruct
+#5 Starcoder2:7b
 
 **1. Granite-code:8b-instruct**
 
@@ -39,5 +45,5 @@ Unusable and unstable. Prints the question in the result before printing the ans
 ---------------------------------------------------------------------------------------------------
 
 No model is completely consistent. For granite, in a few cases, the result is better than codestral. But since the results are inconsistent, the overall performance is worse.
-Comparisons are focused on completeness of response and consistency between iterations.
+Comparisons are focused on accuracy, completeness of response, and consistency between iterations.
 For more details please refer to [chat-results](https://github.com/IBM-GC/vscode-granite-testcases/tree/main/chat-results)
