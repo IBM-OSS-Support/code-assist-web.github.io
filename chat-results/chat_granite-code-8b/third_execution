@@ -1,10 +1,13 @@
 Question 1: What is Lambda function in python?
 
-[ total time = 3900.92 ms | t_prompt_processing=1761.584 t_token_generation=2139.335]
+[total time = 3900.92 ms | t_prompt_processing=1761.584 t_token_generation=2139.335]
 
 RESPONSE:
-A lambda function is a small, anonymous function in Python that can have any number of arguments, but can only have one expression. It is also known as an inline function or a lambda abstraction. Lambda functions are often used when you need a simple function for a short period of time and don't want to define a full function using the def keyword. They are commonly used in functional programming paradigms, such as map(), filter(), and reduce() functions.
 
+"A lambda function is a small, anonymous function in Python that can have any number of arguments, but can only have one expression. 
+It is also known as an inline function or a lambda abstraction. 
+Lambda functions are often used when you need a simple function for a short period of time and don't want to define a full function using the def keyword. 
+They are commonly used in functional programming paradigms, such as map(), filter(), and reduce() functions."
        
 ----------------------------------------------------------------------------------
 

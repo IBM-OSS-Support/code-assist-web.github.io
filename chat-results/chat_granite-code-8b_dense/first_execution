@@ -12,7 +12,7 @@ It can take any number of arguments, but can only have one expression. The synta
 
 Question 2: Write a code for quick-sort algorithm in Python.
 
-[total time =   11163.09 ms | t_prompt_processing=527.789 t_token_generation=10635.301]
+[total time = 11163.09 ms | t_prompt_processing=527.789 t_token_generation=10635.301]
 
 RESPONSE:
 
@@ -55,7 +55,6 @@ In Java, constructors are special methods that are used to initialize objects of
     ```
 
 ----------------------------------------------------------------------------------
-
 
 Question 4: Write a code for Binary Search along with the documentation of the code.
 
@@ -177,7 +176,6 @@ def main():
         elif choice == "3":
 
 ----------------------------------------------------------------------------------
-
 
 Question 6: Port bank code from py to java, javascript
 
@@ -385,7 +383,6 @@ To run this code with Quarkus, you will need to create a `main` method and add t
 You can then run the application using the `mvn quarkus:dev` command.
 
 ----------------------------------------------------------------------------------
-
 
 Question 8: Code optimisation (perhaps sort algorithm)
 

@@ -1,9 +1,10 @@
 Question 1: What is Lambda function in python?
 
-[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+[total time = 7671.49 ms | t_prompt_processing=597.992 t_token_generation=7073.497]
 
 RESPONSE:
-A lambda function is a small, anonymous function in Python that can have any number of arguments, but can only have one expression. It is also known as an inline function or a lambda abstraction. Here's an example of a simple lambda function that adds two numbers together:
+
+"A lambda function is a small, anonymous function in Python that can have any number of arguments, but can only have one expression. It is also known as an inline function or a lambda abstraction. Here's an example of a simple lambda function that adds two numbers together:
     ```python
     lambda x, y: x + y
     ```
@@ -13,12 +14,13 @@ A lambda function is a small, anonymous function in Python that can have any num
     - Sorting data using the sorted() function
     - Creating custom sorting criteria for the sort() method
     - Defining custom exceptions using the raise statement
-       
+"       
+
 ----------------------------------------------------------------------------------
 
 Question 2: Write a code for quick-sort algorithm in Python.
 
-[total time =    2129.13 ms | slot_id=2 t_prompt_processing=2129.12 t_token_generation=0.01]
+[total time =  2129.13 ms | t_prompt_processing=2129.12 t_token_generation=0.01]
 
 RESPONSE:
 
@@ -54,7 +56,7 @@ In this example, we call the `quickSort` function with an initial array `[10, 7,
 
 Question 3: How do you declare constructors and destructors in Java?
 
-[total time =   20128.85 ms | slot_id=1 t_prompt_processing=500.755 t_token_generation=19628.1]
+[total time = 20128.85 ms | t_prompt_processing=500.755 t_token_generation=19628.1]
 
 RESPONSE:
 
@@ -103,13 +105,11 @@ public class MyClass {
 In this example, we define a class with a private `Resource` field that needs to be cleaned up when the object is garbage collected. We define a constructor that takes no arguments, and an overridden `finalize()` method that closes the resource and sets it to null. This ensures that the resource is properly released when the object is no longer needed.
 
 
-
-
 ----------------------------------------------------------------------------------
 
 Question 4: Write a code for Binary Search along with the documentation of the code.
 
-[total time =   24013.74 ms | slot_id=1 t_prompt_processing=497.2 t_token_generation=23516.535]
+[total time = 24013.74 ms | t_prompt_processing=497.2 t_token_generation=23516.535]
 
 RESPONSE:
 
@@ -159,7 +159,7 @@ The documentation for this function includes a description of the parameters and
 Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix)
 "Fix the bugs in the code: @documentation_with_bugs.py"
 
-[total time =    2457.30 ms | t_prompt_processing=2399.404 t_token_generation=57.891]
+[total time = 2457.30 ms | t_prompt_processing=2399.404 t_token_generation=57.891]
 
 RESPONSE:
 

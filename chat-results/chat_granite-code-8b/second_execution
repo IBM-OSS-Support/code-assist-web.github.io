@@ -1,8 +1,9 @@
 Question 1: What is Lambda function in python?
 
-[total time =    8694.50 ms | t_prompt_processing=585.831 t_token_generation=8108.665]
+[total time = 8694.50 ms | t_prompt_processing=585.831 t_token_generation=8108.665]
 
 RESPONSE:
+
 A lambda function in Python is a small anonymous function. It can take any number of arguments, but can only have one expression. Lambda functions are typically used when a simple function is needed and defining a full function would be overkill. Here's an example of how to create a lambda function that adds two numbers together:
 ```python
 add = lambda x, y: x + y
