@@ -24,13 +24,16 @@ Better than granite-code:8b, but the same problems with granite-code:8b is also 
 
 3. Llama3.1:8b-instruct
 
-Major Drawback: Speed to token generation is very slow. 
+Major Drawback: Speed to token generation is very slow. Results are good but inconsistent, reads the full code.
 
 4. Codestral-mamba:7b
 
-Not local.
+Best results out of all. The results are comparable to Github Copilot. Its USP is the speed of token generation. The result generation is fastest. The main issue is that it is not local.
 
 5. Starcoder2:7b
 
+Unusable and unstable. Prints the question in the result before printing the answer. The printed answer is usually garbage or unusable.
 
-(Granite is inconsistent, though sometimes the result is better than codestral. But since the results are inconsistent, the overall result is worse)
+---------------------------------------------------------------------------------------------------
+
+Granite is inconsistent, though sometimes the result is better than codestral. But since the results are inconsistent, the overall result is worse.
