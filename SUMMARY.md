@@ -1,6 +1,6 @@
 | Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
-| Lambda Function | a | 3 | 1 | 2 | 5 |
+| Lambda Function | 2 | 4 | 3 | 1 | 5 |
 | Quicksort Code | a | 3 | 1 | 2 | 5 |
 | Constructors/Desctructors Java | a | 3 | 1 | 2 | 5 |
 | Binary Search Code | a | 3 | 1 | 2 | 5 |
@@ -37,3 +37,4 @@ Unusable and unstable. Prints the question in the result before printing the ans
 ---------------------------------------------------------------------------------------------------
 
 Granite is inconsistent, though sometimes the result is better than codestral. But since the results are inconsistent, the overall result is worse.
+Some comparisons are subjective, as it depends on the user to prefer one result over the other.
