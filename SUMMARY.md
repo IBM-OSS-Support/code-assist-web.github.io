@@ -20,11 +20,11 @@ Works well with basic chat questions, but is inconsistent, does not read full co
 
 2. Granite-code:8b-dense-instruct
 
-Better than granite-code:8b, but the same problems with granite-code:8b is also in this model (inconsistency and incomplete code generation) - reads the full code.
+Slightly better than granite-code:8b in terms of context awarenesss, but the same problems with granite-code:8b is also in this model (inconsistency and incomplete code generation).
 
 3. Llama3.1:8b-instruct
 
-Major Drawback: Speed to token generation is very slow. Results are good but inconsistent, and most of the times too lengthy. Reads the full code.
+Results are good but inconsistent, and most of the times too lengthy because of too much unwanted information. Reads the full code. Also, the speed of token generation is very slow making the overall result take too much time.
 
 4. Codestral-mamba:7b
 
