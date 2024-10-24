@@ -1,7 +1,7 @@
 | Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | Lambda Function | 2 | 4 | 3 | 1 | 5 |
-| Quicksort Code | a | 3 | 1 | 2 | 5 |
+| Quicksort Code | 2 | 3 | 4 | 1 | 5 |
 | Constructors/Desctructors Java | a | 3 | 1 | 2 | 5 |
 | Binary Search Code | a | 3 | 1 | 2 | 5 |
 | Debug the code | a | 3 | 1 | 2 | 5 |
