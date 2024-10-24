@@ -1,0 +1,24 @@
+Question 1: What is Lambda function in python?
+
+Question 2: Write a code for quick-sort algorithm in Python.
+
+Question 3: How do you declare constructors and destructors in Java?
+
+Question 4: Write a code for Binary Search along with the documentation of the code.
+
+Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix) 
+"Fix the bugs in the code: @documentation_with_bugs.py"
+
+Question 6: Port bank code from py to java
+"Port the code @documentation.py to java"
+
+Question 7: Refactor java code to quarkus (Bank code)
+"Refactor the above generated code to quarkus"
+
+Question 8: Code optimisation (perhaps sort algorithm)
+
+Question 9: Documentation comment of bank code
+
+Question 10: Create Unit test for bank code
+
+Models under test: Llama 3.2, granite-8b-instruct-128k (gen 3 is coming), Mystral Mamba latest, starcoder2
