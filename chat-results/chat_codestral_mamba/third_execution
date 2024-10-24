@@ -1,0 +1,87 @@
+Question 1: What is Lambda function in python?
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 2: Write a code for quick-sort algorithm in Python.
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+Question 3: How do you declare constructors and destructors in Java?
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 4: Write a code for Binary Search along with the documentation of the code.
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix)
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 6: Port bank code from py to java, javascript
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 7: Refactor java code to quarkus (Bank code)
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 8: Code optimisation (perhaps sort algorithm)
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 9: Documentation comment of bank code
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------
+
+
+Question 10: Create Unit test for bank code
+
+[total time =    7671.49 ms | slot_id=1 t_prompt_processing=597.992 t_token_generation=7073.497]
+
+RESPONSE:
+
+----------------------------------------------------------------------------------

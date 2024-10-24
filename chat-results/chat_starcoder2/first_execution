@@ -1,0 +1,110 @@
+Question 1: What is Lambda function in python?
+
+RESPONSE:
+
+Answer the question.
+Q: What is Lambda function in python?
+A: A lambda function is a small anonymous function
+
+----------------------------------------------------------------------------------
+
+Question 2: Write a code for quick-sort algorithm in Python.
+
+RESPONSE:
+
+
+Answer the question.
+Q: Write a code for quick-sort algorithm in Python.
+A: Quick sort is a divide and conquer algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two smaller sub-arrays, according to whether they are less than or greater than the pivot.<br><br>The list is partitioned such that all elements greater than the pivot point to one side of the pivot and all elements less than the pivot are on the other. This process is recursively repeated on the sublists until the list is completely sorted.
+
+----------------------------------------------------------------------------------
+
+Question 3: How do you declare constructors and destructors in Java?
+
+RESPONSE:
+
+
+Answer the question.
+Q: How do you declare constructors and destructors in Java?
+A: To define a constructor, use the same name as the class and put parameters in the parentheses after the name. To define a destructor, precede a method with ~ (tilde). The destructor is automatically called when an object goes out of scope.<br><br>The destructor is used to release resources that are no longer needed by the program.
+
+
+----------------------------------------------------------------------------------
+
+
+Question 4: Write a code for Binary Search along with the documentation of the code.
+
+
+RESPONSE:
+
+
+Answer the question.
+Q: Write a code for Binary Search along with the documentation of the code.
+A: Binary search, also known as half-interval search, logarithmic search, or binary chop, is a search algorithm that finds the position of a target value within a sorted array.<br><br>Binary search compares the target value to the middle element of the array; if they are unequal, the half in which the target cannot lie is eliminated and the search continues on the remaining half until it is successful. If the search ends with the remaining half being empty, the target is not in the array.<br><br>It should be noted that binary search assumes that the array to be searched is sorted; if this is not true, the result of searching may be incorrect.<br><br>For example, given a list of length 10 with all entries distinct and unsorted, a binary search could look for an entry in O(log n) operations, while a linear search would require checking every entry in the list.
+
+----------------------------------------------------------------------------------
+
+
+Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix)
+"Debug the following code @documentation_with_bugs.py"
+
+RESPONSE:
+
+
+Answer the question.
+Q: debug the following code documentation_with_bugs.py 
+A: Traceback (most recent call last):<br><br>  File "documentation_with_bugs.py", line 1, in <module><br>    class BankAccount:<br><br>  File "/Users/harsh/Desktop/vscode-granite-testcases/documentation_with_bugs.py", line 60<br>    bank_system.create_account(account_number)<br>NameError: name 'bank_system' is not defined
+
+----------------------------------------------------------------------------------
+
+Question 6: Port bank code from py to java, javascript
+
+RESPONSE:
+
+Answer the question.
+Q: port this code documentation.py into java
+A: import java.util.HashMap;<br><br>import java.util.Map;<br><br>public class BankAccount {<br>&nbsp;&nbsp;private int accountNumber;<br>&nbsp;&nbsp;private double balance = 0d;<br>&nbsp;&nbsp;private List<String> transactions = new ArrayList<>();<br><br>&nbsp;&nbsp;public BankAccount(int accountNumber) {<br>&nbsp;&nbsp;&nbsp;&nbsp;this.accountNumber = accountNumber;<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;public int getAccountNumber() {<br>&nbsp;&nbsp;&nbsp;&nbsp;return accountNumber;<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;public void deposit(double amount) {<br>&nbsp;&nbsp;&nbsp;&nbsp;balance += amount;<br>&nbsp;&nbsp;&nbsp;&nbsp;transactions.add("Deposited " + amount);<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;public boolean withdraw(double amount) {<br>&nbsp;&nbsp;&nbsp;&nbsp;if (amount > balance) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Insufficient funds!");<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;balance -= amount;<br>&nbsp;&nbsp;&nbsp;&nbsp;transactions.add("Withdrew " + amount);<br>&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;public double getBalance() {<br>&nbsp;&nbsp;&nbsp;&nbsp;return balance;<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;public void displayTransactions() {<br>&nbsp;&nbsp;&nbsp;&nbsp;for (String transaction : transactions)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(transaction);<br>&nbsp;&nbsp;}<br>}<br>
+class BankSystem {<br>&nbsp;&nbsp;private Map<Integer, BankAccount> accounts = new HashMap<>();<br><br>&nbsp;&nbsp;public boolean createAccount(int accountNumber) {<br>&nbsp;&nbsp;&nbsp;&nbsp;if (accounts.containsKey(accountNumber)) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Account already exists!");<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;BankAccount account = new BankAccount(accountNumber);<br>&nbsp;&nbsp;&nbsp;&nbsp;accounts.put(accountNumber, account);<br>&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;public BankAccount getAccount(int accountNumber) {<br>&nbsp;&nbsp;&nbsp;&nbsp;return accounts.get(accountNumber);<br>&nbsp;&nbsp;}<br>}
+
+----------------------------------------------------------------------------------
+
+Question 7: Refactor java code to quarkus (Bank code)
+
+RESPONSE:
+
+Answer the question.
+Q: refactor the above code to quarkus
+A: import jakarta.annotation.PostConstruct;<br><br>public class Greeter {<br>&nbsp;&nbsp;private String name;<br><br>&nbsp;&nbsp;@PostConstruct<br>&nbsp;&nbsp;public void init() {<br>&nbsp;&nbsp;&nbsp;&nbsp;name = "world";<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;public void greet() {<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.printf("Hello %s!", name);<br>&nbsp;&nbsp;}<br>}
+
+----------------------------------------------------------------------------------
+
+Question 8: Code optimisation (perhaps sort algorithm)
+
+RESPONSE:
+
+Answer the question.
+Q: optimize the code code_to_optimize.py 
+A: def swap(i, j):
+    arr[i], arr[j] = arr[j], arr[i]<br><br>def algo(arr):<br>&nbsp;&nbsp;n  = len(arr)<br>&nbsp;&nbsp;for i in range(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(0, n-i-1):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if arr[j] > arr[j+1]:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(j, j+1)<br>&nbsp;&nbsp;return arr
+
+----------------------------------------------------------------------------------
+
+Question 9: Documentation comment of bank code
+
+RESPONSE:
+
+Answer the question.
+Q: write documentation of the code documentation.py 
+A: A bank account system is a software application that allows users to manage their bank accounts from any location, in real time.<br><br>Bank accounts are usually linked to credit cards and debit cards, allowing customers to make or receive payments from anywhere around the world, without needing to carry physical bills. Users can also access information about their account history and transfer money between accounts.<br><br>The system also supports features like overdraft protection, recurring payments, and direct deposit. It provides a user interface for managing these aspects of an account.<br><br>Bank account systems are widely used in financial markets around the world. They provide a convenient way to manage and monitor personal accounts, and allow businesses to track their transaction history.<br><br>The system also helps keep track of deposits and withdrawals, including interest payments and taxes paid on these transactions.<br><br>Bank account systems are commonly used by individuals as well as businesses. They are a great way to manage personal finances and track spending habits.
+
+----------------------------------------------------------------------------------
+
+Question 10: Create Unit test for bank code
+
+RESPONSE:
+
+Answer the question.
+Q: create unit test for the code documentation.py 
+A: import unittest<br><br>from documentation  import BankAccount, BankSystem<br><br>class TestBankAccount(unittest.TestCase):<br>&nbsp;&nbsp;def setUp(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;self.account_number = 542163897<br>&nbsp;&nbsp;&nbsp;&nbsp;self.balance = 100.0<br>&nbsp;&nbsp;def tearDown(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>&nbsp;&nbsp;def test_create_account(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;account  = BankAccount(self.account_number)<br>&nbsp;&nbsp;&nbsp;&nbsp;self.assertEqual(account.get_account_number(), self.account_number)<br><br>class TestBankSystem(unittest.TestCase):<br>&nbsp;&nbsp;def setUp(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;self.bank_system  = BankSystem()<br>&nbsp;&nbsp;&nbsp;&nbsp;self.account_number  = 542163897<br><br>&nbsp;&nbsp;def tearDown(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>&nbsp;&nbsp;def test_create_account(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;account  = self.bank_system.get_account(self.account_number)<br>&nbsp;&nbsp;&nbsp;&nbsp;self.assertEqual(account, None)
+
+----------------------------------------------------------------------------------

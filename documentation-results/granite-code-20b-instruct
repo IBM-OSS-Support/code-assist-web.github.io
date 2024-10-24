@@ -1,0 +1,154 @@
+### EXECUTION ###
+
+BankAccount class
+BankSystem class
+main function
+
+## Second Execution:
+
+Bank Account Management System
+
+This program allows you to create new bank accounts, deposit funds, withdraw funds, check balance, and display transaction history.
+
+Here's a breakdown of the classes and their functions:
+
+1. BankAccount class: This class represents a single bank account and has the following methods:
+   - __init__(account_number, balance=0): Initializes the account with an account number and initial balance (default is 0).
+   - deposit(amount): Adds the specified amount to the account balance.
+   - withdraw(amount): Subtracts the specified amount from the account balance if it's available. If not, it displays a message indicating insufficient funds.
+   - check_balance(): Returns the current balance of the account.
+   - display_transactions(): Prints out all the transactions that have been made in this account.
+
+2. BankSystem class: This class represents the entire bank system and has the following methods:
+   - __init__(): Initializes an empty dictionary to store accounts.
+   - create_account(account_number): Creates a new account with the specified account number. If the account already exists, it displays a message indicating so.
+   - get_account(account_number): Returns the account object corresponding to the given account number.
+
+Here's an example of how you can use the program:
+
+```python
+# Create a bank system
+bank = BankSystem()
+
+# Create new accounts
+bank.create_account("12345")
+bank.create_account("67890")
+
+# Deposit funds
+account1 = bank.get_account("12345")
+account1.deposit(100)
+
+# Withdraw funds
+account2 = bank.get_account("67890")
+account2.withdraw(50)
+
+# Check balance and display transaction history
+print(account1.check_balance())  # Output: 100
+account1.display_transactions()   # Output: Deposited 100
+print(account2.check_balance())  # Output: 50
+account2.display_transactions()   # Output: Withdrew 50
+```
+
+
+## Third Execution:
+
+The code provided is a Python program that allows users to create bank accounts, deposit and withdraw funds from those accounts, check the balance of a specific account, and display transaction history. 
+The program uses a BankSystem class to manage multiple accounts, with each account having an account number, balance, and transaction history. 
+The BankAccount class represents an individual bank account, which has methods for depositing, withdrawing, checking balance, and displaying transactions.
+
+To use the code, users can run the main function, which presents a menu of options to the user. 
+They can choose from creating a new account, depositing funds into an existing account, withdrawing funds from an account, checking the balance of an account, displaying transaction history for an account, or exiting the program.
+
+The BankSystem class maintains a dictionary of accounts, with each account number as the key and the corresponding BankAccount object as the value. 
+The create_account method allows users to create new accounts by providing an account number. If the account number already exists, it prints an error message.
+The get_account method retrieves the BankAccount object for a given account number from the dictionary.
+
+The BankAccount class represents an individual bank account. It has an __init__ method that initializes the account number, balance, and transaction history attributes. 
+The deposit method adds the specified amount to the account balance and appends a "Deposited X" message to the transaction history. 
+The withdraw method checks if the requested withdrawal amount is greater than the available balance, and if not, subtracts the amount from the balance and appends a "Withdrew X" message to the transaction history. 
+If the withdrawal amount is insufficient, it prints an error message and returns False. The check_balance method returns the current balance of the account. 
+The display_transactions method iterates through the transaction history and prints each entry.
+
+Overall, this code provides a simple banking system with basic functionality for managing accounts and transactions. 
+However, there are a few features that could be added to improve its usability or security. 
+For example, users could be prompted for confirmation before making large withdrawals, error handling for invalid account numbers or input, and support for multiple currencies could be added.
+
+
+## Fourth Execution: 
+The given Python script `documentation.py` is a simple bank account management system. It allows users to create new accounts, deposit funds, withdraw funds, check balance, and display transaction history. 
+The code uses two classes: `BankAccount` and `BankSystem`. The `BankAccount` class represents an individual bank account and has methods for depositing, withdrawing, checking balance, and displaying transactions. 
+The `BankSystem` class manages a collection of accounts and provides methods for creating new accounts and retrieving existing ones.
+
+The code also includes a main function that presents a menu-based interface to the user. The user can choose from options such as creating a new account, depositing funds, withdrawing funds, checking balance, displaying transaction history, or exiting the program. 
+The script prompts the user for input and performs the corresponding actions on the bank system.
+
+To write documentation for this code, we need to understand the purpose of each class and its methods, as well as the main function that controls the flow of execution. 
+We can document the classes and their methods using docstrings and provide a brief description of the main function's purpose. 
+Additionally, we may want to include information about any external dependencies or resources used by the code.
+
+Here is an example of how you might document the `BankAccount` class:
+
+```python
+class BankAccount:
+    """Represents a bank account and provides methods for depositing, withdrawing, checking balance, and displaying transactions."""
+
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        """Deposit the specified amount into the account."""
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        """Withdraw the specified amount from the account if sufficient funds are available."""
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        """Return the current balance of the account."""
+        return self.balance
+
+    def display_transactions(self):
+        """Display all transactions made on the account."""
+        for transaction in self.transactions:
+            print(transaction)
+```
+
+In this example, we have provided a docstring at the top of the `BankAccount` class that briefly describes its purpose and provides some context for the methods. 
+The docstrings for the other classes and functions can be similarly written to provide comprehensive documentation for the entire code base.
+
+
+## Fifth Execution 
+
+# Bank Account Management System
+This Python program provides a simple bank account management system with the ability to create new accounts, deposit and withdraw funds, check balance, and display transaction history.
+## Classes
+There are two classes in this program - `BankAccount` and `BankSystem`. The `BankAccount` class represents a single bank account and has attributes such as account number, balance, and transaction history. It also includes methods for depositing funds, withdrawing funds, checking balance, and displaying transactions.
+The `BankSystem` class acts as the main system for managing multiple bank accounts. It has an attribute called `accounts`, which is a dictionary mapping account numbers to instances of the `BankAccount` class. The `create_account` method allows users to create new accounts by providing an account number. The `get_account` method retrieves the `BankAccount` instance associated with a given account number.
+## Main Function
+The `main` function provides a simple user interface for interacting with the bank system. It displays a menu of options and prompts the user to choose one. Based on the user's choice, it performs the corresponding action, such as creating a new account, depositing funds, withdrawing funds, checking balance, or displaying transaction history.
+## Sample Output
+Here is an example of how the program might output when creating a new account and depositing funds:
+```
+Bank Account Management System
+1. Create new account
+2. Deposit funds
+3. Withdraw funds
+4. Check balance
+5. Display transaction history
+6. Exit
+Enter your choice: 1
+Enter new account number: 12345
+Account created successfully!
+Enter your choice: 2
+Enter account number: 12345
+Enter deposit amount: 1000
+Deposit successful!
+```

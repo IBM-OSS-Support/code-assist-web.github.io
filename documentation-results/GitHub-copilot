@@ -1,0 +1,414 @@
+#### FIRST RUN ######
+
+
+class BankAccount:
+    """
+    A class to represent a bank account.
+
+    Attributes:
+    ----------
+    account_number : str
+        The account number of the bank account.
+    balance : float
+        The balance of the bank account.
+    transactions : list
+        A list to store the transactions of the bank account.
+
+    Methods:
+    -------
+    deposit(amount):
+        Deposits the specified amount into the bank account.
+    withdraw(amount):
+        Withdraws the specified amount from the bank account if sufficient funds are available.
+    check_balance():
+        Returns the current balance of the bank account.
+    display_transactions():
+        Prints all the transactions of the bank account.
+    """
+
+    def __init__(self, account_number, balance=0):
+        """
+        Constructs all the necessary attributes for the bank account object.
+
+        Parameters:
+        ----------
+        account_number : str
+            The account number of the bank account.
+        balance : float, optional
+            The initial balance of the bank account (default is 0).
+        """
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        """
+        Deposits the specified amount into the bank account.
+
+        Parameters:
+        ----------
+        amount : float
+            The amount to be deposited.
+        """
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        """
+        Withdraws the specified amount from the bank account if sufficient funds are available.
+
+        Parameters:
+        ----------
+        amount : float
+            The amount to be withdrawn.
+
+        Returns:
+        -------
+        bool
+            True if the withdrawal was successful, False otherwise.
+        """
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        """
+        Returns the current balance of the bank account.
+
+        Returns:
+        -------
+        float
+            The current balance of the bank account.
+        """
+        return self.balance
+
+    def display_transactions(self):
+        """
+        Prints all the transactions of the bank account.
+        """
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class BankSystem:
+    """
+    A class to represent the bank system.
+
+    Attributes:
+    ----------
+    accounts : dict
+        A dictionary to store the bank accounts with account numbers as keys.
+
+    Methods:
+    -------
+    create_account(account_number):
+        Creates a new bank account with the specified account number.
+    get_account(account_number):
+        Retrieves the bank account with the specified account number.
+    """
+
+    def __init__(self):
+        """
+        Constructs all the necessary attributes for the bank system object.
+        """
+        self.accounts = {}
+
+    def create_account(self, account_number):
+        """
+        Creates a new bank account with the specified account number.
+
+        Parameters:
+        ----------
+        account_number : str
+            The account number for the new bank account.
+
+        Returns:
+        -------
+        bool
+            True if the account was created successfully, False if the account already exists.
+        """
+        if account_number not in self.accounts:
+            self.accounts[account_number] = BankAccount(account_number)
+            return True
+        else:
+            print("Account already exists!")
+            return False
+
+    def get_account(self, account_number):
+        """
+        Retrieves the bank account with the specified account number.
+
+        Parameters:
+        ----------
+        account_number : str
+            The account number of the bank account to be retrieved.
+
+        Returns:
+        -------
+        BankAccount or None
+            The bank account object if found, None otherwise.
+        """
+        return self.accounts.get(account_number)
+
+
+def main():
+    """
+    The main function to run the bank account management system.
+    """
+    bank_system = BankSystem()
+
+    while True:
+        print("\nBank Account Management System")
+        print("1. Create new account")
+        print("2. Deposit funds")
+        print("3. Withdraw funds")
+        print("4. Check balance")
+        print("5. Display transaction history")
+        print("6. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            account_number = input("Enter new account number: ")
+            bank_system.create_account(account_number)
+        elif choice == "2":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter deposit amount: "))
+            account = bank_system.get_account(account_number)
+            if account:
+                account.deposit(amount)
+        elif choice == "3":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter withdrawal amount: "))
+            account = bank_system.get_account(account_number)
+            if account and account.withdraw(amount):
+                print("Withdrawal successful!")
+        elif choice == "4":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                print(f"Account balance: {account.check_balance()}")
+        elif choice == "5":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                account.display_transactions()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
+
+
+####### SECOND RUN ############
+
+
+class BankAccount:
+    """
+    A class to represent a bank account.
+
+    Attributes:
+    ----------
+    account_number : str
+        The account number of the bank account.
+    balance : float
+        The balance of the bank account.
+    transactions : list
+        A list to store the transaction history of the bank account.
+
+    Methods:
+    -------
+    deposit(amount):
+        Deposits the specified amount into the bank account.
+    withdraw(amount):
+        Withdraws the specified amount from the bank account if sufficient funds are available.
+    check_balance():
+        Returns the current balance of the bank account.
+    display_transactions():
+        Prints the transaction history of the bank account.
+    """
+
+    def __init__(self, account_number, balance=0):
+        """
+        Constructs all the necessary attributes for the bank account object.
+
+        Parameters:
+        ----------
+        account_number : str
+            The account number of the bank account.
+        balance : float, optional
+            The initial balance of the bank account (default is 0).
+        """
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        """
+        Deposits the specified amount into the bank account.
+
+        Parameters:
+        ----------
+        amount : float
+            The amount to be deposited.
+        """
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        """
+        Withdraws the specified amount from the bank account if sufficient funds are available.
+
+        Parameters:
+        ----------
+        amount : float
+            The amount to be withdrawn.
+
+        Returns:
+        -------
+        bool
+            True if the withdrawal was successful, False otherwise.
+        """
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        """
+        Returns the current balance of the bank account.
+
+        Returns:
+        -------
+        float
+            The current balance of the bank account.
+        """
+        return self.balance
+
+    def display_transactions(self):
+        """
+        Prints the transaction history of the bank account.
+        """
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class BankSystem:
+    """
+    A class to represent a bank system.
+
+    Attributes:
+    ----------
+    accounts : dict
+        A dictionary to store the bank accounts.
+
+    Methods:
+    -------
+    create_account(account_number):
+        Creates a new bank account with the specified account number.
+    get_account(account_number):
+        Retrieves the bank account with the specified account number.
+    """
+
+    def __init__(self):
+        """
+        Constructs all the necessary attributes for the bank system object.
+        """
+        self.accounts = {}
+
+    def create_account(self, account_number):
+        """
+        Creates a new bank account with the specified account number.
+
+        Parameters:
+        ----------
+        account_number : str
+            The account number for the new bank account.
+
+        Returns:
+        -------
+        bool
+            True if the account was created successfully, False if the account already exists.
+        """
+        if account_number not in self.accounts:
+            self.accounts[account_number] = BankAccount(account_number)
+            return True
+        else:
+            print("Account already exists!")
+            return False
+
+    def get_account(self, account_number):
+        """
+        Retrieves the bank account with the specified account number.
+
+        Parameters:
+        ----------
+        account_number : str
+            The account number of the bank account to be retrieved.
+
+        Returns:
+        -------
+        BankAccount or None
+            The bank account object if found, None otherwise.
+        """
+        return self.accounts.get(account_number)
+
+
+def main():
+    """
+    The main function to run the bank account management system.
+    """
+    bank_system = BankSystem()
+
+    while True:
+        print("\nBank Account Management System")
+        print("1. Create new account")
+        print("2. Deposit funds")
+        print("3. Withdraw funds")
+        print("4. Check balance")
+        print("5. Display transaction history")
+        print("6. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            account_number = input("Enter new account number: ")
+            bank_system.create_account(account_number)
+        elif choice == "2":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter deposit amount: "))
+            account = bank_system.get_account(account_number)
+            if account:
+                account.deposit(amount)
+        elif choice == "3":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter withdrawal amount: "))
+            account = bank_system.get_account(account_number)
+            if account and account.withdraw(amount):
+                print("Withdrawal successful!")
+        elif choice == "4":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                print(f"Account balance: {account.check_balance()}")
+        elif choice == "5":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                account.display_transactions()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()

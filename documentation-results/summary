@@ -1,0 +1,123 @@
+Testing results for documenting code
+
+ 
+
+Summary:
+
+Github Codepilot is excellent.
+
+llama3:8b-instruct was interesting, but difficult to use for work/productivity.
+
+granite.code 20b-instruct, 8b-instruct, 8b-instruct-128k is not usable.
+
+ 
+
+The test:
+
+The accuracy and precision baselines were run command line directly against ollama. We have manually run them from continue.dev chat window with the same results, but for consistency, automation, and to isolate the results the test was performed with the following ollama run command. Note: The max context length is limited by the model in this operation.
+
+Models ran using: Command Line
+
+<ollama run <model id> "Generate documentation comments for this code: $(cat documentation.py)
+
+All the results and their output can be found in the following github link.
+
+https://github.com/harshmittalibm/vscode-granite-testcases/blob/main/GitHub-copilot
+
+ 
+
+The sample python bank account application is 88 lines long with 2 classes, 8 functions along with main()
+
+https://github.com/harshmittalibm/vscode-granite-testcases/blob/main/documentation.py
+
+ 
+
+The models tested from best to worst results
+
+Github Copilot
+granite.code (Through the chat box under VS Code)
+
+llama3:8b-instruct
+
+granite-code:20b-instruct
+
+granite-code:8b-instruct
+
+granite-code:8b-instruct-128k
+
+ 
+
+#1. It just works! Professional and usable. This is the North Star.
+
+Github Copilot result summary
+
+The results were accurate and documented the entire codebase exactly as required. This includes a description of each class, attributes that include data types of each class, Method and description of every function and their return results.
+
+Most remarkably you get the exact same results everytime you ask it to generate documentation comments for the code.
+
+
+#2 (WCA) granite.code in the chatbox.
+It is slow, but accurate with poor integration with the VS Code editor making it annoying to use requiring copy and paste like the old days where you copied code from stack overflow or sourceforge
+
+The good news is that going through the granite.code installed chat box yielded much better results. I understand that through granite.code there are some system prompts that improve results.
+It was very consistent able to properly document the first 2 classes including attributes of the functions, methods with variables, and return values.
+The big strike was that it did not comment the main() class even in repeated requests, but each request yielded the same results against the first 2 classes.
+The bad thing about granite.code So the setup looks similar to continue.dev/Github Copilot with a dedicated AI chatbox, but there is poor intergration with the VS Code editor. You could not ask granite.code to take any action against the code in the editor nor could you refer to a file. Very awkward!
+You have to Copy the entire codebase into the chat box or you have to use a specil @<name.py> and ask for the action against it.
+granite.code was also significantly slower than ollama cli or continue.dev
+Copying the 88 lines takes about 5-10 seconds. Not clear why this is slow? Using the @ redirect may take care of this step.
+Asking it to document the codebase takes about 50-60 seconds vs continue.dev and direct ollama taking 10-20 seconds to reply.
+When it is done you do get a "copy" icon that you can press and then you have to paste it into the editor. You actually want to paste it into a new editor tab or you have to delete the contents and copy it into the original editor tab. Again very awkward.
+continue.dev and Github Copilot can take action against the editor panel and provides the following useful abilities with the AI response.
+apply in editor -> followed by a confirm accept changes that merges changes into your original editor with the codebase.
+ insert at cursor,
+ insert into terminal,
+or insert into new file.
+If Granite.code improves integration with VS Code editor for a better user experience it is consistent and accurate except for skipping main. 
+
+
+#3. LLama3:8b-instruct
+
+Kind of functional and able to work through the entire codebase, but inconsistent results also makes it difficult to use with desired results that may occur after repeated attempts and/or  partial desired results in between. Its free, but I would not use this for work.
+
+LLama3 attempts to follow a standard format like Github Copilot with description, attributes, and methods, but Inconsistent comments and documentation from run to run. Sometimes it starts with an overview or explanation of the code and sometimes it doesn't.
+
+Sometimes it puts comments inline with the code, but sometimes it just outputs documentation separate from the code for each class, function, and main.
+
+Sometimes it documents example usage of how to call each function, but sometimes it doesn't.
+
+It does read through the entire codebase and delivers something for every class, function, and main. Interesting, but not really usable.
+
+ 
+
+#4.  granite-code:20b-instruct
+
+Not usable due to poor accuracy and wild precision/inconsistency
+
+Results vary widely. Some attempts return gibberish or empty class, function, main headers with no comment or anything useful. sometimes only a summary documentation with no comments in actual code. Sometimes it returns the code with no comments at all like it did nothing. Sometimes it comments the code only in the first class, but nothing for the second or main. Sometimes you get an absurd response like "This is not something that is required/related to the code"
+
+ 
+
+#5. granite-code:8b-instruct
+
+Not usable due to poor accuracy and wild precision/inconsistency.
+
+This model performed very much the same as the 20b. Unless you were keeping track you wouldn't know the difference. Same issues of Sometimes ...  and Sometimes not ...
+
+Same issues of gibberish or absurd response.
+
+ 
+
+#6. granite-code:8b-instruct-128k
+
+Not usable because it never returned comment or documentation beyond the first class. IE It never returned results for the second class or main or the functions in them.
+
+Same issues of poor accuracy and wild precision/inconsistency as the other granite models.
+
+It is last on the list because it had the same problem as the other granite-code models, but it fails accuracy as it could not read the full code.
+
+Note: This is the model we are planning on defaulting to for our continue.dev project.
+
+ 
+
+We will test again when gen3 8b-instruct-128k is available.
