@@ -1,15 +1,15 @@
 | Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | Lambda Function | 2 | 4 | 3 | 1 | 5 |
-| Quicksort Code | 2 | 3 | 4 | 1 | 5 |
-| Constructors/Desctructors Java | a | 3 | 1 | 2 | 5 |
-| Binary Search Code | a | 3 | 1 | 2 | 5 |
-| Debug the code | a | 3 | 1 | 2 | 5 |
-| Port the code | a | 3 | 1 | 2 | 5 |
-| Refactor code into Quarkus | a | 3 | 1 | 2 | 5 |
-| Optimisation of code | a | 3 | 1 | 2 | 5 |
-| Documentation of code | a | 3 | 1 | 2 | 5 |
-| Unit Test of code | a | 3 | 1 | 2 | 5 |
+| Quicksort Code | 3 | 2 | 4 | 1 | 5 |
+| Constructors/Desctructors Java | 1 | 4 | 3 | 2 | 5 |
+| Binary Search Code | 3 | 1 | 4 | 2 | 5 |
+| Debug the code | 4 | 3 | 1 | 2 | 5 |
+| Port the code | 4 | 3 | 2 | 1 | 5 |
+| Refactor code into Quarkus | 4 | 3 | 2 | 1 | 5 |
+| Optimisation of code | 3 | 1 | 2 | 4 | 5 |
+| Documentation of code | 4 | 3 | 2 | 1 | 5 |
+| Unit Test of code | 4 | 3 | 1 | 2 | 5 |
 
 
 Summary:
@@ -24,7 +24,7 @@ Better than granite-code:8b, but the same problems with granite-code:8b is also 
 
 3. Llama3.1:8b-instruct
 
-Major Drawback: Speed to token generation is very slow. Results are good but inconsistent, reads the full code.
+Major Drawback: Speed to token generation is very slow. Results are good but inconsistent, and most of the times too lengthy. Reads the full code.
 
 4. Codestral-mamba:7b
 
