@@ -1,4 +1,4 @@
-### Comparison table for different models
+### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
 
 | Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
