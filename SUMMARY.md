@@ -7,7 +7,7 @@
 | Constructors/Desctructors Java | 1  | 4  | 3  | 2 | 5 |
 | Binary Search Code | 3  | 2  | 4 | 1 | 5 |
 | Debug the code | 4 | 3  | 1   | 2 | 5 |
-| Port the code | 4  | 3 | 2  ( | 1 | 5 |
+| Port the code | 4  | 3 | 2  | 1 | 5 |
 | Refactor code into Quarkus | 4 | 3   | 2   | 1 | 5 |
 | Optimization of code | 3  | 1  | 2  | 4 | 5 |
 | Documentation of code | 4 | 3  | 2  | 1 | 5 |
