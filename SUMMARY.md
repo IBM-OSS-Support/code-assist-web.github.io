@@ -8,7 +8,7 @@
 | Binary Search Code | 3  | 2  | 4 | 1 | 5 |
 | Debug the code | 4 | 3  | 1   | 2 | 5 |
 | Port the code | 4  | 3 | 2  | 1 | 5 |
-| Refactor code into Quarkus | 4 | 3   | 2   | 1 | 5 |
+| Refactor code into Quarkus | 4 | 3   | 2 | 1 | 5 |
 | Optimization of code | 3  | 1  | 2  | 4 | 5 |
 | Documentation of code | 4 | 3  | 2  | 1 | 5 |
 | Unit Test of code | 4 | 3   | 1 | 2 | 5 |
@@ -39,19 +39,19 @@ Over all ranking
 
 **1. Granite-code:8b-instruct**
 
-Works well with basic chat questions, but is inconsistent, does not read full code and sometimes ignores the context.
+System prompt from WCA team did not improve results. Ok chat questions, but the results are inconsistent, does not read full code and sometimes ignores the context.
 
 **2. Granite-code:8b-dense-instruct**
 
-Better than granite-code:8b in terms of context awarenesss, but the same problems with granite-code:8b is also in this model (inconsistency and incomplete code generation). More thorough. Generates well documented code in Q4.
+Better than granite-code:8b with context awarenesss, but the same issues with granite-code:8b is also in this model (inconsistency and incomplete code generation). Generates well documented code in Q4.
 
 **3. Llama3.1:8b-instruct**
 
-Results are good but inconsistent, and most of the times too lengthy because of too much explanation. Reads the full code. Also, the speed of token generation is very slow making the overall result take too much time.
+Results are accurate but inconsistent, and often verbose with explanation. Reads the full code. Slowest response time of all models tested.
 
 **4. Codestral-mamba:7b**
 
-Best results out of all. Accuracy is good across 9 questions. Poor on debugging Q5. The response time result generation is the fastest in all scenarios. 
+Best overall results. Accuracy is good across 9 questions. Poor on optimization question. ollama did not return response time, but the result generation is significantly faster in all scenarios. 
 
 **5. Starcoder2:7b**
 
