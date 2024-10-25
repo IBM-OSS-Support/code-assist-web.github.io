@@ -1,17 +1,32 @@
 ### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
-(Average timings in bracket)
+
 | Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
-| Lambda Function | 2  (7671.49 ms) | 4  (9759.53 ms) | 3  (27867.56 ms) | 1 | 5 |
-| Quicksort Code | 3 (7984.16 ms) | 2 (13163.09 ms) | 4  (35300.37 ms) | 1 | 5 |
-| Constructors/Desctructors Java | 1  (20128.85 ms) | 4  (16603.52 ms) | 3  (44066.22 ms) | 2 | 5 |
-| Binary Search Code | 3 (20013.74 ms) | 2  (24424.41 ms) | 4 (44469.09 ms) | 1 | 5 |
-| Debug the code | 4 (23764.16 ms) | 3  (61535.52 ms) | 1 (81078.74 ms)  | 2 | 5 |
-| Port the code | 4 (71351.14 ms) | 3  (69910.73 ms) | 2  (103004.82 ms) | 1 | 5 |
-| Refactor code into Quarkus | 4 (81471.42 ms) | 3  (62507.44 ms) | 2  (98524.59 ms) | 1 | 5 |
-| Optimization of code | 3 (51825.82 ms) | 1 (37054.33 ms) | 2 (49334.90 ms) | 4 | 5 |
-| Documentation of code | 4 (49589.85 ms) | 3  (64780.98 ms) | 2 (98268.18 ms) | 1 | 5 |
-| Unit Test of code | 4 (95197.65 ms) | 3  (68422.32 ms) | 1 (64526.62 ms) | 2 | 5 |
+| Lambda Function | 2  | 4  | 3  | 1 | 5 |
+| Quicksort Code | 3  | 2 | 4  | 1 | 5 |
+| Constructors/Desctructors Java | 1  | 4  | 3  | 2 | 5 |
+| Binary Search Code | 3  | 2  | 4 | 1 | 5 |
+| Debug the code | 4 | 3  | 1   | 2 | 5 |
+| Port the code | 4  | 3 | 2  ( | 1 | 5 |
+| Refactor code into Quarkus | 4 | 3   | 2   | 1 | 5 |
+| Optimization of code | 3  | 1  | 2  | 4 | 5 |
+| Documentation of code | 4 | 3  | 2  | 1 | 5 |
+| Unit Test of code | 4 | 3   | 1 | 2 | 5 |
+
+
+### Average timing comparison of different models
+| Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b |
+| :----: | :----: | :----: | :----: |
+| Lambda Function |  7671.49 ms |   9759.53 ms | 27867.56 ms | 
+| Quicksort Code | 7984.16 ms | 13163.09 ms| 35300.37 ms |
+| Constructors/Desctructors Java | 20128.85 ms | 16603.52 ms | 44066.22 ms |
+| Binary Search Code | 20013.74 ms| 24424.41 ms | 44469.09 ms |
+| Debug the code | 23764.16 ms) | 61535.52 ms | 81078.74 ms  |
+| Port the code | 71351.14 ms) | 69910.73 ms | 103004.82 ms|
+| Refactor code into Quarkus | 81471.42 ms | 62507.44 ms | 98524.59 ms |
+| Optimization of code | 51825.82 ms | 37054.33 ms | 49334.90 ms |
+| Documentation of code | 49589.85 ms | 64780.98 ms | 98268.18 ms |
+| Unit Test of code | 95197.65 ms | 68422.32 ms | 64526.62 ms | 
 
 
 ### Summary:
