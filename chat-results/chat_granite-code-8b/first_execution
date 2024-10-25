@@ -20,7 +20,7 @@ RESPONSE:
 
 Question 2: Write a code for quick-sort algorithm in Python.
 
-[total time =  2129.13 ms | t_prompt_processing=2129.12 t_token_generation=0.01]
+[total time = 2129.13 ms | t_prompt_processing=2129.12 t_token_generation=0.01]
 
 RESPONSE:
 
@@ -199,7 +199,7 @@ class Bank
 Question 6: Port bank code from py to java
 "Port the code @documentation.py to java"
 
-[total time =   56551.41 ms | t_prompt_processing=20459.508 t_token_generation=36091.906]
+[total time = 56551.41 ms | t_prompt_processing=20459.508 t_token_generation=36091.906]
 
 RESPONSE:
 
@@ -454,7 +454,7 @@ Here's an optimized version of the code that uses the built-in `sorted` function
 Question 9: Documentation comment of bank code
 "Write documentation comment for @documentation.py"
 
-[total time =   54589.85 ms | t_prompt_processing=28270.844 t_token_generation=26319.003]
+[total time = 54589.85 ms | t_prompt_processing=28270.844 t_token_generation=26319.003]
 
 RESPONSE:
 

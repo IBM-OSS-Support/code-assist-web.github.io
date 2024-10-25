@@ -1,6 +1,6 @@
 Question 1: What is Lambda function in python?
 
-[total time =   33684.53 ms | t_prompt_processing=2648.243 t_token_generation=31036.289]
+[total time = 33684.53 ms | t_prompt_processing=2648.243 t_token_generation=31036.289]
 
 RESPONSE:
 
@@ -79,7 +79,7 @@ Avoid using lambda functions when:
 
 Question 2: Write a code for quick-sort algorithm in Python.
 
-[total time =   37878.58 ms | t_prompt_processing=728.014 t_token_generation=37150.567 t_total=37878.581000000006]
+[total time = 37878.58 ms | t_prompt_processing=728.014 t_token_generation=37150.567]
 
 RESPONSE:
 
@@ -149,13 +149,11 @@ When implementing Quick Sort or any other algorithm:
 *   **Provide thorough documentation**, including docstrings and comments, to explain complex logic and edge cases.
 *   **Test your implementation** with various inputs, including edge cases and large datasets, to ensure correctness and performance.
 
-
 ----------------------------------------------------------------------------------
-
 
 Question 3: How do you declare constructors and destructors in Java?
 
-[total time =  54184.08 ms | t_prompt_processing=618.055 t_token_generation=53566.029]
+[total time = 54184.08 ms | t_prompt_processing=618.055 t_token_generation=53566.029]
 
 RESPONSE:
 
@@ -250,7 +248,7 @@ public class MyClass {
 
 Question 4: Write a code for Binary Search along with the documentation of the code.
 
-[total time =   44469.09 ms | t_prompt_processing=526.113 t_token_generation=43942.981]
+[total time = 44469.09 ms | t_prompt_processing=526.113 t_token_generation=43942.981]
 
 RESPONSE:
 
@@ -341,7 +339,7 @@ The space complexity of binary search is O(1) since it only requires a constant 
 Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix) 
 "Fix the bugs in the code: @documentation_with_bugs.py"
 
-[total time =   81078.74 ms | t_prompt_processing=3447.483 t_token_generation=77631.254]
+[total time = 81078.74 ms | t_prompt_processing=3447.483 t_token_generation=77631.254]
 
 RESPONSE:
 
@@ -1029,11 +1027,9 @@ Note that this is a simplified implementation and does not include any error han
 
 ----------------------------------------------------------------------------------
 
-
 Question 10: Create Unit test for bank code
 
-
-[total time =   58225.04 ms | t_prompt_processing=20284.908 t_token_generation=37940.128]
+[total time =  58225.04 ms | t_prompt_processing=20284.908 t_token_generation=37940.128]
 
 RESPONSE:
 

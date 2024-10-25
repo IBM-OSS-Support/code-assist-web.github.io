@@ -167,7 +167,7 @@ class Bank
 Question 6: Port bank code from py to java
 "Port the code @documentation.py to java"
 
-[total time =   77351.14 ms | t_prompt_processing=17588.191 t_token_generation=59762.944]
+[total time = 77351.14 ms | t_prompt_processing=17588.191 t_token_generation=59762.944]
 
 RESPONSE:
 
@@ -291,7 +291,6 @@ public class Main {
 }
 ```
 The Java code has a similar structure to the Python code, with classes for BankAccount and BankSystem that encapsulate the relevant functionality. The main() function in the Java code implements a basic bank account management system that allows users to create accounts, deposit funds, withdraw funds, check their balance, display transaction history, and exit the program.
-
        
 ----------------------------------------------------------------------------------
 
@@ -470,7 +469,7 @@ This optimized implementation has a time complexity of O(n^2), where n is the le
 
 Question 9: Documentation comment of bank code
 
-[total time =   56434.90 ms | t_prompt_processing=33928.56 t_token_generation=22506.339]
+[total time = 56434.90 ms | t_prompt_processing=33928.56 t_token_generation=22506.339]
 
 RESPONSE:
        
@@ -516,7 +515,7 @@ class Bank
 
 Question 10: Create Unit test for bank code
 
-[total time =  110933.90 ms | t_prompt_processing=31537.422 t_token_generation=79396.478]
+[total time = 110933.90 ms | t_prompt_processing=31537.422 t_token_generation=79396.478]
 
 RESPONSE:
 

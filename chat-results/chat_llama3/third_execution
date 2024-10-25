@@ -1,6 +1,6 @@
 Question 1: What is Lambda function in python?
 
-[total time = 27867.56 ms | t_prompt_processing=637.164 t_token_generation=27230.396 t_total=27867.56]
+[total time = 27867.56 ms | t_prompt_processing=637.164 t_token_generation=27230.396]
 
 RESPONSE:
 
@@ -143,12 +143,11 @@ When implementing the Quick-Sort algorithm, keep in mind:
 * Implement a stable sorting algorithm if you need to preserve the relative order of equal elements.
 * Avoid using recursion for large input arrays, as it can lead to stack overflows.
 
-
 ----------------------------------------------------------------------------------
 
 Question 3: How do you declare constructors and destructors in Java?
 
-[total time =   44066.22 ms | t_prompt_processing=537.754 t_token_generation=43528.469 ]
+[total time = 44066.22 ms | t_prompt_processing=537.754 t_token_generation=43528.469 ]
 
 RESPONSE:
 

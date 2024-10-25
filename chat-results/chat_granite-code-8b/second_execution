@@ -39,7 +39,7 @@ This implementation of Quick Sort works by selecting a pivot element from the ar
 
 Question 3: How do you declare constructors and destructors in Java?
 
-[total time =   26252.21 ms | t_prompt_processing=3673.018 t_token_generation=22579.189]
+[total time = 26252.21 ms | t_prompt_processing=3673.018 t_token_generation=22579.189]
 
 RESPONSE:
 
@@ -85,7 +85,7 @@ I hope this helps! Let me know if you have any further questions.
 
 Question 4: Write a code for Binary Search along with the documentation of the code.
 
-[total time =   29915.73 ms | t_prompt_processing=548.455 t_token_generation=29367.274]
+[total time = 29915.73 ms | t_prompt_processing=548.455 t_token_generation=29367.274]
 
 RESPONSE:
 
@@ -137,7 +137,7 @@ I hope this helps! Let me know if you have any further questions.
 Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix) 
 "Fix the bugs in the code: @documentation_with_bugs.py"
 
-[total time =   23764.16 ms | t_prompt_processing=13103.133 t_token_generation=10661.029]
+[total time = 23764.16 ms | t_prompt_processing=13103.133 t_token_generation=10661.029]
 
 RESPONSE:
 
@@ -177,7 +177,7 @@ class Bank
 Question 6: Port bank code from py to java
 "Port the code @documentation.py to java"
 
-[total time =   79597.39 ms | t_prompt_processing=18604.893 t_token_generation=60992.494]
+[total time = 79597.39 ms | t_prompt_processing=18604.893 t_token_generation=60992.494]
 
 RESPONSE:
 
@@ -268,7 +268,7 @@ I hope this helps! Let me know if you have any further questions.
 Question 7: Refactor java code to quarkus (Bank code)
 "Refactor the above generated code to quarkus"
 
-[total time =   69291.50 ms | t_prompt_processing=25385.162 t_token_generation=43906.342]
+[total time = 69291.50 ms | t_prompt_processing=25385.162 t_token_generation=43906.342]
 
 
 RESPONSE:
@@ -385,7 +385,7 @@ The optimized version uses a flag to track if any swaps were made during an iter
 
 Question 9: Documentation comment of bank code
 
-[total time =   37612.38 ms | t_prompt_processing=29983.349 t_token_generation=7629.031]
+[total time = 37612.38 ms | t_prompt_processing=29983.349 t_token_generation=7629.031]
 
 RESPONSE:
 
@@ -404,7 +404,7 @@ This module provides functionality for creating bank accounts, depositing and wi
 
 Question 10: Create Unit test for bank code
 
-[total time =   49441.22 ms | t_prompt_processing=26688.207 t_token_generation=22753.017]
+[total time = 49441.22 ms | t_prompt_processing=26688.207 t_token_generation=22753.017]
 
 RESPONSE:
 
