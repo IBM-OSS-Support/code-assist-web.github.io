@@ -1,12 +1,12 @@
 ### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
 
-| Questions | Granite-code:8b-instruct | granite3-dense:8b | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
+| Questions | Granite-code:8b-instruct | granite-code-dense:8b | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | Lambda Function | 2  | 4  | 3  | 1 | 5 |
 | Quicksort Code | 3  | 2 | 4  | 1 | 5 |
 | Constructors/Desctructors Java | 1  | 4  | 3  | 2 | 5 |
 | Binary Search Code | 3  | 2  | 4 | 1 | 5 |
-| Debug the code | 4 | 3  | 1   | 2 | 5 |
+| Debug the code | 4 | 3  | 1  | 2 | 5 |
 | Port the code | 4  | 3 | 2  | 1 | 5 |
 | Refactor code into Quarkus | 4 | 3   | 2 | 1 | 5 |
 | Optimization of code | 3  | 1  | 2  | 4 | 5 |
