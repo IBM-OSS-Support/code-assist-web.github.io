@@ -1,6 +1,6 @@
 ### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
 
-| Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
+| Questions | Granite-code:8b-instruct | granite3-dense:8b | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | Lambda Function | 2  | 4  | 3  | 1 | 5 |
 | Quicksort Code | 3  | 2 | 4  | 1 | 5 |
@@ -15,7 +15,7 @@
 
 
 ### Average timing comparison of different models
-| Questions | Granite-code:8b-instruct | Granite-code:8b-dense-instruct | Llama3.1:8b |
+| Questions | Granite-code:8b-instruct | granite3-dense:8b | Llama3.1:8b |
 | :----: | :----: | :----: | :----: |
 | Lambda Function |  7671.49 ms |   9759.53 ms | 27867.56 ms | 
 | Quicksort Code | 7984.16 ms | 13163.09 ms| 35300.37 ms |
@@ -37,23 +37,23 @@ Over all ranking
 #4 Granite-code-8b-instruct
 #5 Starcoder2:7b
 
-**1. Granite-code:8b-instruct**
+**Granite-code:8b-instruct**
 
 System prompt from WCA team did not improve results. Ok chat questions, but the results are inconsistent, does not read full code and sometimes ignores the context.
 
-**2. Granite-code:8b-dense-instruct**
+**granite3-dense:8b**
 
 Better than granite-code:8b with context awarenesss, but the same issues with granite-code:8b is also in this model (inconsistency and incomplete code generation). Generates well documented code in Q4.
 
-**3. Llama3.1:8b-instruct**
+**Llama3.1:8b-instruct**
 
 Results are accurate but inconsistent, and often verbose with explanation. Reads the full code. Slowest response time of all models tested.
 
-**4. Codestral-mamba:7b**
+**Codestral-mamba:7b**
 
 Best overall results. Accuracy is good across 9 questions. Poor on optimization question. ollama did not return response time, but the result generation is significantly faster in all scenarios. 
 
-**5. Starcoder2:7b**
+**Starcoder2:7b**
 
 Unusable and unstable. Prints the question in the result before printing the answer. The printed answer is usually garbage or unusable.
 
