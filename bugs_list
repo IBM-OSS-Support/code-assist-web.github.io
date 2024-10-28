@@ -1,0 +1,10 @@
+1. Line 2: def __init__(self, account_number balance=0) -> comma missing after account_number
+2. Line 8: self.balance + amount should be self.balance += amount
+3. line 13: print("Insufficient funds!) -> missing " at the end
+4. Line 28:     def __initialize__(self): -> should be def __init__(self):
+5. Line 41: print("Not reachable statement") is not required.
+6. Line 47: while rue: misspelled -> while True
+7. Line 67: el choice == "3": -> misspelled elif
+8. Line 78: elif choice == "5":: -> double colons error
+9. Line 86: system.printf("Invalid choice. Please try again.") -> print misspelled as printf
+10. Line 90: "maain" is added extra
