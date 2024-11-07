@@ -21,4 +21,8 @@ Question 9: Documentation comment of bank code
 
 Question 10: Create Unit test for bank code
 
+Question 11: Code complete using Tab-autocomplete. (Simple)
+
+Question 12: Code complete using Tab-autocomplete. (Moderate)
+
 Models under test: Llama 3.2, granite-8b-instruct-128k (gen 3 is coming), Mystral Mamba latest, starcoder2
