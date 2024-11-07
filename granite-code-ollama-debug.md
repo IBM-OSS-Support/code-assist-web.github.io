@@ -163,9 +163,9 @@ DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task
 time=2024-11-08T01:14:14.096+05:30 level=INFO source=server.go:626 msg="llama runner started in 2.52 seconds"
 time=2024-11-08T01:14:14.096+05:30 level=DEBUG source=sched.go:462 msg="finished setting up runner" model=/Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa
 
-
-Results are not consistent. 
-First session (3 iterations) -> repeatable explanation but no code documentation.
+> [!IMPORTANT]
+> Results are not consistent. 
+> First session (3 iterations) -> repeatable explanation but no code documentation.
 Second session (3 iterations) -> first iteration: explained and documented the code successfully (logged as "First run" below). Second iteration completely failed (it didn't accept input codebase). Third iteration accepts input codebase. It gives a brief summary of the code and no code documentation.
 
 See Ollama Logs and input/output below for the second session.
