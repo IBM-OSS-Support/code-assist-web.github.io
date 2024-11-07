@@ -9,7 +9,9 @@ time=2024-11-08T01:23:49.379+05:30 level=DEBUG source=memory.go:170 msg="gpu has
 time=2024-11-08T01:23:49.379+05:30 level=DEBUG source=memory.go:312 msg="insufficient VRAM to load any model layers"
 time=2024-11-08T01:23:49.379+05:30 level=DEBUG source=memory.go:103 msg=evaluating library=metal gpu_count=1 available="[21.3 GiB]"
 time=2024-11-08T01:23:49.380+05:30 level=DEBUG source=memory.go:103 msg=evaluating library=metal gpu_count=1 available="[21.3 GiB]"
-time=2024-11-08T01:23:49.380+05:30 level=DEBUG source=memory.go:170 msg="gpu has too little memory to allocate any layers" id=0 library=metal variant="" compute="" driver=0.0 name="" total="21.3 GiB" available="21.3 GiB" minimum_memory=536870912 layer_size="2.1 GiB" gpu_zer_overhead="0 B" partial_offload="32.3 GiB" full_offload="32.3 GiB"
+> [!WARNING]
+> time=2024-11-08T01:23:49.380+05:30 level=DEBUG source=memory.go:170 msg="gpu has too little memory to allocate any layers" id=0 library=metal variant="" compute="" driver=0.0 name="" total="21.3 GiB" available="21.3 GiB" minimum_memory=536870912 layer_size="2.1 GiB" gpu_zer_overhead="0 B" partial_offload="32.3 GiB" full_offload="32.3 GiB"
+
 time=2024-11-08T01:23:49.380+05:30 level=DEBUG source=memory.go:312 msg="insufficient VRAM to load any model layers"
 time=2024-11-08T01:23:49.380+05:30 level=DEBUG source=memory.go:103 msg=evaluating library=metal gpu_count=1 available="[21.3 GiB]"
 time=2024-11-08T01:23:49.381+05:30 level=INFO source=server.go:105 msg="system memory" total="32.0 GiB" free="22.4 GiB" free_swap="0 B"
@@ -18,7 +20,10 @@ time=2024-11-08T01:23:49.382+05:30 level=INFO source=memory.go:326 msg="offload 
 time=2024-11-08T01:23:49.382+05:30 level=DEBUG source=common.go:168 msg=extracting runner=metal payload=darwin/arm64/metal/ollama_llama_server.gz
 time=2024-11-08T01:23:49.382+05:30 level=DEBUG source=common.go:294 msg="availableServers : found" file=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3150757885/runners/metal/ollama_llama_server
 time=2024-11-08T01:23:49.382+05:30 level=DEBUG source=common.go:294 msg="availableServers : found" file=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3150757885/runners/metal/ollama_llama_server
-time=2024-11-08T01:23:49.383+05:30 level=INFO source=server.go:388 msg="starting llama server" cmd="/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3150757885/runners/metal/ollama_llama_server --model /Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa --ctx-size 128000 --batch-size 512 --embedding --n-gpu-layers 20 --verbose --threads 8 --no-mmap --parallel 1 --port 63965"
+
+> [!WARNING]
+> time=2024-11-08T01:23:49.383+05:30 level=INFO source=server.go:388 msg="starting llama server" cmd="/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3150757885/runners/metal/ollama_llama_server --model /Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa --ctx-size 128000 --batch-size 512 --embedding --n-gpu-layers 20 --verbose --threads 8 --no-mmap --parallel 1 --port 63965"
+
 time=2024-11-08T01:23:49.384+05:30 level=DEBUG source=server.go:405 msg=subprocess environment="[PATH=/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/harsh/.local/bin LD_LIBRARY_PATH=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3150757885/runners/metal]"
 time=2024-11-08T01:23:49.386+05:30 level=INFO source=sched.go:449 msg="loaded runners" count=1
 time=2024-11-08T01:23:49.387+05:30 level=INFO source=server.go:587 msg="waiting for llama runner to start responding"
