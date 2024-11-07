@@ -396,3 +396,8 @@ Example usage:
     python banking_system.py
 """
 This documentation comments provide information about the purpose of the module, the classes it provides, and an example of how to use it. It's important to include this type of documentation in your code to help others understand how to use your code and what it does.
+
+
+> [!NOTE]
+> References: Indexing your workspace
+When you open a workspace folder, IBM Granite.Code creates an index of these items in memory so that you can reference these files and functions in the chat. The IDE also indexes files that you add or change during your Visual Studio Code session. The index contains up to 1000 of the most recent files in 7 programming languages: C, C++, Java, Go, JavaScript, Typescript, and Python.
