@@ -1,20 +1,20 @@
 ### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
 
 > [!NOTE]
-> $${\color{green}Green}$$ number means that the model succeeded in all three iterations. $${\color{yellow}Yellow}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
+> $${\color{green}Green}$$ number means that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
 
 | Questions | Granite-code:8b-instruct | granite-code-dense:8b | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | Lambda Function | $${\color{green}2}$$  | $${\color{green}4}$$  | $${\color{green}3}$$  | $${\color{green}1}$$ | $${\color{red}5}$$ |
-| Quicksort Code | $${\color{yellow}3}$$  | $${\color{red}4}$$ | $${\color{green}1}$$ | $${\color{green}2}$$ | $${\color{red}5}$$ |
-| Constructors/Desctructors Java | $${\color{yellow}3}$$  | $${\color{green}2}$$ | $${\color{yellow}4}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
+| Quicksort Code | $${\color{orange}3}$$  | $${\color{red}4}$$ | $${\color{green}1}$$ | $${\color{green}2}$$ | $${\color{red}5}$$ |
+| Constructors/Desctructors Java | $${\color{orange}3}$$  | $${\color{green}2}$$ | $${\color{orange}4}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
 | Binary Search Code | $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{green}2}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
-| Debug the code | $${\color{red}4}$$ | $${\color{red}3}$$  | $${\color{green}1}$$  | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
-| Port the code |  $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{yellow}1}$$  | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
+| Debug the code | $${\color{red}4}$$ | $${\color{red}3}$$  | $${\color{green}1}$$  | $${\color{orange}2}$$ | $${\color{red}5}$$ |
+| Port the code |  $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{orange}1}$$  | $${\color{orange}2}$$ | $${\color{red}5}$$ |
 | Refactor code into Quarkus | $${\color{green}2}$$  | $${\color{green}2}$$ | $${\color{green}2}$$ | $${\color{green}2}$$  | $${\color{red}5}$$ |
-| Optimization of code | $${\color{yellow}4}$$  |  $${\color{yellow}2}$$ | $${\color{yellow}3}$$  | $${\color{green}1}$$ | $${\color{red}5}$$ |
-| Documentation of code | $${\color{red}4}$$ | $${\color{red}3}$$   | $${\color{green}1}$$ | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
-| Unit Test of code | $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{yellow}2}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
+| Optimization of code | $${\color{orange}4}$$  |  $${\color{orange}2}$$ | $${\color{orange}3}$$  | $${\color{green}1}$$ | $${\color{red}5}$$ |
+| Documentation of code | $${\color{red}4}$$ | $${\color{red}3}$$   | $${\color{green}1}$$ | $${\color{orange}2}$$ | $${\color{red}5}$$ |
+| Unit Test of code | $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{orange}2}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
 
 
 ### Average timing comparison of different models
