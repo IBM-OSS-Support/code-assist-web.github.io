@@ -5,14 +5,18 @@ granite.code (OLLAMA_DEBUG=1)
 time=2024-11-08T01:14:11.561+05:30 level=DEBUG source=sched.go:181 msg="updating default concurrency" OLLAMA_MAX_LOADED_MODELS=0x1044d56d0 gpu_count=1
 time=2024-11-08T01:14:11.569+05:30 level=DEBUG source=sched.go:224 msg="loading first model" model=/Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa
 time=2024-11-08T01:14:11.569+05:30 level=DEBUG source=memory.go:103 msg=evaluating library=metal gpu_count=1 available="[21.3 GiB]"
-time=2024-11-08T01:14:11.570+05:30 level=INFO source=sched.go:714 msg="new model will fit in available VRAM in single GPU, loading" model=/Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa gpu=0 parallel=4 available=22906503168 required="6.6 GiB"
+> [!WARNING]
+> time=2024-11-08T01:14:11.570+05:30 level=INFO source=sched.go:714 msg="new model will fit in available VRAM in single GPU, loading" model=/Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa gpu=0 parallel=4 available=22906503168 required="6.6 GiB"
+
 time=2024-11-08T01:14:11.570+05:30 level=INFO source=server.go:105 msg="system memory" total="32.0 GiB" free="21.8 GiB" free_swap="0 B"
 time=2024-11-08T01:14:11.570+05:30 level=DEBUG source=memory.go:103 msg=evaluating library=metal gpu_count=1 available="[21.3 GiB]"
 time=2024-11-08T01:14:11.570+05:30 level=INFO source=memory.go:326 msg="offload to metal" layers.requested=-1 layers.model=37 layers.offload=37 layers.split="" memory.available="[21.3 GiB]" memory.gpu_overhead="0 B" memory.required.full="6.6 GiB" memory.required.partial="6.6 GiB" memory.required.kv="1.1 GiB" memory.required.allocations="[6.6 GiB]" memory.weights.total="5.2 GiB" memory.weights.repeating="5.1 GiB" memory.weights.nonrepeating="157.5 MiB" memory.graph.full="560.0 MiB" memory.graph.partial="560.0 MiB"
 time=2024-11-08T01:14:11.570+05:30 level=DEBUG source=common.go:168 msg=extracting runner=metal payload=darwin/arm64/metal/ollama_llama_server.gz
 time=2024-11-08T01:14:11.571+05:30 level=DEBUG source=common.go:294 msg="availableServers : found" file=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama704670310/runners/metal/ollama_llama_server
 time=2024-11-08T01:14:11.571+05:30 level=DEBUG source=common.go:294 msg="availableServers : found" file=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama704670310/runners/metal/ollama_llama_server
-time=2024-11-08T01:14:11.572+05:30 level=INFO source=server.go:388 msg="starting llama server" cmd="/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama704670310/runners/metal/ollama_llama_server --model /Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa --ctx-size 8192 --batch-size 512 --embedding --n-gpu-layers 37 --verbose --threads 8 --parallel 4 --port 63725"
+> [!WARNING]
+> time=2024-11-08T01:14:11.572+05:30 level=INFO source=server.go:388 msg="starting llama server" cmd="/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama704670310/runners/metal/ollama_llama_server --model /Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa --ctx-size 8192 --batch-size 512 --embedding --n-gpu-layers 37 --verbose --threads 8 --parallel 4 --port 63725"
+
 time=2024-11-08T01:14:11.572+05:30 level=DEBUG source=server.go:405 msg=subprocess environment="[PATH=/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/harsh/.local/bin LD_LIBRARY_PATH=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama704670310/runners/metal]"
 time=2024-11-08T01:14:11.573+05:30 level=INFO source=sched.go:449 msg="loaded runners" count=1
 time=2024-11-08T01:14:11.573+05:30 level=INFO source=server.go:587 msg="waiting for llama runner to start responding"
