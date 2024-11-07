@@ -1,19 +1,20 @@
 ### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
 
-[ GREEN MEANS THAT THE MODEL SUCCEEDED IN AT LEAST ONE ITERATION, RED MEANS FAILURE IN ALL THREE ITERATIONS ]
+> [!NOTE]
+> $${\color{green}Green}$$ number means that the model succeeded in all three iterations. $${\color{yellow}Yellow}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
 
 | Questions | Granite-code:8b-instruct | granite-code-dense:8b | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
-| Lambda Function | 2  | 4  | 3  | 1 | 5 |
-| Quicksort Code | 3  | 2 | 4  | 1 | 5 |
-| Constructors/Desctructors Java | 1  | 4  | 3  | 2 | 5 |
-| Binary Search Code | 3  | 2  | 4 | 1 | 5 |
-| Debug the code | 4 | 3  | 1  | 2 | 5 |
-| Port the code | 4  | 3 | 2  | 1 | 5 |
-| Refactor code into Quarkus | 4 | 3   | 2 | 1 | 5 |
-| Optimization of code | 3  | 1  | 2  | 4 | 5 |
-| Documentation of code | 4 | 3  | 2  | 1 | 5 |
-| Unit Test of code | 4 | 3   | 1 | 2 | 5 |
+| Lambda Function | $${\color{green}2}$$  | $${\color{green}4}$$  | $${\color{green}3}$$  | $${\color{green}1}$$ | $${\color{red}5}$$ |
+| Quicksort Code | $${\color{yellow}3}$$  | $${\color{red}4}$$ | $${\color{green}1}$$ | $${\color{green}2}$$ | $${\color{red}5}$$ |
+| Constructors/Desctructors Java | $${\color{yellow}3}$$  | $${\color{green}2}$$ | $${\color{yellow}4}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
+| Binary Search Code | $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{green}2}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
+| Debug the code | $${\color{red}4}$$ | $${\color{red}3}$$  | $${\color{green}1}$$  | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
+| Port the code |  $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{yellow}1}$$  | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
+| Refactor code into Quarkus | $${\color{green}2}$$ 4 | $${\color{green}2}$$ 3 | $${\color{green}2}$$ 2 | $${\color{green}2}$$ 1 | $${\color{red}5}$$ |
+| Optimization of code | $${\color{green}2}$$ 3  |  $${\color{green}2}$$1  | $${\color{green}2}$$ 2  | $${\color{green}2}$$ 4 | $${\color{red}5}$$ |
+| Documentation of code | $${\color{green}2}$$ 4 | $${\color{green}2}$$ 3  | $${\color{green}2}$$ 2  | $${\color{green}2}$$ 1 | $${\color{red}5}$$ |
+| Unit Test of code | $${\color{green}2}$$ 4 | $${\color{green}2}$$ 3 | $${\color{green}2}$$ 1 | $${\color{green}2}$$ 2| $${\color{red}5}$$ |
 
 
 ### Average timing comparison of different models
