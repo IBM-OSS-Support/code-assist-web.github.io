@@ -11,10 +11,10 @@
 | Binary Search Code | $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{green}2}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
 | Debug the code | $${\color{red}4}$$ | $${\color{red}3}$$  | $${\color{green}1}$$  | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
 | Port the code |  $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{yellow}1}$$  | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
-| Refactor code into Quarkus | $${\color{green}2}$$ 4 | $${\color{green}2}$$ 3 | $${\color{green}2}$$ 2 | $${\color{green}2}$$ 1 | $${\color{red}5}$$ |
-| Optimization of code | $${\color{green}2}$$ 3  |  $${\color{green}2}$$1  | $${\color{green}2}$$ 2  | $${\color{green}2}$$ 4 | $${\color{red}5}$$ |
-| Documentation of code | $${\color{green}2}$$ 4 | $${\color{green}2}$$ 3  | $${\color{green}2}$$ 2  | $${\color{green}2}$$ 1 | $${\color{red}5}$$ |
-| Unit Test of code | $${\color{green}2}$$ 4 | $${\color{green}2}$$ 3 | $${\color{green}2}$$ 1 | $${\color{green}2}$$ 2| $${\color{red}5}$$ |
+| Refactor code into Quarkus | $${\color{green}2}$$  | $${\color{green}2}$$ | $${\color{green}2}$$ | $${\color{green}2}$$  | $${\color{red}5}$$ |
+| Optimization of code | $${\color{yellow}4}$$  |  $${\color{yellow}2}$$ | $${\color{yellow}3}$$  | $${\color{green}1}$$ | $${\color{red}5}$$ |
+| Documentation of code | $${\color{red}4}$$ | $${\color{red}3}$$   | $${\color{green}1}$$ | $${\color{yellow}2}$$ | $${\color{red}5}$$ |
+| Unit Test of code | $${\color{red}3}$$  | $${\color{red}4}$$ | $${\color{yellow}2}$$ | $${\color{green}1}$$ | $${\color{red}5}$$ |
 
 
 ### Average timing comparison of different models
