@@ -1,6 +1,6 @@
 granite.code (OLLAMA_DEBUG=1)
 
--- OLLAMA INITIALIZATION LOGS --
+-- BEGINNING OLLAMA LOG FOR NEW SESSION IN granite.code --
 
 time=2024-11-08T01:14:11.561+05:30 level=DEBUG source=sched.go:181 msg="updating default concurrency" OLLAMA_MAX_LOADED_MODELS=0x1044d56d0 gpu_count=1
 time=2024-11-08T01:14:11.569+05:30 level=DEBUG source=sched.go:224 msg="loading first model" model=/Users/harsh/.ollama/models/blobs/sha256-bf481f838ba0e13524bde2f44cfd57a0eefb1c422da885fb26ca6cf12bea11fa
