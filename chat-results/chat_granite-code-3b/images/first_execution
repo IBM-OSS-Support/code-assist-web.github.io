@@ -1,1 +1,493 @@
+Question 1: What is Lambda function in python?
+
+Response:
+A lambda function in Python is an anonymous function that can be defined on the fly and used just like any other function. It is created using the keyword "lambda" followed by the input parameters and the expression to be evaluated. Here's an example of a lambda function that adds two numbers together:
+
+lambda x, y: x + y
+
+In this example, the lambda function takes two parameters (x and y) and returns their sum.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 2: Write a code for quick-sort algorithm in Python.
+Response:
+Here's an implementation of the quick-sort algorithm in Python:
+
+def quick_sort(arr): if len(arr) <= 1: return arr
+
+pivot = arr[len(arr) // 2] left = [x for x in arr if x < pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x > pivot]
+
+return quick_sort(left) + middle + quick_sort(right)
+
+This implementation uses a divide-and-conquer approach to sort the input array. It selects a pivot element (in this case, the middle element), and then partitions the array into three parts: elements less than the pivot, elements equal to the pivot, and elements greater than the pivot. The function then recursively sorts each part and combines them to produce the final sorted array.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 3: How do you declare constructors and destructors in Java?
+Response:
+In Java, constructors and destructors are used to initialize and release resources associated with an object. Constructors are called when a new object is created, while destructors are called when an object is destroyed or goes out of scope.
+
+To declare a constructor in Java, you use the "constructor" keyword followed by the name of the class and parentheses. Here's an example:
+
+public class MyClass { private int myVar;
+
+// Constructor public MyClass(int var) { this.myVar = var; }
+
+// Destructor public void finalize() throws Throwable { System.out.println("Destroying object"); super.finalize(); } }
+
+In this example, the constructor takes an integer parameter and assigns it to a private instance variable called "myVar". The destructor is declared with the "finalize" keyword, which is automatically called when the object is destroyed.
+
+You can also declare static constructors and destructors in Java, which are called once, at the beginning and end of the program execution, respectively. Static constructors are used to initialize resources that need to be shared by multiple objects, while static destructors are used to release those resources when all objects have been destroyed.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 4: Write a code for Binary Search along with the documentation of the code.
+Response:
+Here's an implementation of the binary search algorithm in Python:
+
+def binary_search(arr, target): """ Searches for a target value in a sorted array using the binary search algorithm.
+
+Parameters: arr (list): The sorted array to be searched. target (int): The target value to search for.
+
+Returns: int: The index of the target value in the array, or -1 if the target is not found.
+
+Example:
+
+arr = [1, 3, 5, 7, 9] binary_search(arr, 5) 2 """ left = 0 right = len(arr) - 1
+
+while left <= right: mid = (left + right) // 2
+
+if arr[mid] == target: return mid elif arr[mid] < target: left = mid + 1 else: right = mid - 1
+
+return -1
+
+This implementation uses a divide-and-conquer approach to search for the target value in a sorted array. It starts by setting the left and right indices of the array, and then repeatedly calculates the middle index and compares the target value with the value at that index. If the target is less than the middle value, it updates the right index; if the target is greater than the middle value, it updates the left index; otherwise, it returns the index of the target.
+
+The binary search algorithm has a time complexity of O(log n), which makes it much faster than a linear search for large arrays.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix)
+"Fix the bugs in the code: @documentation_with_bugs.py"
+Response:
+class BankAccount:
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        return self.balance
+
+    def display_transactions():
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class Bank
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 6: Port bank code from py to java
+"Port the code @documentation.py to java"
+Response:
+class BankAccount {
+    private String accountNumber;
+    private double balance;
+    private List<String> transactions = new ArrayList<>();
+
+    public BankAccount(String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+        this.transactions.add("Deposited " + amount);
+    }
+
+    public void withdraw(double amount) {
+        if (amount > this.balance) {
+            System.out.println("Insufficient funds!");
+            return;
+        }
+        this.balance -= amount;
+        this.transactions.add("Withdrew " + amount);
+    }
+
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public List<String> getTransactions() {
+        return this.transactions;
+    }
+}
+
+class BankSystem {
+    private Map<String, BankAccount> accounts = new HashMap<>();
+
+    public void createAccount(String accountNumber) {
+        if (!this.accounts.containsKey(accountNumber)) {
+            this.accounts.put(accountNumber, new BankAccount(accountNumber, 0));
+            System.out.println("Account created successfully!");
+        } else {
+            System.out.println("Account already exists!");
+        }
+    }
+
+    public BankAccount getAccount(String accountNumber) {
+        return this.accounts.get(accountNumber);
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question 7: Refactor java code to quarkus (Bank code)
+"Refactor the above generated code to quarkus"
+Response:
+package io.quarkus.it.main;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class BankAccount {
+
+    private String accountNumber;
+    private double balance;
+    private List<String> transactions = new ArrayList<>();
+
+    public BankAccount(String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+        this.transactions.add("Deposited " + amount);
+    }
+
+    public void withdraw(double amount) {
+        if (amount > this.balance) {
+            System.out.println("Insufficient funds!");
+            return;
+        }
+        this.balance -= amount;
+        this.transactions.add("Withdrew " + amount);
+    }
+
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public List<String> getTransactions() {
+        return this.transactions;
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question 8: Code optimisation (perhaps sort algorithm)
+"Optimize this code: @code_to_optimize.py "
+Response:
+The given code implements the bubble sort algorithm to sort an array of integers in ascending order. The algorithm iterates through the array multiple times, comparing adjacent elements and swapping them if they are in the wrong order. This process is repeated until the entire array is sorted.
+
+To optimize this code, we can use a more efficient sorting algorithm such as quicksort or mergesort. These algorithms have a time complexity of O(n log n) on average, which is faster than bubble sort's O(n^2) time complexity. Additionally, they are more robust to worst-case scenarios and can handle larger arrays efficiently.
+
+Here's an example implementation of the quicksort algorithm in Python:
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[0]
+    left = [x for x in arr[1:] if x < pivot]
+    right = [x for x in arr[1:] if x >= pivot]
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
+This implementation of quicksort recursively divides the array into two subarrays based on a pivot element. The left subarray contains elements smaller than the pivot, and the right subarray contains elements larger than or equal to the pivot. The algorithm then recursively sorts each subarray and combines them with the pivot element to produce the final sorted array.
+
+You can test this optimized code by comparing its output with the original bubble sort implementation:
+
+arr = [64, 34, 25, 12, 22, 11, 90]
+res_arr = quick_sort(arr)
+assert res_arr == algo(arr)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question 9: Documentation comment of bank code
+"Write documentation comment for @documentation.py"
+Response:
+
+class BankAccount:
+    """BankAccount class represents a bank account with an account number, balance, and list of transactions."""
+
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        """Deposit funds into the account."""
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        """Withdraw funds from the account."""
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        """Return the current balance of the account."""
+        return self.balance
+
+    def display_transactions(self):
+        """Display a list of all transactions made on the account."""
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class Bank
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question 10: Create Unit test for bank code
+RESPONSE:
+import unittest
+from documentation import BankAccount, BankSystem
+
+
+class TestBankAccount(unittest.TestCase):
+    def setUp(self):
+        self.account = BankAccount("123456", 1000)
+
+    def test_deposit(self):
+        self.assertEqual(self.account.balance, 1000)
+        self.account.deposit(500)
+        self.assertEqual(self.account.balance, 1500)
+
+    def test_withdrawal(self):
+        self.assertEqual(self.account.balance, 1500)
+        self.assertTrue(self.account.withdraw(200))
+        self.assertEqual(self.account.balance, 1300)
+        self.assertFalse(self.account.withdraw(1000))
+
+
+class TestBankSystem(unittest.TestCase):
+    def setUp(self):
+        self.bank_system = BankSystem()
+
+    def test_create_account(self):
+        account_number = "123456"
+        self.assertTrue(self.bank_system.create_account(account_number))
+        self.assertIn(account_number, self.bank_system.accounts)
+
+    def test_get_account(self):
+        account_number = "123456"
+        self.bank_system.create_account(account_number)
+        self.assertEqual(self.bank_system.get_account(account_number), self.account)
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
