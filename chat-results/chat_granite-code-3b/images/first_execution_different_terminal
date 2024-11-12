@@ -1,0 +1,465 @@
+Question 1: What is Lambda function in python?
+Response:
+A lambda function in Python is an anonymous function that can be defined on the fly and used just like any other function. It is created using the keyword "lambda" followed by the input parameters and the expression to be evaluated. Here's an example of a lambda function that takes two numbers as input and returns their sum:
+
+sum_func = lambda x, y: x + y
+result = sum_func(2, 3)
+print(result) # Output: 5
+Lambda functions are useful when you need to pass a simple function as an argument to another function or when you want to define a small function that you will use only once. They are also commonly used in functional programming languages like Python and can help reduce the amount of code needed for simple tasks.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 2: Write a code for quick-sort algorithm in Python.
+Response:
+Sure, here's a code for the quick-sort algorithm in Python:
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]
+        left = [x for x in arr[1:] if x < pivot]
+        right = [x for x in arr[1:] if x >= pivot]
+        return quick_sort(left) + [pivot] + quick_sort(right)
+This code defines a recursive function quick_sort that takes an array as input and returns a sorted array. The algorithm works by selecting a pivot element from the array, partitioning the other elements into two sub-arrays, one containing elements less than or equal to the pivot, and the other containing elements greater than the pivot. The function then recursively sorts each sub-array and combines them with the pivot element to produce the final sorted array.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 3: How do you declare constructors and destructors in Java?
+Response:
+In Java, constructors and destructors are used to initialize and clean up resources that are allocated for an object. A constructor is a special method that is automatically called when an object is created, while a destructor is a special method that is automatically called when an object is destroyed.
+
+Here's how you declare a constructor in Java:
+
+public class MyClass {
+    private int myVariable;
+
+    public MyClass(int myVariable) {
+        this.myVariable = myVariable;
+    }
+}
+In this example, the MyClass constructor takes an integer parameter and assigns it to the instance variable myVariable.
+
+Here's how you declare a destructor in Java:
+
+public class MyClass {
+    private int myVariable;
+
+    public MyClass(int myVariable) {
+        this.myVariable = myVariable;
+    }
+
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.out.println("Cleaning up resources");
+    }
+}
+In this example, the finalize method is overridden to perform any necessary cleanup before the object is destroyed.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 4: Write a code for Binary Search along with the documentation of the code.
+Response:
+
+def binary_search(arr, target):
+    """
+    Performs a binary search on an array to find the index of the target value.
+
+    Args:
+        arr (list): The sorted array to be searched.
+        target (any): The value to be found in the array.
+
+    Returns:
+        int: The index of the target value in the array, or -1 if not found.
+    """
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return -1
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix)
+"Fix the bugs in the code: @documentation_with_bugs.py"
+Response:
+
+class BankAccount:
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        return self.balance
+
+    def display_transactions():
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class Bank
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 6: Port bank code from py to java
+"Port the code @documentation.py to java"
+Response:
+
+public class BankAccount {
+    private String accountNumber;
+    private double balance;
+    private List<String> transactions = new ArrayList<>();
+
+    public BankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+        this.transactions.add("Deposited " + amount);
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount > this.balance) {
+            System.out.println("Insufficient funds!");
+            return false;
+        }
+        this.balance -= amount;
+        this.transactions.add("Withdrew " + amount);
+        return true;
+    }
+
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public List<String> getTransactions() {
+        return this.transactions;
+    }
+}
+===============================================================================================================================================================================
+
+Question 7: Refactor java code to quarkus (Bank code)
+"Refactor the above generated code to quarkus"
+Response:
+
+Sure, here's a refactored version of the code using Quarkus:
+
+package com.example;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
+import java.util.ArrayList;
+import java.util.List;
+
+@RegisterForReflection
+public class BankAccount {
+ private String accountNumber;
+ private double balance;
+ private List<String> transactions;
+ public BankAccount(String accountNumber, double initialBalance) {
+   this.accountNumber = accountNumber;
+   this.balance = initialBalance;
+   this.transactions = new ArrayList<>();
+ }
+ public void deposit(double amount) {
+   this.balance += amount;
+   this.transactions.add("Deposited " + amount);
+ }
+ public boolean withdraw(double amount) {
+   if (amount > this.balance) {
+     System.out.println("Insufficient funds!");
+     return false;
+   }
+   this.balance -= amount;
+   this.transactions.add("Withdrew " + amount);
+   return true;
+ }
+ public double getBalance() {
+   return this.balance;
+ }
+ public void displayTransactions() {
+   for (String transaction : this.transactions) {
+     System.out.println(transaction);
+   }
+ }
+}
+The refactored code uses Quarkus annotations to register the BankAccount class for reflection, which allows it to be used in other applications that are built using Quarkus. It also removes any unnecessary imports and replaces the List<String> with a more appropriate data structure for storing transactions.
+==================================================================================================================================================================================
+
+Question 8: Code optimisation (perhaps sort algorithm)
+"Optimize this code: @code_to_optimize.py "
+Response:
+
+Here's an optimized version of the algo function:
+
+def algo(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+The original implementation has a time complexity of O(n^2), where n is the length of the input array. The optimized version uses a nested loop with a single iteration over the outer loop, which reduces the number of iterations to O(n). This optimization can significantly improve the performance of the algorithm for large arrays.
+=================================================================================================================================================================================
+
+Question 9: Documentation comment of bank code
+"Write documentation comment for @documentation.py"
+Response:
+
+class BankAccount:
+    """BankAccount class represents a bank account with an account number, balance, and a list of transactions."""
+
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        """Deposit funds into the account."""
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        """Withdraw funds from the account."""
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        """Return the current balance of the account."""
+        return self.balance
+
+    def display_transactions(self):
+        """Display a list of all transactions made on the account."""
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class Bank
+================================================================================================================================================================================
+
+Question 10: Create Unit test for bank code
+Response:
+
+Sure, here are some example unit tests for the BankAccount and BankSystem classes in the documentation.py file:
+
+
+
+
+import unittest
+from documentation import BankAccount, BankSystem
+
+class TestBankAccount(unittest.TestCase):
+    def test_deposit(self):
+        account = BankAccount("12345")
+        self.assertEqual(account.balance, 0)
+
+        account.deposit(100)
+        self.assertEqual(account.balance, 100)
+
+    def test_withdrawal(self):
+        account = BankAccount("12345")
+        account.deposit(100)
+
+        self.assertTrue(account.withdraw(50))
+        self.assertEqual(account.balance, 50)
+
+        self.assertFalse(account.withdraw(150))
+        self.assertEqual(account.balance, 50)
+
+    def test_check_balance(self):
+        account = BankAccount("12345")
+        account.deposit(100)
+
+        self.assertEqual(account.check_balance(), 100)
+
+
+class TestBankSystem(unittest.TestCase):
+    def test_create_account(self):
+        bank_system = BankSystem()
+        account_number = "12345"
+        self.assertTrue(bank_system.create_account(account_number))
+
+        self.assertIn(account_number, bank_system.accounts)
+
+    def test_get_account(self):
+        bank_system = BankSystem()
+        account_number = "12345"
+        bank_system.create_account(account_number)
+
+        self.assertEqual(bank_system.get_account(account_number), bank_system.accounts[account_number])
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
