@@ -3,7 +3,7 @@
 > [!NOTE]
 > $${\color{green}Green}$$ number means that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
 
-| Questions | Granite-code:8b-instruct | granite-code-dense:8b | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
+| Questions | Granite-code:8b-instruct | granite3-dense:8b | Llama3.1:8b | Codestral-Mamba:7b | Starcoder2:7b |
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | Lambda Function | $${\color{green}2}$$  | $${\color{green}4}$$  | $${\color{green}3}$$  | $${\color{green}1}$$ | $${\color{red}5}$$ |
 | Quicksort Code | $${\color{orange}3}$$  | $${\color{red}4}$$ | $${\color{green}1}$$ | $${\color{green}2}$$ | $${\color{red}5}$$ |
@@ -36,7 +36,7 @@
 Over all ranking
 #1 Codestral Mamba
 #2 Lama3.1:8b
-#3 Granite-code=8b-dense-instruct
+#3 Granite3-dense:8b
 #4 Granite-code-8b-instruct
 #5 Starcoder2:7b
 
