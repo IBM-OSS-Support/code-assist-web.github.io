@@ -436,7 +436,122 @@ This will start the Quarkus development mode, and you can access the endpoints a
 
 ===========================================================================================================================================================================================
 
+Question 8: Code optimisation (perhaps sort algorithm)
+"Optimize this code: @code_to_optimize.py "
+RESPONSE:
+
+Hello! I am Granite Code, created by IBM. How can I help you today?
+
+To optimize the given code, we can use the built-in sorted() function in Python, which is implemented in C and is more efficient than a manual sorting algorithm like bubble sort. Here's the optimized code:
+
+def algo(arr):
+    return sorted(arr)
+
+# Example usage
+arr = [64, 34, 25, 12, 22, 11, 90]
+res_arr = algo(arr)
+print("Result array is:", res_arr)
+This version of the code has a time complexity of O(n log n), which is more efficient than the original bubble sort algorithm with a time complexity of O(n^2).
+
+===========================================================================================================================================================================================
+
+Question 9: Documentation comment of bank code
+"Write documentation comment for @documentation.py"
+RESPONSE:
+
+"""
+Bank Account Management System
+
+This Python script provides a simple command-line interface for managing bank accounts. It allows users to create new accounts, deposit and withdraw funds, check balances, and display transaction history.
+
+The system is composed of two classes:
+
+1. BankAccount: Represents a single bank account with attributes such as account number, balance, and transactions. It provides methods for depositing, withdrawing, checking the balance, and displaying transaction history.
+
+2. BankSystem: Manages a collection of bank accounts and provides methods for creating new accounts, retrieving accounts by their numbers, and executing basic account operations.
+
+The main function of this script is a simple menu-driven interface that allows users to interact with the bank system.
+
+Example usage:
+
+Bank Account Management System
+
+Create new account
+Deposit funds
+Withdraw funds
+Check balance
+Display transaction history
+Exit Enter your choice: 1 Enter new account number: 12345 Account created successfully!
+Enter your choice: 2 Enter account number: 12345 Enter deposit amount: 100.0 Deposit successful!
+
+Enter your choice: 4 Enter account number: 12345 Account balance: 100.0
+
+Enter your choice: 5 Enter account number: 12345 Transaction history: Deposited 100.0
+
+Enter your choice: 6
+
+"""
+
+import sys
+
+class BankAccount:
+    # ... (class definition)
+
+class BankSystem:
+    # ... (class definition)
+
+def main():
+    # ... (main function definition)
+
+if __name__ == "__main__":
+    main()
+
+===========================================================================================================================================================================================
 
 
+Question 10: Create Unit test for bank code
+Create Unit test for @documentation.py
+RESPONSE:
+
+To create unit tests for the provided Python code, you can use a testing framework like unittest or pytest. Here's an example of how you can write unit tests for the BankAccount and BankSystem classes using unittest:
+
+import unittest
+from documentation.bank_account import BankAccount
+from documentation.bank_system import BankSystem
+
+class TestBankAccount(unittest.TestCase):
+    def setUp(self):
+        self.bank_system = BankSystem()
+        self.account1 = BankAccount("12345", 1000)
+        self.account2 = BankAccount("67890", 500)
+
+    def test_deposit(self):
+        self.account1.deposit(500)
+        self.assertEqual(self.account1.check_balance(), 1500)
+
+    def test_withdraw(self):
+        self.account1.withdraw(200)
+        self.assertEqual(self.account1.check_balance(), 800)
+
+    def test_insufficient_funds(self):
+        self.account1.withdraw(1500)
+        self.assertEqual(self.account1.check_balance(), 1000)
+
+class TestBankSystem(unittest.TestCase):
+    def setUp(self):
+        self.bank_system = BankSystem()
+
+    def test_create_account(self):
+        self.assertTrue(self.bank_system.create_account("98765"))
+        self.assertFalse(self.bank_system.create_account("98765"))
+
+    def test_get_account(self):
+        self.assertEqual(self.bank_system.get_account("12345"), BankAccount("12345", 0))
+
+if __name__ == '__main__':
+    unittest.main()
+This test suite includes tests for the deposit, withdraw, and insufficient_funds methods of the BankAccount class, as well as tests for the create_account and get_account methods of the BankSystem class. You can run these tests using the unittest module or a testing framework like pytest.
+
+===========================================================================================================================================================================================
 
 
