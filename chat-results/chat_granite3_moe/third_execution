@@ -17,7 +17,9 @@ In this example, the lambda function add takes two arguments x and y, and return
 
 Lambda functions are often used in combination with other Python features, such as list comprehensions and the map() function, to perform complex tasks in a concise and efficient way.
 
-==============================================================================================================================================================================================Question 2: Write a code for quick-sort algorithm in Python.
+==============================================================================================================================================================================================
+
+Question 2: Write a code for quick-sort algorithm in Python.
 
 total time:  6.850841584s
 
