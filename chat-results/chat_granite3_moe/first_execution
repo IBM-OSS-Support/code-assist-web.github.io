@@ -15,7 +15,9 @@ In this example, the lambda function add takes two arguments x and y, and return
 Lambda functions are often used in combination with other Python features, such as list comprehensions and the map() function, to perform complex tasks in a concise and efficient way.
 
 
-==============================================================================================================================================================================================Question 2: Write a code for quick-sort algorithm in Python.
+==============================================================================================================================================================================================
+
+Question 2: Write a code for quick-sort algorithm in Python.
 Response
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
@@ -36,7 +38,8 @@ Next, the function selects a pivot element from the array (in this case, the mid
 Finally, the function recursively calls itself on the left and right lists, and concatenates the sorted left list, the middle list (which is already sorted), and the sorted right list to produce the final sorted array.
 
 This implementation of quick-sort has a time complexity of O(n log n) in the average case, but can degrade to O(n^2) in the worst case if the pivot element is chosen poorly. To avoid this, it's often recommended to use a randomized pivot selection or a median-of-three pivot selection strategy.
-==============================================================================================================================================================================================Question 3: How do you declare constructors and destructors in Java?
+==============================================================================================================================================================================================
+Question 3: How do you declare constructors and destructors in Java?
 Response:
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
@@ -72,7 +75,8 @@ In this example, the constructor takes a File argument and assigns it to the ins
 
 Note that Java does not have a built-in destructor like C++ or Python. Instead, it uses the finalize() method to perform cleanup actions before an object is destroyed. However, this method is not guaranteed to be called, and may be overridden by subclasses to provide custom cleanup behavior.
 
-==============================================================================================================================================================================================Question 4: Write a code for Binary Search along with the documentation of the code.
+==============================================================================================================================================================================================
+Question 4: Write a code for Binary Search along with the documentation of the code.
 Response:
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
@@ -112,7 +116,9 @@ Inside the loop, the function calculates the middle index mid of the current sub
 If the loop completes without finding the element, the function returns -1 to indicate that the element was not found in the array.
 
 This implementation of binary search has a time complexity of O(log n) in the average case, where n is the length of the array. However, it can degrade to O(n) in the worst case if the array is already sorted and the element is not present in the array. To avoid this, it's often recommended to use a binary search algorithm that works on partially sorted arrays or randomized search algorithms.
-==============================================================================================================================================================================================Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix) 
+==============================================================================================================================================================================================
+
+Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix) 
 "Fix the bugs in the code: @documentation_with_bugs.py"
 Response:
 Hello! I am Granite Code, created by IBM. How can I help you today?
@@ -379,7 +385,9 @@ public class Main {
 In this corrected version, I have added docstrings to the class and method definitions to provide documentation on their purpose and parameters. I have also added type hints to the function arguments and return types to improve code readability and maintainability. Additionally, I have added error handling to the create_account() method to ensure that a new account is only created if it does not already exist. Finally, I have added a display_transactions() method to the BankAccount class to display the transaction history of the account.
 
 To port this code documentation to Java, you can use the same approach as in Python, where you add docstrings to the class and method definitions to provide documentation on their purpose and parameters. You can also add type hints to the function arguments and return types to improve code readability and maintainability. Additionally, you can add error handling to the create_account() method to ensure that a new account is only created if it does not already exist. Finally, you can add a display_transactions() method to the BankAccount class to display the transaction history of the account.
-==============================================================================================================================================================================================Question 7: Refactor java code to quarkus (Bank code)
+==============================================================================================================================================================================================
+
+Question 7: Refactor java code to quarkus (Bank code)
 "Refactor the above generated code to quarkus"
 
 Response:
@@ -503,7 +511,9 @@ In this corrected version of the code, I have added docstrings to the class and 
 
 To port this code documentation to Quarkus, you can use the same approach as in Python, where you add docstrings to the class and method definitions to provide documentation on their purpose and parameters. You can also add type hints to the function arguments and return types to improve code readability and maintainability. Additionally, you can add error handling to the create_account() method to ensure that a new account is only created if it does not already exist. Finally, you can add a display_transactions() method to the BankAccount class to display the transaction history of the account.
 
-==============================================================================================================================================================================================Question 8: Code optimisation (perhaps sort algorithm)
+==============================================================================================================================================================================================
+
+Question 8: Code optimisation (perhaps sort algorithm)
 "Optimize this code: @code_to_optimize.py "
 Response:
 Hello! I am Granite Code, created by IBM. How can I help you today?
@@ -527,7 +537,9 @@ In this optimized version of the code, I have added docstrings to the function d
 To optimize this code, I have removed the unnecessary import statement and replaced it with the from statement to import the numpy module. I have also replaced the array variable with a NumPy array to improve performance. Finally, I have added a print() statement to print the result array.
 
 To port this code documentation to Python, you can use the same approach as in Python, where you add docstrings to the class and method definitions to provide documentation on their purpose and parameters. You can also add type hints to the function arguments and return types to improve code readability and maintainability. Additionally, you can add error handling to the create_account() method to ensure that a new account is only created if it does not already exist. Finally, you can add a display_transactions() method to the BankAccount class to display the transaction history of the account.
-==============================================================================================================================================================================================Question 9: Documentation comment of bank code
+==============================================================================================================================================================================================
+
+Question 9: Documentation comment of bank code
 "Write documentation comment for @documentation.py"
 Response:
 
@@ -567,7 +579,9 @@ The `main` function contains the main logic of the bank account management syste
 If the user enters 1, the `create_account` method is called to create a new account. If the user enters 2, the `deposit` method is called to deposit funds into the account. If the user enters 3, the `withdraw` method is called to withdraw funds from the account. If the user enters 4, the `check_balance` method is called to check the balance of the account. If the user enters 5, the `display_transactions` method is called to display the transaction history of the account. If the user enters 6, the program exits.
 
 The `BankAccount` and `BankSystem` classes are defined in separate files and modules. The `documentation.py` file contains the documentation for these classes and methods.
-==============================================================================================================================================================================================Question 10: Create Unit test for bank code
+==============================================================================================================================================================================================
+
+Question 10: Create Unit test for bank code
 
 Response:
 Hello! I am Granite Code, created by IBM. How can I help you today?
