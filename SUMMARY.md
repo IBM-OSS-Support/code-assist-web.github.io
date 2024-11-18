@@ -3,9 +3,7 @@
 > [!NOTE]
 > $${\color{green}Green}$$ number means that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
 
-<img width="958" alt="image" src="https://github.com/user-attachments/assets/3564090c-0df5-46e5-802c-dc4f42470507">
-
-
+<img width="1004" alt="image" src="https://github.com/user-attachments/assets/6c37088d-c2b4-47df-8f87-965853491b87">
 
 
 ### Average timing comparison of different models
@@ -24,38 +22,36 @@
 
 
 ### Summary:
-Over all ranking
-#1 Codestral Mamba
-#2 Lama3.1:8b
-#3 Granite3-dense:8b
-#4 Granite-code-8b-instruct
-#5 Starcoder2:7b
-
-**Granite-code:8b-instruct**
-
-System prompt from WCA team did not improve results. Ok chat questions, but the results are inconsistent, does not read full code and sometimes ignores the context.
-
-**granite3-dense:8b**
-
-Better than granite-code:8b with context awarenesss, but the same issues with granite-code:8b is also in this model (inconsistency and incomplete code generation). Generates well documented code in Q4.
-
-**Llama3.1:8b-instruct**
-
-Results are accurate but inconsistent, and often verbose with explanation. Reads the full code. Slowest response time of all models tested.
 
 **Codestral-mamba:7b**
-
 Best overall results. Accuracy is good across 9 questions. Poor on optimization question. ollama did not return response time, but the result generation is significantly faster in all scenarios. 
 
+**Llama3.1:8b-instruct**
+Results are accurate but inconsistent, and often verbose with explanation. Reads the full code. Slowest response time of all models tested.
+
+**granite3-dense:2b**
+Comparitievly better results. Better than granite3-code:3b and 8b
+
+**granite3-dense:8b**
+Better than granite-code:8b with context awarenesss, but the same issues with granite-code:8b is also in this model (inconsistency and incomplete code generation). Generates well documented code in Q4.
+
+**Granite-code:8b**
+Ok chat questions, but the results are inconsistent, does not read full code and sometimes ignores the context.
+
+**granite3-dense:2b-instruct-fp16**
+Faster but less accurate than granite3-dense:2b
+
+**granite3-moe**
+Fast but inaccurate
+
+**granite3-code:3b**
+Inaccurate
+
+**granite3-moe:3b-instruct-fp16**
+Less accurate than granite3-moe
+
 **Starcoder2:7b**
-
 Unusable and unstable. Prints the question in the result before printing the answer. The printed answer is usually garbage or unusable.
-
-**granite3-dense:2b:**
-
-Comparitievly better results. Better than granite3-code:3b and 8b 
-
-
 
 ---------------------------------------------------------------------------------------------------
 
