@@ -3,7 +3,8 @@
 > [!NOTE]
 > $${\color{green}Green}$$ number means that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
 
-<img width="959" alt="image" src="https://github.com/user-attachments/assets/bebd3a90-95e8-421e-88a1-22f450013eb4">
+<img width="961" alt="image" src="https://github.com/user-attachments/assets/2fbc02be-8c70-41e8-8a6d-9622e2e4b1b1">
+
 
 
 ### Average timing comparison of different models
