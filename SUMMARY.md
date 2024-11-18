@@ -1,7 +1,7 @@
 ### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
 
 > [!NOTE]
-> $${\color{green}Green}$$ number means that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
+> $${\color{green}Green}$$ number that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
 
 <img width="1004" alt="image" src="https://github.com/user-attachments/assets/6c37088d-c2b4-47df-8f87-965853491b87">
 
@@ -24,16 +24,16 @@
 ### Summary:
 
 **Codestral-mamba:7b**
-Best overall results. Accuracy is good across 9 questions. Poor on optimization question. ollama did not return response time, but the result generation is significantly faster in all scenarios. 
+Best overall results. Accuracy is very good on 7 questions. ollama did not return response time, but the result generation is very faster in all scenarios. 
 
 **Llama3.1:8b-instruct**
 Results are accurate but inconsistent, and often verbose with explanation. Reads the full code. Slowest response time of all models tested.
 
 **granite3-dense:2b**
-Comparitievly better results. Better than granite3-code:3b and 8b
+Comparable to other models in the granite3 family. Better than granite-code second generation. Very Fast response.
 
 **granite3-dense:8b**
-Better than granite-code:8b with context awarenesss, but the same issues with granite-code:8b is also in this model (inconsistency and incomplete code generation). Generates well documented code in Q4.
+Better than granite-code:8b with context awarenesss, but the same issues with granite-code:8b is also in this model (inconsistency and incomplete code generation). Too slow for tab code complete. 
 
 **Granite-code:8b**
 Ok chat questions, but the results are inconsistent, does not read full code and sometimes ignores the context.
