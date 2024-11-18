@@ -1,8 +1,8 @@
 Question 1: What is Lambda function in python?
 
-total time:  4.852866041s
+total time: 4.861657583s
 
-Response:
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
@@ -17,13 +17,15 @@ In this example, the lambda function add takes two arguments x and y, and return
 
 Lambda functions are often used in combination with other Python features, such as list comprehensions and the map() function, to perform complex tasks in a concise and efficient way.
 
-==============================================================================================================================================================================================
 
-Question 2: Write a code for quick-sort algorithm in Python.
 
-total time:  6.850841584s
+=============================================================================================================================================
 
-Response:
+Question 2:Write a code for quick-sort algorithm in Python.
+
+total time: 9.70827s 
+
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
@@ -37,60 +39,74 @@ def quick_sort(arr):
     middle = [x for x in arr if x == pivot]
     right = [x for x in arr if x > pivot]
     return quick_sort(left) + middle + quick_sort(right)
-In this implementation, the quick_sort() function takes an array arr as input and returns a sorted version of the array. The function first checks if the length of the array is less than or equal to 1, in which case it returns the array as is (since it's already sorted).
 
-Next, the function selects a pivot element from the array (in this case, the middle element). It then creates three lists: left, middle, and right. The left list contains all elements in the array that are less than the pivot, the middle list contains all elements that are equal to the pivot, and the right list contains all elements that are greater than the pivot.
+# Example usage:
+arr = [3,6,8,10,1,2,1]
+print(quick_sort(arr))  # Output: [1, 1, 2, 3, 6, 8, 10]
+In this implementation, the quick_sort() function takes an array arr as input and returns a sorted version of the array. The function first checks if the length of the array is less than or equal to 1, in which case it returns the array itself (since it's already sorted).
 
-Finally, the function recursively calls itself on the left and right lists, and concatenates the sorted results with the middle list to produce a sorted version of the original array.
+The function then selects a pivot element from the array (in this case, the middle element), and creates three lists: left, middle, and right. The left list contains all elements that are less than the pivot, the middle list contains all elements that are equal to the pivot, and the right list contains all elements that are greater than the pivot.
 
-This implementation has a time complexity of O(n log n) in the average case, but can degrade to O(n^2) in the worst case if the pivot is chosen poorly. To avoid this, it's common to use a randomized pivot or a median-of-three pivot selection strategy.
+The function then recursively calls itself on the left and right lists, and concatenates the sorted results with the middle list to produce a final sorted array.
+
+This implementation has a time complexity of O(n log n) in the average case, but can degrade to O(n^2) in the worst case if the input array is already sorted or nearly sorted. To avoid this, it's often recommended to use a randomized version of quick-sort or a hybrid algorithm that combines quick-sort with other sorting algorithms like merge sort or heap sort.
 
 
-==============================================================================================================================================================================================
+=============================================================================================================================================
 
 Question 3: How do you declare constructors and destructors in Java?
 
-total time: 6.885576125s
+total time: 23.381903458s
 
-Response:
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
-In Java, constructors and destructors are special methods that are used to initialize objects and clean up resources, respectively. Here's how you can declare them:
+In Java, a constructor is a method that is used to initialize an object of a class. It has the same name as the class and does not have a return type or a parameter list. Here's an example of a constructor that initializes an object of a class called Person:
 
-Constructor: A constructor is a method that has the same name as the class and is used to initialize objects of that class. It is called automatically when an object is created from the class. Here's an example of a constructor that initializes an integer variable x:
-public class MyClass {
-    private int x;
+public class Person {
+    private String name;
+    private int age;
 
-    public MyClass(int value) {
-        x = value;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
-}
-In this example, the constructor takes an integer argument value and assigns it to the instance variable x. When an object of MyClass is created, the constructor is called automatically with the specified value.
 
-Destructor: A destructor is a method that is used to clean up resources, such as closing files or releasing memory, when an object is no longer needed. It is called automatically when an object is destroyed. Here's an example of a destructor that releases a file pointer:
-public class MyClass {
+    // Other methods and fields...
+}
+In this example, the constructor Person() takes two parameters: name (a String) and age (an integer). It initializes the object's fields with these values.
+
+A destructor in Java is a method that is used to clean up resources or perform other cleanup tasks when an object is no longer needed. It has the same name as the class, but does not have a return type or a parameter list. Here's an example of a destructor that closes a file:
+
+public class FileHandler {
     private File file;
 
-    public MyClass(File file) throws IOException {
+    public FileHandler(File file) {
         this.file = file;
-        // Open the file and perform some operations
     }
 
-    ~MyClass() throws IOException {
-        if (file != null) {
+    public void close() {
+        try {
             file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+    // Other methods and fields...
 }
-In this example, the destructor takes a File argument and checks if it is not null before closing it. When an object of MyClass is destroyed, the destructor is called automatically to release any resources associated with the object.
+In this example, the constructor FileHandler() takes a File object as a parameter and initializes the object's field with it. The destructor close() closes the file when the object is no longer needed.
 
-==============================================================================================================================================================================================
-Question 4: Write a code for Binary Search along with the documentation of the code.
+It's important to note that Java does not have destructors in the same sense as C++ or other languages. Instead, it uses finalizers (also known as destructors) to perform cleanup tasks when an object is garbage collected. However, finalizers are not guaranteed to be called and can be overridden by the programmer.
 
-total time: 12.731230875s
+=============================================================================================================================================
 
-Response:
+Question 4:Write a code for Binary Search along with the documentation of the code.
+
+total time: 39.189891625s
+
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
@@ -98,14 +114,14 @@ Here's a simple implementation of the binary search algorithm in Python:
 
 def binary_search(arr, x):
     """
-    Performs a binary search on the given sorted array for the target value.
+    Performs a binary search on a sorted array for a given element.
 
     Parameters:
-    arr (list): The sorted array to be searched.
-    x (int): The target value to be found.
+    arr (list): A sorted list of integers to be searched.
+    x (int): The element to be found in the array.
 
     Returns:
-    int: The index of the target value in the array if found, otherwise -1.
+    int: The index of the element if found, otherwise -1.
     """
     low = 0
     high = len(arr) - 1
@@ -121,57 +137,81 @@ def binary_search(arr, x):
             high = mid - 1
 
     return -1
-In this implementation, the binary_search() function takes a sorted array arr and a target value x as input. It returns the index of the target value in the array if found, otherwise it returns -1.
 
-The function first initializes two variables low and high to the indices of the first and last elements in the array, respectively. It then enters a loop that continues until low is greater than high.
+# Example usage:
+arr = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+x = 12
+result = binary_search(arr, x)
+if result != -1:
+    print("Element found at index", result)
+else:
+    print("Element not found in the array")
+In this implementation, the binary_search() function takes a sorted list arr and an element x as input. It returns the index of the element if found, or -1 if not found.
 
-Inside the loop, the function calculates the index of the middle element using integer division (//). If the middle element is equal to the target value, the function returns its index. Otherwise, if the middle element is less than the target value, the function updates low to be one more than the middle index. Otherwise, it updates high to be one less than the middle index.
+The function first initializes two variables: low (the lower bound) and high (the upper bound) to the first and last indices of the array, respectively. It then enters a loop that continues until the lower bound is greater than the high bound.
 
-If the loop completes without finding the target value, the function returns -1 to indicate that the target value was not found in the array.
+Inside the loop, the function calculates the middle index mid by taking the average of the lower and high bounds. If the element at the middle index is equal to the target element, the function returns the middle index. If the element at the middle index is less than the target element, the function updates the lower bound to be the middle index plus one. Otherwise, it updates the upper bound to be the middle index minus one.
 
+If the loop completes without finding the target element, the function returns -1.
 
-==============================================================================================================================================================================================
+This implementation has a time complexity of O(log n) in the average case, where
+=============================================================================================================================================
 
-Question 5: Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix)
+Question 5:Debugging question (break 10 lines of the 88 lines of banking code ask ai to fix)
 "Fix the bugs in the code: @documentation_with_bugs.py"
 
-total time: 28.0314235s
+total time: 1m12s
 
-Response:
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
-Here's the corrected code with documentation and bug fixes:
+Here's a fixed version of the code with documentation and bug fixes:
 
 class BankAccount:
-    def __init__(self, account_number, balance=0):
-        """
-        Initializes a new BankAccount object with the given account number and balance.
+    """
+    A class representing a bank account with methods for depositing, withdrawing, checking balance, and displaying transactions.
 
-        Parameters:
-        account_number (str): The unique identifier for the account.
-        balance (float): The initial balance of the account.
-        """
+    Attributes:
+    account_number (str): The unique identifier for the account.
+    balance (float): The current balance of the account.
+    transactions (list): A list of transaction strings.
+
+    Methods:
+    deposit(self, amount): Adds the given amount to the account balance.
+    withdraw(self, amount): Withdraws the given amount from the account balance if sufficient funds are available. Returns True if successful, False otherwise.
+    check_balance(self): Returns the current balance of the account.
+    display_transactions(self): Displays all transaction strings in the list.
+    """
+
+    def __init__(self, account_number, balance=0.0):
         self.account_number = account_number
         self.balance = balance
         self.transactions = []
 
     def deposit(self, amount):
         """
-        Deposits the given amount into the account and adds a transaction to the list.
+        Adds the given amount to the account balance.
 
         Parameters:
-        amount (float): The amount to be deposited.
+        amount (float): The amount to be added to the balance.
+
+        Returns:
+        bool: True if successful, False otherwise.
         """
         self.balance += amount
         self.transactions.append(f"Deposited {amount}")
+        return True
 
     def withdraw(self, amount):
         """
-        Withdraws the given amount from the account and adds a transaction to the list.
+        Withdraws the given amount from the account balance if sufficient funds are available.
 
         Parameters:
-        amount (float): The amount to be withdrawn.
+        amount (float): The amount to be withdrawn from the balance.
+
+        Returns:
+        bool: True if successful, False otherwise.
         """
         if amount > self.balance:
             print("Insufficient funds!")
@@ -183,67 +223,66 @@ class BankAccount:
     def check_balance(self):
         """
         Returns the current balance of the account.
+
+        Returns:
+        float: The current balance of the account.
         """
         return self.balance
 
     def display_transactions(self):
         """
-        Displays all transactions for the account.
+        Displays all transaction strings in the list.
+
+        Returns:
+        None
         """
         for transaction in self.transactions:
             print(transaction)
 
 class BankSystem:
-    def __init__(self):
-        """
-        Initializes a new BankSystem object with an empty dictionary to store accounts.
-        """
-        self.accounts = {}
+    """
+    A class representing a bank system with methods for creating accounts, depositing funds, withdrawing funds
 
-    def create_account(self, account_number):
-        """
-        Creates a new account with the given account number and returns the corresponding BankAccount object.
+=============================================================================================================================================
 
-        Parameters:
-        account_number (str): The unique identifier for the account.
-
-        Returns:
-        BankAccount: The corresponding BankAccount object.
-        """
-        if account_number not in self.accounts:
-            self.accounts[account_number] = BankAccount(account_number)
-            return self.accounts[account_number]
-        else:
-            print("Account already exists!")
-            return None
-
-    def get_account(self, account_number):
-        """
-        Returns the corresponding BankAccount object for the
-==============================================================================================================================================================================================
-
-Question 6: Port bank code from py to java
+Question 6:Port bank code from py to java
 "Port the code @documentation.py to java"
 
-total time: 1m23s
+total time: 1m14s
 
-Response:
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
-Here's the Java version of the code with documentation:
+Here's a ported version of the code with documentation and bug fixes in Java:
 
 
 
 
 public class BankAccount {
-    private String accountNumber;
-    private double balance;
-    private List<String> transactions = new ArrayList<>();
+    /**
+     * A class representing a bank account with methods for depositing, withdrawing, checking balance, and displaying transactions.
 
-    public BankAccount(String accountNumber, double initialBalance) {
-        this.accountNumber = accountNumber;
-        this.balance = initialBalance;
+     Attributes:
+     account_number (String): The unique identifier for the account.
+     balance (double): The current balance of the account.
+     transactions (List<String>): A list of transaction strings.
+
+     Methods:
+     deposit(double amount): Adds the given amount to the account balance.
+     withdraw(double amount): Withdraws the given amount from the account balance if sufficient funds are available. Returns true if successful, false otherwise.
+     checkBalance(): Returns the current balance of the account.
+     displayTransactions(): Displays all transaction strings in the list.
+     */
+
+    private String account_number;
+    private double balance;
+    private List<String> transactions;
+
+    public BankAccount(String account_number, double balance) {
+        this.account_number = account_number;
+        this.balance = balance;
+        this.transactions = new ArrayList<>();
     }
 
     public void deposit(double amount) {
@@ -273,70 +312,61 @@ public class BankAccount {
 }
 
 public class BankSystem {
-    private Map<String, BankAccount> accounts = new HashMap<>();
+    /**
+     * A class representing a bank system with methods for creating accounts, depositing funds, withdrawing funds, and checking balance.
 
-    public boolean createAccount(String accountNumber) {
-        if (!accounts.containsKey(accountNumber)) {
-            BankAccount account = new BankAccount(accountNumber, 0);
-            accounts.put(accountNumber, account);
-            return true;
-        } else {
-            System.out.println("Account already exists!");
-            return false;
-        }
-    }
+     Attributes:
+     accounts (Map<String, BankAccount>): A map of account numbers to BankAccount objects.
 
-    public BankAccount getAccount(String accountNumber) {
-        return accounts.get(accountNumber);
-    }
-}
+     Methods:
+     createAccount(String account_number): Creates a new BankAccount object with the given account number if it doesn't already exist. Returns true if successful, false otherwise.
+     getAccount(String account_number): Returns the BankAccount object associated with the given account number.
+     */
 
-public class Main {
-    public static void main(String[] args) {
-        BankSystem bankSystem = new BankSystem();
+    private Map<String, BankAccount> accounts;
 
-        while (true) {
-            System.out.println("Bank Account Management System");
-            System.out.println("1. Create new account");
-            System.out.println("2. Deposit funds");
-            System.out.println("3. Withdraw funds");
-            System.out.println("4. Check balance");
-            System.out.println("5. Display transaction history");
-            System.out.println("6. Exit");
+    public Bank
 
-            int choice = Integer.parseInt(args[0]);
-
-            if (choice == 1) {
-                String accountNumber = args[1];
-                bankSystem.createAccount(accountNumber);
-            } else if (choice == 
-
-
-==============================================================================================================================================================================================
+=============================================================================================================================================
 
 Question 7: Refactor java code to quarkus (Bank code)
 "Refactor the above generated code to quarkus"
 
 total time: 1m13s
 
-Response:
+RESPONSE:
 
-Hello! I am Granite Code, created by IBM. How can I help you today?
+ Hello! I am Granite Code, created by IBM. How can I help you today?
 
-Here's the refactored Java code using Quarkus:
+Here's a refactored version of the code with documentation and bug fixes in Quarkus:
 
-import io.quarkus.runtime.Quarkus;
-import io.quarkus.runtime.QuarkusApplication;
-import io.quarkus.runtime.QuarkusApplicationBuilder;
+
+
 
 public class BankAccount {
-    private String accountNumber;
-    private double balance;
-    private List<String> transactions = new ArrayList<>();
+    /**
+     * A class representing a bank account with methods for depositing, withdrawing, checking balance, and displaying transactions.
 
-    public BankAccount(String accountNumber, double initialBalance) {
-        this.accountNumber = accountNumber;
-        this.balance = initialBalance;
+     Attributes:
+     account_number (String): The unique identifier for the account.
+     balance (double): The current balance of the account.
+     transactions (List<String>): A list of transaction strings.
+
+     Methods:
+     deposit(double amount): Adds the given amount to the account balance.
+     withdraw(double amount): Withdraws the given amount from the account balance if sufficient funds are available. Returns true if successful, false otherwise.
+     checkBalance(): Returns the current balance of the account.
+     displayTransactions(): Displays all transaction strings in the list.
+     */
+
+    private String account_number;
+    private double balance;
+    private List<String> transactions;
+
+    public BankAccount(String account_number, double balance) {
+        this.account_number = account_number;
+        this.balance = balance;
+        this.transactions = new ArrayList<>();
     }
 
     public void deposit(double amount) {
@@ -366,153 +396,198 @@ public class BankAccount {
 }
 
 public class BankSystem {
-    private Map<String, BankAccount> accounts = new HashMap<>();
+    /**
+     * A class representing a bank system with methods for creating accounts, depositing funds, withdrawing funds, and checking balance.
 
-    public boolean createAccount(String accountNumber) {
-        if (!accounts.containsKey(accountNumber)) {
-            BankAccount account = new BankAccount(accountNumber, 0);
-            accounts.put(accountNumber, account);
-            return true;
-        } else {
-            System.out.println("Account already exists!");
-            return false;
-        }
-    }
+     Attributes:
+     accounts (Map<String, BankAccount>): A map of account numbers to BankAccount objects.
 
-    public BankAccount getAccount(String accountNumber) {
-        return accounts.get(accountNumber);
-    }
-}
+     Methods:
+     createAccount(String account_number): Creates a new BankAccount object with the given account number if it doesn't already exist. Returns true if successful, false otherwise.
+     getAccount(String account_number): Returns the BankAccount object associated with the given account number.
+     */
 
-public class Main {
-    public static void main(String[] args) {
-        QuarkusApplicationBuilder builder = new QuarkusApplicationBuilder();
-
-        try {
-            builder.withClass(BankAccount::new).withClass(BankSystem::new).build().run();
-        } catch (Exception e) {
-            System.err.println("Error starting Quarkus application: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-}
-This code uses the Quarkus framework to create a RESTful API for the BankAccount and BankSystem classes. The Main class
+    private Map<String, BankAccount> accounts;
 
 
-
-==============================================================================================================================================================================================
+=============================================================================================================================================
 
 Question 8: Code optimisation (perhaps sort algorithm)
 "Optimize this code: @code_to_optimize.py "
 
-total time: 1m4s
+total time: 1m8s
 
-Response:
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
-Here's the optimized Python code using list comprehension and the built-in sorted() function:
+Here's an optimized version of the code with bug fixes and documentation:
 
-def algo(arr):
-    return sorted(arr)
+def sort_array(arr):
+    """
+    A function that sorts an array in ascending order using the bubble sort algorithm.
+
+    Args:
+    arr (list): The list to be sorted.
+
+    Returns:
+    list: The sorted list.
+    """
+
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
 
 # Example usage
 arr = [64, 34, 25, 12, 22, 11, 90]
-res_arr = algo(arr)
-print("Result array is:", res_arr)
-This code uses the built-in sorted() function to sort the input list in ascending order. The time complexity of this algorithm is O(n log n), which is more efficient than the original algorithm's time complexity of O(n^2).
+sorted_arr = sort_array(arr)
+print("Result array is:", sorted_arr)
+This optimized version of the code uses the bubble sort algorithm to sort the array in ascending order. The algorithm works by repeatedly swapping adjacent elements if they are in the wrong order. This process is repeated until the entire array is sorted. The time complexity of this algorithm is O(n^2), where n is the number of elements in the array. However, it is still a simple and easy-to-understand sorting algorithm.
 
-
-==============================================================================================================================================================================================
-
+=============================================================================================================================================
 Question 9: Documentation comment of bank code
 "Write documentation comment for @documentation.py"
 
-total time:  1m0s 
+total time: 1m9s 
 
-Response:
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
-Here's the documentation comment for the 
+Here's a documentation comment for the 
 documentation.py
  file:
 
+
+
+
 class BankAccount:
     """
-    A class representing a bank account with methods to deposit, withdraw, check balance, and display transactions.
+    A class representing a bank account with methods for depositing, withdrawing, checking balance, and displaying transactions.
 
     Attributes:
-        account_number (str): The unique identifier of the account.
-        balance (float): The current balance of the account.
-        transactions (list): A list of strings representing the transaction history.
+    account_number (str): The unique identifier for the account.
+    balance (float): The current balance of the account.
+    transactions (list): A list of transaction strings.
 
     Methods:
-        deposit(self, amount): Adds the given amount to the account balance and appends a message to the transactions list.
-        withdraw(self, amount): Subtracts the given amount from the account balance if sufficient funds are available, appends a message to the transactions list, and returns True if successful, False otherwise.
-        check_balance(self): Returns the current balance of the account.
-        display_transactions(self): Displays the transaction history for the account.
+    deposit(float amount): Adds the given amount to the account balance.
+    withdraw(float amount): Withdraws the given amount from the account balance if sufficient funds are available. Returns True if successful, False otherwise.
+    check_balance(): Returns the current balance of the account.
+    display_transactions(): Displays all transaction strings in the list.
     """
 
     def __init__(self, account_number, balance=0):
-        self.account_number = account_
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
 
+    def deposit(self, amount):
+        """
+        Adds the given amount to the account balance.
 
+        Args:
+        amount (float): The amount to be added to the account balance.
 
-==============================================================================================================================================================================================
+        Returns:
+        bool: True if successful, False otherwise.
+        """
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        """
+        Withdraws the given amount from the account balance if sufficient funds are available.
+
+        Args:
+        amount (float): The amount to be withdrawn from the account balance.
+
+        Returns:
+        bool: True if successful, False otherwise.
+        """
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        """
+        Returns the current balance of the account.
+
+        Returns:
+        float: The current balance of the account.
+        """
+        return self.balance
+
+    def display_transactions(self):
+        """
+        Displays all transaction strings in the list.
+
+        Returns:
+        None
+        """
+        for transaction in self.transactions:
+            print(transaction)
+
+class BankSystem:
+    """
+    A class representing a bank system with methods for creating accounts, depositing funds, withdrawing funds, and checking balance.
+
+    Attributes:
+
+=============================================================================================================================================
 
 Question 10: Create Unit test for bank code
 
 
-total time: 13.556689959s
+total time: 1m9s
 
-Response:
+RESPONSE:
 
 Hello! I am Granite Code, created by IBM. How can I help you today?
 
-Here's the unit test for the bank_code.py file using the unittest framework:
+Here's a unit test for the BankAccount class using the unittest module in Python:
 
 import unittest
-from bank_code import BankAccount, BankSystem
 
 class TestBankAccount(unittest.TestCase):
     def setUp(self):
-        self.account = BankAccount("123456789")
-
-    def test_deposit(self):
-        self.account.deposit(100)
-        self.assertEqual(self.account.balance, 100)
-
-    def test_withdraw(self):
-        self.account.withdraw(50)
-        self.assertEqual(self.account.balance, 50)
-        with self.assertRaises(ValueError):
-            self.account.withdraw(100)
-
-class TestBankSystem(unittest.TestCase):
-    def setUp(self):
+        self.account_number = "12345"
         self.bank_system = BankSystem()
 
     def test_create_account(self):
-        self.bank_system.create_account("123456789")
-        self.assertIsInstance(self.bank_system.get_account("123456789"), BankAccount)
+        self.assertEqual(self.bank_system.create_account(self.account_number), True)
+        self.assertNotIn("Account already exists!", self.bank_system.accounts)
 
     def test_deposit(self):
-        self.bank_system.get_account("123456789").deposit(100)
-        self.assertEqual(self.bank_system.get_account("123456789").balance, 100)
+        self.bank_system.get_account(self.account_number)
+        self.bank_system.get_account(self.account_number).deposit(100.0)
+        self.assertEqual(self.bank_system.get_account(self.account_number).balance, 100.0)
 
     def test_withdraw(self):
-        self.bank_system.get_account("123456789").withdraw(50)
-        self.assertEqual(self.bank_system.get_account("123456789").balance, 50)
-        with self.assertRaises(ValueError):
-            self.bank_system.get_account("123456789").withdraw(100)
+        self.bank_system.get_account(self.account_number)
+        self.bank_system.get_account(self.account_number).withdraw(50.0)
+        self.assertEqual(self.bank_system.get_account(self.account_number).balance, 50.0)
+
+    def test_check_balance(self):
+        self.bank_system.get_account(self.account_number)
+        self.assertEqual(self.bank_system.get_account(self.account_number).check_balance(), 50.0)
+
+    def test_display_transactions(self):
+        self.bank_system.get_account(self.account_number)
+        self.bank_system.get_account(self.account_number).display_transactions()
 
 if __name__ == "__main__":
     unittest.main()
-This unit test includes three tests: test_deposit, test_withdraw, and test_create_account. The test_deposit and test_withdraw tests check the behavior of the BankAccount class, while the `test_create_account
-==============================================================================================================================================================================================
+This unit test includes five test cases:
 
+test_create_account: Tests the create_account method of the BankSystem class to ensure that a new account is created and added to the accounts dictionary.
+test_deposit: Tests the deposit method of the BankAccount class to ensure that the balance is updated correctly after a deposit.
+`test
 
-
-
-
+=============================================================================================================================================
