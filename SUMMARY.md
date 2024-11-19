@@ -44,7 +44,7 @@ Faster but less accurate than granite3-dense:2b
 **granite3-moe**
 Fast but inaccurate
 
-**granite3-code:3b**
+**granite-code:3b**
 Inaccurate
 
 **granite3-moe:3b-instruct-fp16**
