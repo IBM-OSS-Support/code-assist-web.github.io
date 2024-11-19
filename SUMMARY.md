@@ -1,10 +1,9 @@
 ### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
 
 > [!NOTE]
-> $${\color{green}Green}$$ number that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
+> $${\color{green}Green}$$ indicates that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
 
-<img width="1004" alt="image" src="https://github.com/user-attachments/assets/6c37088d-c2b4-47df-8f87-965853491b87">
-
+<img width="1004" alt="image" src="https://github.com/user-attachments/assets/5ee63705-0348-476f-884c-260bb7f56969">
 
 ### Average timing comparison of different models
 | Questions | Granite-code:8b-instruct | granite3-dense:8b | Llama3.1:8b |
