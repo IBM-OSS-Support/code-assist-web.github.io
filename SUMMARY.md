@@ -12,8 +12,8 @@
 | Quicksort Code | 7984.16 ms | 13163.09 ms| 35300.37 ms |
 | Constructors/Desctructors Java | 20128.85 ms | 16603.52 ms | 44066.22 ms |
 | Binary Search Code | 20013.74 ms| 24424.41 ms | 44469.09 ms |
-| Debug the code | 23764.16 ms) | 61535.52 ms | 81078.74 ms  |
-| Port the code | 71351.14 ms) | 69910.73 ms | 103004.82 ms|
+| Debug the code | 23764.16 ms | 61535.52 ms | 81078.74 ms  |
+| Port the code | 71351.14 ms | 69910.73 ms | 103004.82 ms|
 | Refactor code into Quarkus | 81471.42 ms | 62507.44 ms | 98524.59 ms |
 | Optimization of code | 51825.82 ms | 37054.33 ms | 49334.90 ms |
 | Documentation of code | 49589.85 ms | 64780.98 ms | 98268.18 ms |
