@@ -6,7 +6,7 @@
 <img width="586" alt="image" src="https://github.com/user-attachments/assets/c7963c12-5c74-42d6-ac2f-13951d878d6c">
 
 ### Average timing comparison of different models
-| Questions | Granite-code:8b-instruct | granite3-dense:8b | Llama3.1:8b |
+| Questions | granite-code:8b | granite3-dense:8b | Llama3.1:8b |
 | :----: | :----: | :----: | :----: |
 | Lambda Function |  7671.49 ms |   9759.53 ms | 27867.56 ms | 
 | Quicksort Code | 7984.16 ms | 13163.09 ms| 35300.37 ms |
@@ -24,7 +24,7 @@
 **Codestral-mamba:7b**
 Best overall results. Accuracy is very good on 7 questions. ollama did not return response time, but the result generation is very faster in all scenarios. 
 
-**Llama3.1:8b-instruct**
+**Llama3.1:8b**
 Results are accurate but inconsistent, and often verbose with explanation. Reads the full code. Slowest response time of all models tested.
 
 **granite3-dense:2b**
