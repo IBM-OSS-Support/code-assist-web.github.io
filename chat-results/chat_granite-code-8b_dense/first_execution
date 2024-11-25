@@ -456,3 +456,76 @@ class TestBankAccount(unittest.TestCase):
         account.
 
 ----------------------------------------------------------------------------------
+
+
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+The provided code is a Python script that manages tasks using JSON files. Here's a breakdown of the code:
+
+file_io.py: This file contains functions to save and load tasks from a JSON file named "tasks.json".
+
+save_tasks(tasks): This function takes a list of tasks as input and saves them to the "tasks.json" file using the json.dump() method. If there's an error during saving, it returns an error message.
+
+load_tasks(): This function loads tasks from the "tasks.json" file using the json.load() method. If the file doesn't exist or there's an error during loading, it returns an empty list and prints an error message.
+
+manager.py: This file contains functions to view, add, mark as completed, and delete tasks.
+
+view_tasks(tasks): This function takes a list of tasks as input and returns a string containing the tasks listed with their numbers, names, completion status (marked with '✓' or '✗'), and priority. If there are no tasks, it returns "No tasks added yet!".
+
+add_task(tasks, name, priority): This function takes a list of tasks, a task name, and a priority as input. It adds the new task to the list with the given name and priority. If the task name is empty, it returns "Task name cannot be empty!". If the priority is not one of the valid options ("Low", "Medium", "High"), it defaults to "Medium".
+
+mark_task_completed(tasks, task_number): This function takes a list of tasks and a task number as input. It marks the task with the given number as completed by setting its 'completed' status to True. If the task number is invalid (less than 1 or greater than the total number of tasks), it returns "Invalid task number!".
+
+delete_task(tasks, task_number): This function takes a list of tasks and a task number as input. It removes the task with the given number from the list and returns a message indicating which task was deleted. If the task number is invalid (less than 1 or greater than the total number of tasks), it returns "Invalid task number!".
+
+To learn more about how these functions work together, you can look at the manager.py file, where the main logic for managing tasks is implemented.
+
+
+----------------------------------------------------------------------------------
+
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+
+To add a new feature to the To-Do List Application, you would need to modify the existing codebase. Here are some steps to guide you:
+
+Open the main.py file in your text editor or IDE. This is the main entry point of the application.
+Look for the existing functions that handle user input and update the task list accordingly. These functions are likely named view_tasks, add_task, mark_task_completed, and delete_task.
+Decide on the new feature you want to add. For example, you might want to allow users to edit tasks or set due dates for tasks.
+Write a new function to handle the new feature. This function should take the current task list as input, perform the necessary operations, and return the updated task list.
+Call this new function from the appropriate place in the main.py file. For example, if you're adding an "edit task" feature, you might call this function when the user enters a command to edit a task.
+Test your new feature by running the application and verifying that it works as expected.
+Here's an example of how you might add an "edit task" feature:
+
+def edit_task(tasks, task_number, new_name, new_priority):
+    if task_number < 1 or task_number > len(tasks):
+        return "Invalid task number!"
+    if not new_name:
+        return "Task name cannot be empty!"
+    if new_priority not in ["Low", "Medium", "High"]:
+        new_priority = "Medium"
+    tasks[task_number - 1]["name"] = new_name
+    tasks[task_number - 1]["priority"] = new_priority
+    return f"Task '{new_name}' edited with priority '{new_priority}'."
+You would then call this function from the appropriate place in the main.py file, for example:
+
+if command == "edit":
+    task_number = int(input("Enter task number to edit: "))
+    new_name = input("Enter new task name: ")
+    new_priority = input("Enter new task priority (Low/Medium/High): ")
+    return edit_task(tasks, task_number, new_name, new_priority)
+
+
+
+
+
+
+
+
+

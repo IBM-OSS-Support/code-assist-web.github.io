@@ -301,8 +301,38 @@ if __name__ == "__main__":
 
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+The code in tasks is a manager for tasks that can be added, marked as completed, and deleted. It uses a JSON file to store the tasks, with each task having a name, a completion status (true or false), and a priority level (low, medium, or high). The code includes functions for viewing all tasks, adding a new task, marking a task as completed, and deleting a task.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+
+To add a new feature to the To-Do List Application, you can follow these steps:
+
+Identify the feature you want to add and determine its purpose.
+Create a new function in the manager.py file that will handle the new feature. This function should take any necessary parameters and return the result of the operation.
+Update the main.py file to call the new function when the appropriate option is selected from the menu.
+Add any necessary code to the new function to perform the desired action.
+Test the application thoroughly to ensure that the new feature works as expected.
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 

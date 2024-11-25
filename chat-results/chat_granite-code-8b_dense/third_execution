@@ -584,3 +584,32 @@ This test suite includes tests for the `BankAccount` and `BankSystem` classes. T
 To run the tests, save the test code in a file named `test_documentation.py` and execute it using the command `python test_documentation.py`. The test suite will run and display the results on the console.
 
 ----------------------------------------------------------------------------------
+
+
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+The code provided is a Python script that defines two files: file_io.py and manager.py.
+
+file_io.py contains functions for saving and loading tasks from a JSON file named tasks.json. The save_tasks(tasks) function takes a list of tasks as input and saves them to the JSON file. If there's an error during this process, it returns an error message. The load_tasks() function reads the JSON file and returns the list of tasks. If the file doesn't exist or there's an error reading it, it returns an empty list.
+
+manager.py contains functions for managing tasks. It imports the load_tasks() function from file_io.py. The view_tasks(tasks) function displays the list of tasks in a formatted string. If there are no tasks, it returns a message saying "No tasks added yet!".
+
+The add_task(tasks, name, priority) function adds a new task to the list. It checks if the task name is empty and if the priority is valid. If the name is empty, it returns an error message. If the priority is not one of the three valid options ("Low", "Medium", "High"), it defaults to "Medium".
+
+The mark_task_completed(tasks, task_number) function marks a task as completed by setting its completed attribute to True. It checks if the task number is valid. If it's not, it returns an error message.
+
+The delete_task(tasks, task_number) function removes a task from the list by its number. It checks if the task number is valid. If it's not, it returns an error message.
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+Question 12: ask questions on codebase
+
+  @codebase how do i add new feature to this?
+
+RESPONSE:
+

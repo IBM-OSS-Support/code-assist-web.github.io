@@ -565,6 +565,82 @@ This test suite includes tests for the deposit, withdraw, and check_balance meth
 ==========================================================================================================================================================================================
 
 
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+The provided code is a Python script that defines a set of functions to manage tasks. The tasks are stored in a JSON file named "tasks.json". Here's a breakdown of the code:
+
+save_tasks(tasks): This function takes a list of tasks as input and saves them to the "tasks.json" file. It uses the json.dump() function to convert the tasks list into a JSON string and then writes it to the file. If there's an error during writing, it returns an error message.
+
+load_tasks(): This function reads the tasks from the "tasks.json" file and returns them as a list. It uses the json.load() function to parse the JSON string back into a Python list. If the file doesn't exist or there's an error during reading, it returns an empty list.
+
+view_tasks(tasks): This function takes a list of tasks as input and returns a formatted string that lists all the tasks with their names, completion status (indicated by a checkmark or cross), and priority. If no tasks have been added yet, it returns a message saying so.
+
+add_task(tasks, name, priority): This function takes a list of tasks, a task name, and a priority level as input. It adds the new task to the list and returns a confirmation message. If the name is empty or the priority is not one of "Low", "Medium", or "High", it returns an error message.
+
+mark_task_completed(tasks, task_number): This function takes a list of tasks and a task number as input and marks the corresponding task as completed. It returns a confirmation message. If the task number is invalid, it returns an error message.
+
+delete_task(tasks, task_number): This function takes a list of tasks and a task number as input and deletes the corresponding task from the list. It returns a confirmation message. If the task number is invalid, it returns an error message.
+
+To learn more about this code, you might want to check out the json module documentation for handling JSON data in Python, or the file_io.py and manager.py files for understanding how the tasks are saved and managed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+
+To add a new feature to this to-do list application, you can follow these steps:
+
+Identify the new feature you want to add. For example, let's say you want to add a feature to set a deadline for each task.
+
+Modify the manager.py file to include the new feature. Here's an example of how you can add a set_deadline function:
+
+def set_deadline(tasks, task_number, deadline):
+    if task_number < 1 or task_number > len(tasks):
+        return "Invalid task number!"
+    tasks[task_number - 1]["deadline"] = deadline
+    return f"Deadline set for task '{tasks[task_number - 1]['name']}' to {deadline}."
+Update the view_tasks function to display the deadline if it's set:
+def view_tasks(tasks):
+    if not tasks:
+        return "No tasks added yet!"
+    return "\n".join([
+        f"{i + 1}. {task['name']} [{'✓' if task['completed'] else '✗'}] (Priority: {task['priority']}, Deadline: {task['deadline']})"
+        for i, task in enumerate(tasks)
+    ])
+To save the tasks to a file, you can use the json module in Python. Here's an example of how you can modify the add_task function to save the tasks to a file:
+import json
+
+def add_task(tasks, name, priority, deadline):
+    if not name:
+        return "Task name cannot be empty!"
+    if priority not in ["Low", "Medium", "High"]:
+        priority = "Medium"
+    task = {"name": name, "completed": False, "priority": priority, "deadline": deadline}
+    tasks.append(task)
+    with open("tasks.json", "w") as f:
+        json.dump(tasks, f)
+    return f"Task '{name}' added with priority '{priority}' and deadline '{deadline}'."
+To load the tasks from a file, you can also use the json module. Here's an example of how you can modify the view_tasks function to load the tasks from a file:
+def view_tasks(tasks):
+    if not tasks:
+        return "No tasks added yet!"
+    with open("tasks.json", "r") as f:
+        tasks = json.load(f)
+    return "\n".join([
+        f"{i + 1}. {task['name']} [{'✓' if task['completed'] else '✗'}] (Priority: {task['priority']}, Deadline: {task['deadline']})"
+        for i, task in enumerate(tasks)
+    ])
+Don't forget to create a tasks.json file in the same directory as your Python script to store the tasks. The first time you run your application, it will create this file and save the initial empty list of tasks to it.
+
+To learn more about how to add new features to this application, you can refer to the official Python documentation for the json module and the argparse module, which can help you create a command-line interface for your application. You can also refer to the official documentation for the argparse module to learn how to handle command-line arguments and options.
+
 
 
 

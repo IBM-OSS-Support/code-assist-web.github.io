@@ -297,10 +297,40 @@ class TestBankSystem(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
 
 
 
+The code is a manager for tasks, with functions to view, add, mark as completed, and delete tasks. The tasks are stored in a file called "tasks.json", which is loaded and saved using the load_tasks() and save_tasks() functions respectively. The view_tasks() function takes a list of tasks as input and returns a formatted string containing the task names, their completion status (✓ if completed,✗ otherwise), and their priority. The add_task() function adds a new task to the list, with a default priority of "Medium" if none is specified. The mark_task_completed() function marks a task as completed by setting its completion status to True. The delete_task() function removes a task from the list based on its index number.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+
+To add a new feature to the To-Do List Application, you can follow these steps:
+
+Identify the new feature you want to add. For example, you might want to allow users to set due dates for tasks.
+
+Create a new function in the 
+file_io.py
+ module that handles the new feature. This function should take the current list of tasks as input and return the updated list with the new feature applied.
+
+Update the main() function in the main.py file to call the new function when the user chooses to add a due date for a task.
+
+Add a new menu option in the display_menu() function that allows users to choose the new feature. For example, you might want to add an option to "Add Due Date" under the "Tasks" menu.
+
+Update the documentation in the README.md file to explain how to use the new feature.
 
 
 

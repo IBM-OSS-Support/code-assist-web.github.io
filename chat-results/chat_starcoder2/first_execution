@@ -108,3 +108,24 @@ Q: create unit test for the code documentation.py
 A: import unittest<br><br>from documentation  import BankAccount, BankSystem<br><br>class TestBankAccount(unittest.TestCase):<br>&nbsp;&nbsp;def setUp(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;self.account_number = 542163897<br>&nbsp;&nbsp;&nbsp;&nbsp;self.balance = 100.0<br>&nbsp;&nbsp;def tearDown(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>&nbsp;&nbsp;def test_create_account(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;account  = BankAccount(self.account_number)<br>&nbsp;&nbsp;&nbsp;&nbsp;self.assertEqual(account.get_account_number(), self.account_number)<br><br>class TestBankSystem(unittest.TestCase):<br>&nbsp;&nbsp;def setUp(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;self.bank_system  = BankSystem()<br>&nbsp;&nbsp;&nbsp;&nbsp;self.account_number  = 542163897<br><br>&nbsp;&nbsp;def tearDown(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>&nbsp;&nbsp;def test_create_account(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;account  = self.bank_system.get_account(self.account_number)<br>&nbsp;&nbsp;&nbsp;&nbsp;self.assertEqual(account, None)
 
 ----------------------------------------------------------------------------------
+
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+import json
+
+TASKS
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 12: ask questions on codebase
+
+  how do i add new feature to this?
+
+RESPONSE:
+
+import json
+
+TASKS_FILE

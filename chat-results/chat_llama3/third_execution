@@ -1230,3 +1230,24 @@ This will execute all the tests in both files and display the results.
 
 
 ----------------------------------------------------------------------------------
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+I'd be happy to help explain the code!
+
+The provided code is written in Python and consists of two
+-------------------------------------------------------------------------------------
+
+
+Question 12: ask questions on codebase
+
+  @codebase how do i add new feature to this?
+
+RESPONSE:
+To add a new feature to the To-Do List Application, you can follow these general steps:
+
+1
+

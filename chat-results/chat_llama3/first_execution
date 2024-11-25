@@ -1247,4 +1247,70 @@ In this test suite:
 
 These tests cover various scenarios to ensure that the code works as expected. You can run these tests using Python's built-in `unittest` module by saving this code in a separate file (e.g., `test_documentation.py`) and executing it with `python test_documentation.py`.
 
+
 ----------------------------------------------------------------------------------
+
+
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+
+I'd be happy to help explain the code!
+
+The provided code is written in Python and consists of two files: file_io.py and manager.py. These files contain functions for managing tasks, which can be saved and loaded from a JSON file named "tasks.json".
+
+Here's an overview of what each function does:
+
+file_io.py
+
+save_tasks(tasks): This function takes a list of tasks as input and saves it to the "tasks.json" file. It uses the json.dump() function to convert the task list into a JSON string, which is then written to the file.
+load_tasks(): This function loads the tasks from the "tasks.json" file and returns them as a list. If the file does not exist (i.e., it's empty or doesn't exist at all), an empty list is returned.
+manager.py
+
+view_tasks(tasks): This function takes a list of tasks as input and returns a string representation of those tasks. Each task is displayed in the format:
+<task_number>. <task_name> [✓ or ✗] (Priority: <priority>)
+If no tasks have been added, it returns the message "No tasks added yet!".
+add_task(tasks, name, priority): This function adds a new task to the list of tasks. It takes three parameters:
+tasks: The list of existing tasks
+name: The name of the new task
+priority: The priority level of the new task (can be "Low", "Medium", or "High") If the task name is empty, it returns an error message. Otherwise, it adds the new task to the list and returns a success message.
+mark_task_completed(tasks, task_number): This function marks a specific task as completed. It takes two parameters:
+tasks: The list of existing tasks
+task_number: The number of the task to mark as completed (1-indexed) If the task number is invalid (i.e., out of range), it returns an error message. Otherwise, it updates the task's "completed" status and returns a success message.
+delete_task(tasks, task_number): This function deletes a specific task from the list. It takes two parameters:
+tasks: The list of existing tasks
+task_number: The number of the task to delete (1-indexed) If the task number is invalid (i.e., out of range), it returns an error message. Otherwise, it removes the task from the list and returns a success message.
+These functions provide basic CRUD (Create, Read, Update, Delete) operations for managing tasks.
+
+
+----------------------------------------------------------------------------------
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+
+To add a new feature to this To-Do List Application, you can follow these general steps:
+
+1
+
+
+-----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

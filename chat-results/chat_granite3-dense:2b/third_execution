@@ -522,4 +522,89 @@ This test suite includes tests for the deposit, withdraw, and check_balance meth
 
 =========================================================================================================================================================================================
 
+Question 11 : explain code in folder 
 
+   explain the code in @task
+
+RESPONSE:
+
+The provided code is a Python script that defines a set of functions to manage tasks. The tasks are stored in a JSON file named "tasks.json". Here's a breakdown of the code:
+
+save_tasks(tasks): This function takes a list of tasks as input and saves them to the "tasks.json" file. It uses the json.dump() function to convert the tasks list into a JSON string and then writes it to the file. If there's an error during writing, it returns an error message.
+
+load_tasks(): This function reads the tasks from the "tasks.json" file and returns them as a list. It uses the json.load() function to parse the JSON string back into a Python list. If the file doesn't exist or there's an error during reading, it returns an empty list.
+
+view_tasks(tasks): This function takes a list of tasks as input and returns a formatted string that lists all the tasks with their names, completion status (indicated by a checkmark or cross), and priority. If no tasks have been added yet, it returns a message saying so.
+
+add_task(tasks, name, priority): This function takes a list of tasks, a task name, and a priority level as input. It adds the new task to the list and returns a confirmation message. If the name is empty or the priority is not one of "Low", "Medium", or "High", it returns an error message.
+
+mark_task_completed(tasks, task_number): This function takes a list of tasks and a task number as input and marks the corresponding task as completed. It returns a confirmation message. If the task number is invalid, it returns an error message.
+
+delete_task(tasks, task_number): This function takes a list of tasks and a task number as input and deletes the corresponding task from the list. It returns a confirmation message. If the task number is invalid, it returns an error message.
+
+To learn more about this code, you might want to check out the json module documentation for handling JSON data in Python, or the file_io.py and manager.py files for understanding how the tasks are saved and managed.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+
+To add a new feature to the to-do list application, you can modify the manager.py file. Here's an example of how you can add a feature to mark tasks as "important":
+
+Add a new parameter to the add_task function to indicate if the task is important or not:
+def add_task(tasks, name, priority, important=False):
+    # ...
+Update the view_tasks function to display the importance of each task:
+def view_tasks(tasks):
+    # ...
+    return "\n".join([
+        f"{i + 1}. {task['name']} [{'✓' if task['completed'] else '✗'}] (Priority: {task['priority']}, Importance: {'Yes' if task['important'] else 'No'})"
+        for i, task in enumerate(tasks)
+    ])
+Add a new function to mark all tasks as important or not:
+def mark_all_as_important(tasks):
+    for i, task in enumerate(tasks):
+        task['important'] = True
+    return "All tasks marked as important."
+
+def mark_all_as_not_important(tasks):
+    for i, task in enumerate(tasks):
+        task['important'] = False
+    return "All tasks marked as not important."
+Update the main function to handle user input and call the appropriate functions:
+def main():
+    tasks = []
+    while True:
+        command = input("Enter a command (add, view, mark_completed, delete, mark_important, mark_all_important, mark_all_not_important, quit): ").lower()
+
+        if command == "add":
+            name = input("Enter task name: ")
+            priority = input("Enter task priority (Low, Medium, High): ")
+            important = input("Is this task important? (yes/no): ").lower() == "yes"
+            tasks.append(add_task(tasks, name, priority, important))
+
+        # ...
+
+        elif command == "mark_important":
+            mark_all_as_important(tasks)
+
+        elif command == "mark_all_important":
+            mark_all_as_important(tasks)
+
+        # ...
+
+        elif command == "quit":
+            break
+
+    print("\nYour to-do list:")
+    print(view_tasks(tasks))
+This will add a new feature to mark tasks as important or not important. You can further extend this by adding more features like saving and loading tasks from a file, etc.
+
+
+
+
+
+ 
