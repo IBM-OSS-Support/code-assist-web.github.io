@@ -781,3 +781,90 @@ $ python -m unittest test_documentation.py
 This will run all the test cases defined in the `TestBankAccount` and `TestBankSystem` classes. If all the tests pass, the output will indicate that the tests were successful. If any test fails, the output will indicate which test failed and why.
 
 ----------------------------------------------------------------------------------
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+
+The provided code consists of two files: 
+file_io.py
+ and 
+manager.py
+.
+
+file_io.py
+: This file contains functions for saving and loading tasks from a JSON file named tasks.json. The 
+save_tasks
+ function takes a list of tasks as input and attempts to write this list to the JSON file. If successful, it returns a success message. If an exception occurs, it returns an error message.
+
+load_tasks
+ function: This function tries to read and load tasks from the JSON file. If the file is not found, it returns an empty list. If an exception occurs, it prints the error message and returns an empty list.
+
+manager.py
+: This file contains functions for managing tasks. The 
+view_tasks
+ function takes a list of tasks as input and returns a formatted string displaying the tasks, their completion status, and their priority.
+
+The 
+add_task
+ function accepts a list of tasks, a task name, and a priority level. It adds a new task to the list with the given name and priority level. If the priority level is not one of "Low", "Medium", or "High", it defaults to "Medium".
+
+The 
+mark_task_completed
+ function marks a task as completed based on its task number.
+
+The 
+delete_task
+ function deletes a task from the list based on its task number.
+
+To learn more about these functions and how they work, you can refer to the comments in the code or consult a Python tutorial or documentation.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+To add a new feature to this application, you would need to modify both the 
+manager.py
+ and 
+file_io.py
+ files.
+
+Here's a general guide on how you might add a new feature:
+
+Determine the feature: The first step is to decide what new feature you want to add. This could be anything from sorting tasks by priority, allowing tasks to have due dates, adding categories to tasks, or even integrating with external services.
+
+Plan the implementation: Once you've decided on the feature, you'll need to plan how you're going to implement it. This might involve adding new functions to 
+manager.py
+ or updating the 
+file_io.py
+ functions to handle the new data structure.
+
+Update the tasks file: If your feature requires storing additional data, you'll need to update the tasks.json file to include the new data. This might involve adding new keys to the task objects.
+
+Modify the 
+manager.py
+ functions: You'll need to modify the functions in 
+manager.py
+ to handle the new data. This might involve adding new parameters to existing functions or creating new functions.
+
+Update the 
+file_io.py
+ functions: You'll need to update the functions in 
+file_io.py
+ to handle the new data structure. This might involve adding new keys to the task objects when saving them, or updating your loading code to handle the new structure.
+
+Test the feature: Once you've implemented the feature, you should test it to make sure it works as expected. This might involve running the application and trying out the new feature to make sure it behaves as you expected.
+
+If you're new to Python or programming in general, this might seem like a lot to take in. One thing you could do is start by implementing a simpler feature, like adding a due date to a task. Once you have that working, you can move on to more complex features.
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+

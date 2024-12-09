@@ -704,3 +704,90 @@ if __name__ == '__main__':
 This test case covers different scenarios for the `BankAccount` class, such as depositing money, withdrawing money, checking the balance, and displaying the transaction history. The test case uses the `unittest` module to define test cases and assert the expected results.
 
 ----------------------------------------------------------------------------------
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+The code provided consists of two parts, 
+file_io.py
+ and 
+manager.py
+, which handle file input/output and task management, respectively.
+
+In 
+file_io.py
+:
+
+The script imports the json module and defines a variable TASKS_FILE as a string "tasks.json".
+The 
+save_tasks
+ function takes a 
+file_io.py
+ argument and attempts to write the tasks to a JSON file named TASKS_FILE. If successful, it returns a success message. If not, it returns an error message.
+The 
+load_tasks
+ function tries to read tasks from the TASKS_FILE and returns them. If the file does not exist, it returns an empty list. If an error occurs, it prints the error and returns an empty list.
+In 
+manager.py
+:
+
+The 
+view_tasks
+ function takes a list of tasks and returns a formatted string showing the tasks' details.
+The 
+add_task
+ function adds a new task to the list of tasks. If the task name is empty, it returns an error message. If the priority is not one of "Low", "Medium", or "High", it defaults to "Medium".
+The 
+mark_task_completed
+ function marks a task as completed by its task number. If the task number is invalid, it returns an error message.
+The 
+delete_task
+ function removes a task by its task number. If the task number is invalid, it returns an error message.
+To understand the code better, you might want to review Python's file handling and JSON modules. The code uses these modules to save and load tasks from a JSON file. The 
+manager.py
+ script contains functions to manage (add, view, complete, delete) tasks.
+ -----------------------------------------------------------------------------------------------------------------------------
+ Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+
+The configuration file (
+config.json
+) and the 
+README.md
+ file are not related to the to-do list application. They are separate files and serve different purposes. The 
+config.json
+ file contains configuration settings for a language model, a task embedding provider, and possibly some other models. The 
+README.md
+ file provides information about the to-do list application, how to clone and run it, and its features.
+
+To add new features to the to-do list application, you would need to modify the 
+manager.py
+ file. Here are some suggestions:
+
+Add a feature to mark all tasks as completed: This feature would mark all tasks in the list as completed.
+def mark_all_completed(tasks):
+    if not tasks:
+        return "No tasks found!"
+    for task in tasks:
+        task["completed"] = True
+    return "All tasks marked as completed!"
+Add a feature to delete completed tasks: This feature would delete all tasks that have been marked as completed.
+def delete_completed_tasks(tasks):
+    if not tasks:
+        return "No tasks found!"
+    tasks[:] = [task for task in tasks if not task["completed"]]
+    return "Completed tasks deleted!"
+Add a feature to view completed tasks: This feature would show the user all tasks that have been marked as completed.
+def view_completed_tasks(tasks):
+    completed_tasks = [task for task in tasks if task["completed"]]
+    if not completed_tasks:
+        return "No completed tasks!"
+    return "\n".join([
+        f"{i + 1}. {task['name']} [✓] (Priority: {task['priority']})"
+        for i, task in enumerate(completed_tasks)
+    ])
+--------------------------------------------------------------------------------------------------------

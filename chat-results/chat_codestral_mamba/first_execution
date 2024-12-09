@@ -818,3 +818,63 @@ The `test_create_account` method tests the `create_account` method of the `BankS
 The `test_get_account` method tests the `get_account` method of the `BankSystem` class by creating a new account and retrieving it using the account number. It checks that the account was retrieved successfully and that the account number matches the expected value.
 
 ----------------------------------------------------------------------------------
+
+Question 11 : explain code in folder 
+
+   explain the code in @task
+
+RESPONSE: 
+The provided code is divided into two files: 
+file_io.py
+ and 
+manager.py
+. Let's break down the functionality of each file:
+
+file_io.py
+: This file contains functions for saving, loading, and managing tasks stored in a JSON file named tasks.json.
+
+save_tasks(tasks)
+: This function takes a list of tasks as input and saves them to the tasks.json file. If successful, it returns the message "Tasks saved successfully!". If there is an error, it returns a message indicating the error.
+
+load_tasks()
+: This function loads tasks from the tasks.json file. If the file exists and can be read, it returns a list of tasks. If the file is not found, it returns an empty list. If there is an error reading the file, it prints the error message and returns an empty list.
+
+manager.py
+: This file contains functions for managing tasks.
+
+view_tasks(tasks)
+: This function takes a list of tasks as input and returns a formatted string showing the tasks with their names, completion status, and priority. If there are no tasks, it returns the message "No tasks added yet!".
+
+add_task(tasks, name, priority)
+: This function adds a new task to the list of tasks. It takes the list of tasks, the task name, and the priority as input. If the task name is empty, it returns the message "Task name cannot be empty!". If the priority is not one of "Low", "Medium", or "High", it sets the priority to "Medium". The new task is added to the list of tasks, and a message is returned indicating that the task was added.
+
+mark_task_completed(tasks, task_number)
+: This function marks a task as completed by setting its "completed" field to True. It takes the list of tasks and the task number as input. If the task number is valid, it returns a message indicating that the task was marked as completed. If the task number is invalid, it returns the message "Invalid task number!".
+
+delete_task(tasks, task_number)
+: This function deletes a task from the list of tasks. It takes the list of tasks and the task number as input. If the task number is valid, it removes the task from the list and returns a message indicating that the task was deleted. If the task number is invalid, it returns the message "Invalid task number!".
+
+If you want to learn more about these functions and how they work, I would recommend looking at the code and understanding how each function is implemented. You can also run the code and test the functionality of each function by calling them with different inputs.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question 12: ask questions on codebase
+
+@codebase  how do i add new feature to this?
+
+RESPONSE:
+To add a new feature to this to-do list application, you would need to modify the existing code or add new code to implement the new feature. Here are some general steps you can follow to add a new feature:
+
+Define the new feature: Identify the specific functionality or feature you want to add to the to-do list application. This could be a new command-line argument, a new task property, or a new user interface.
+Analyze the existing code: Understand how the existing code works and how the new feature can be integrated into it. Look at the 
+file_io.py
+ and 
+manager.py
+ files to see how tasks are stored, retrieved, and manipulated.
+Plan the implementation: Decide on the implementation strategy for the new feature. This could involve adding new functions, modifying existing functions, or adding new code to handle the new feature.
+Implement the new feature: Write the code to implement the new feature. Make sure to test each component of the new feature separately to ensure it works as expected.
+Test the new feature: Test the new feature by running the to-do list application with the new feature enabled. Make sure the new feature works as expected and does not introduce any bugs.
+Document the new feature: Update the 
+README.md
+ file to document the new feature and how to use it. This will help other users of the application understand how to use the new feature.
+Refactor and optimize: Review the code and make any necessary refactorings or optimizations to improve the overall performance and maintainability of the application.
+If you need further assistance or have specific questions about adding a new feature, feel free to ask. Good luck with your project!
+----------------------------------------------------------------------------------------------------------------------------------------------------------
