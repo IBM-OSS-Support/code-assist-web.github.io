@@ -11,23 +11,20 @@
 **Codestral-mamba:7b**
 Best overall results. Accuracy is very good on 7 questions. ollama did not return response time, but the result generation is very faster in all scenarios. 
 
+**granite3.1-dense:8b**
+More accurate than granite3 models and more detailed than granite3.1-dense:2b. Context length 128k under continue.dev tends to stall after multiple prompts in the same context session. Reducing context length back to 4k speeds through all 10 prompts with higher accuracy than granite3 models.
+
 **Llama3.1:8b**
 Results are accurate but inconsistent, and often verbose with explanation. Reads the full code. Slowest response time of all models tested.
 
-**granite3-dense:2b**
-Comparable to other models in the granite3 family. Better than granite-code second generation. Very Fast response.
-
-**granite3-dense:8b**
-Better than granite-code:8b with context awarenesss, but the same issues with granite-code:8b is also in this model (inconsistency and incomplete code generation). Too slow for tab code complete. 
+**granite3.1-dense:2b**
+Better than granite3-dense:2b  Very Fast response. Less accurate than granite3.1-dense:8b
 
 **Starcoder2:7b**
 Unusable and unstable. Prints the question in the result before printing the answer. The printed answer is usually garbage or unusable.
 
-**granite3.1-dense:2b**
-Better than granite3-dense:2b  Very Fast response with lesser contex length(4096)
 
-**granite3.1-dense:8b**
-Better than granite3-dense:2b, delivering very fast response times. However, it operates with a reduced context length  and code generation tends to stall when approaching the maximum context length.
+
 
 
 ---------------------------------------------------------------------------------------------------
