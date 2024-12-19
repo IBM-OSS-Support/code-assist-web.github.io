@@ -5,7 +5,7 @@ The main folder has the following files:
 1. [SUMMARY.md](https://github.com/IBM-OSS-Support/Continue.dev-Granite-manual-test-cases/blob/main/SUMMARY.md) has a table of ranked results focusing on accuracy and precision, as well as a brief summary for each model for how well they performed.
    SUMMARY10Models.md is a more comprehensive comparison
 
-3. [test-cases](https://github.com/IBM-GC/vscode-granite-testcases/blob/main/test-cases) has the 10 questions/scenarios where we are testing against the following models:
+3. [test-cases](https://github.com/IBM-OSS-Support/Continue.dev-Granite-manual-test-cases/blob/main/test-cases) has the 10 questions/scenarios where we are testing against the following models:
 
 - Granite-code:8b-instruct (and different tags)
 - granite3-dense:8b (and different tags)
