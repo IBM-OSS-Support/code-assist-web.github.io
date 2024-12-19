@@ -1,4 +1,4 @@
-### Comparison table for different models ranked 1 (Best) -> 5 (Worst)
+### Comparison table for different models ranked Best -> Worst from Left -> Right
 
 > [!NOTE]
 > $${\color{green}Green}$$ indicates that the model succeeded in all three iterations. $${\color{Orange}Orange}$$ means it succeeded in at least one iteration but not in all three. $${\color{red}Red}$$ means it failed in all three iterations.
