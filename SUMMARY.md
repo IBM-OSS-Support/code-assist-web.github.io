@@ -9,7 +9,7 @@
 ### Summary:
 
 **Codestral-mamba:7b**
-Best overall results. Accuracy is very good on 7 questions. ollama did not return response time, but the result generation is very faster in all scenarios. 
+Best overall results. Accuracy is very good on 7 questions. ollama did not return response time, but the result generation or latency is the fastest in all scenarios. 
 
 **granite3.1-dense:8b**
 More accurate than granite3 models and more detailed than granite3.1-dense:2b. Context length 128k under continue.dev tends to stall after multiple prompts in the same context session. Reducing context length back to 4k speeds through all 10 prompts with higher accuracy than granite3 models.
