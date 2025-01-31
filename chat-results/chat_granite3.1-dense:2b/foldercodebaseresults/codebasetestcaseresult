@@ -1,0 +1,54 @@
+
+Question 1:
+Review the test files in  and suggest any improvements in the code structure or naming conventions
+
+Response:
+
+The provided Python test files, 
+test_file_io.py
+ and 
+test_manager.py
+, are well-structured for testing file I/O operations and a task management system respectively. However, there's an opportunity to improve the naming convention for better readability and maintainability.
+
+In 
+test_file_io.py
+: The function names in tasks.file_io (save_tasks and load_tasks) are quite descriptive already. But, if we were to follow a more Pythonic naming convention, they could be named as save_tasks_to_file and load_tasks_from_file. This would make the purpose of these functions clearer at a glance.
+
+In 
+test_manager.py
+: The function names in tasks.manager (add_task, view_tasks, mark_task_completed, delete_task) are also descriptive and follow Python's naming conventions well. However, for consistency, you might consider renaming view_tasks to display_tasks. This change would align with the naming convention used in other functions like add_task, making the code more uniform.
+
+Here's how these files could look after these improvements:
+
+# tests/test_file_io.py
+import unittest
+from tasks.file_io import save_tasks_to_file, load_tasks_from_file
+
+class TestFileIO(unittest.TestCase):
+    def test_save_tasks(self):
+        tasks = [{"name": "Test Task", "completed": False, "priority": "Medium"}]
+        result = save_tasks_to_file(tasks)
+        self.assertEqual(result, "Tasks saved successfully!")
+
+if __name__ == "__main__":
+    unittest.main()
+# tests/test_manager.py
+import unittest
+from tasks.manager import add_task, display_tasks, mark_task_completed, delete_task
+
+class TestManager(unittest.TestCase):
+    def test_add_task(self):
+        tasks = []
+        result = add_task(tasks, "Test Task", "High")
+        self.assertEqual(result, "Task 'Test Task' added with priority 'High'.")
+        self.assertEqual(len(tasks), 1)
+
+    def test_display_tasks(self):
+        tasks = [{"name": "Test Task", "completed": False, "priority": "Medium"}]
+        result = display_tasks(tasks)
+        self.assertIn("Test Task", result)
+
+if __name__ == "__main__":
+    unittest.main()
+These changes don't alter the functionality of your tests but improve their readability and adherence to Python's naming conventions, making them easier for others (or future you) to understand.
+
