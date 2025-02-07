@@ -4,7 +4,7 @@
 
 ![image](https://github.com/user-attachments/assets/f4faf4b5-8427-4bd9-849a-2ed08a73880a)
 
--Select the prompt file that is created in the repo [here] (https://github.com/IBM-OSS-Support/Continue.dev-Granite-manual-test-cases/blob/main/.continue/prompts/test_cases.prompt)
+-Select the prompt file that is created in the repo [here](https://github.com/IBM-OSS-Support/Continue.dev-Granite-manual-test-cases/blob/main/.continue/prompts/test_cases.prompt)
 
 ![image](https://github.com/user-attachments/assets/c160d913-cc93-4ace-b736-ff2a9e570fbd)
 
