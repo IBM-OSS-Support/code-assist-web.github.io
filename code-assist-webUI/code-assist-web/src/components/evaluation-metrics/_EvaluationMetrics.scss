@@ -19,6 +19,15 @@
             text-align: center;
             padding: 0.6rem 0.8rem;
         }
+
+        .cds--btn--ghost {
+            margin-left: 0.5rem;
+            &:focus {
+                outline: none;
+                box-shadow: none;
+                border-color: #78a9ff;
+            }
+        }
     }
 
     .information-wrap {
@@ -30,6 +39,15 @@
         > .cds--list__item {
             &::before {
                 top: 4px;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .cds--data-table {
+        .top-rank {
+            background-color: #000031;
+            > td {
                 font-weight: bold;
             }
         }

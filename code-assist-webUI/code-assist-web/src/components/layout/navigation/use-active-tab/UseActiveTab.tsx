@@ -25,7 +25,9 @@ export const ActiveTabProvider: React.FC<ActiveTabProviderProps> = ({ value, chi
     } else if (pathname === '/summary') {
       setActiveTab('Summary');
     } else if (pathname === '/leaderboard') {
-        setActiveTab('BigCodeBench Leaderboard');
+      setActiveTab('BigCodeBench Leaderboard');
+    } else if (pathname === '/model-comparison') {
+      setActiveTab('Model Comparison');
     }
   }, []);
 

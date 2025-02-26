@@ -16,9 +16,7 @@ import {
 import { GaugeChart, ScaleTypes, LineChart } from "@carbon/charts-react";
 import "@carbon/charts/styles.css"; // Import Carbon Styles
 import "./_EvaluationReport.scss";
-import codeAssistData from "../../code-assist-data.json"; // Import the JSON data directly
-import PassGraph from "../pass-graph/PassGraph";
-import PassMethodList from "../pass-method-list/PassMethodList";
+import codeAssistData from "../../code-assist-data.json"; 
 
 // Define the type for the data item
 interface DataItem {

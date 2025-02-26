@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderMenuButton, HeaderName, SideNav, SideNavItems, SideNavLink, Theme } from '@carbon/react';
-import {Home, UserAvatar, Folders, Group} from '@carbon/react/icons';
+import {Home, UserAvatar, Folders, Group, GroupResource} from '@carbon/react/icons';
 import { ActiveTabProvider } from './use-active-tab/UseActiveTab';
 import "./_Navigation.scss";
 
@@ -26,6 +26,8 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       setActiveTab('Summary');
     } else if (location.pathname === '/leaderboard') {
       setActiveTab('Leaderboard');
+    } else if (location.pathname === '/model-comparison') {
+      setActiveTab('EvaluationComparison');
     }
   }, [location]);
 
@@ -64,6 +66,9 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               </SideNavLink>
               <SideNavLink renderIcon={Group} href="/leaderboard" onClick={() => handleNavLinkClick('Leaderboard')}>
                 BigCodeBench Leaderboard
+              </SideNavLink>
+              <SideNavLink renderIcon={GroupResource} href="/model-comparison" onClick={() => handleNavLinkClick('EvaluationComparison')}>
+                Model Comparison
               </SideNavLink>
             </SideNavItems>
           </SideNav>
