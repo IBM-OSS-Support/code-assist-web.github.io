@@ -19,6 +19,12 @@
         }
     }
 
+    .cds--css-grid-column {
+        h4 {
+            margin: 0 0 2rem;
+        }
+    }
+
     .chat-screen {
         $user-color: #007bff; // Blue for user messages
         $assistant-color: #303030; // Dark gray for assistant messages

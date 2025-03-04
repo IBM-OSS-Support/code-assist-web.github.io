@@ -88,7 +88,9 @@ const ModelComparison = () => {
         <div className="evaluation-comparison-wrap">
             <Grid fullWidth narrow className="page-content">
                 <Column lg={16}>
-                    <h4>Select Models for Comparison</h4>
+                    <div className="heading-wrap">
+                        <h3>Select Models for Comparison</h3>
+                    </div>
                 </Column>
                 <Column lg={16}>
                     <Grid narrow>

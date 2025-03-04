@@ -38,7 +38,7 @@ class PassGraph extends React.Component<{}, PassGraphState> {
     this.state = {
       data: [],
       options: {
-        title: "Pass@1 Scores Comparison",
+        title: "",
         theme: "g100",
         axes: {
           bottom: {
@@ -106,6 +106,9 @@ class PassGraph extends React.Component<{}, PassGraphState> {
   render() {
     return (
       <div className="pass-graph-wrap">
+        <div className="heading-wrap">
+          <h3>Pass@1 Scores Comparison</h3>
+        </div>
         <ScatterChart data={this.state.data} options={this.state.options} />
       </div>
     );

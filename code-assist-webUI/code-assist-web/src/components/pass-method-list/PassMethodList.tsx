@@ -110,7 +110,9 @@ const PassMethodList = () => {
 
   return (
     <div className="pass-method-wrap">
-      <h3>Leaderboard</h3>
+      <div className="heading-wrap">
+        <h3>Leaderboard</h3>
+      </div>
       <DataTable rows={currentRows} headers={headers} render={({ rows, headers, getHeaderProps }) => (
         <Table>
           <TableHead>

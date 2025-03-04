@@ -180,7 +180,9 @@ const EvaluationReport: React.FC = () => {
     <div className="evaluation-report">
       <Grid fullWidth narrow className="page-content">
         <Column lg={16}>
-          <h4>Al Chat Models</h4>
+          <div className="heading-wrap">
+            <h3>Al Chat Models</h3>
+          </div>
         </Column>
         {data.map((row, index) => (
           <Column key={index} lg={5} md={5} sm={5} className="gauge-container">
