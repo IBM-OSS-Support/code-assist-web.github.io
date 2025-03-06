@@ -44,6 +44,7 @@
         margin: 20px auto;
         font-family: 'Segoe UI', system-ui, sans-serif;
         color: $text-color;
+        border: 0.5px solid #6c6b6b;
 
         &.solid-bg {
             background: $background-color;
@@ -132,4 +133,26 @@
         // scrollbar-width: thin;
         // scrollbar-color: #0f62fe #393939;
     }
+
+    .skeleton-wrap {
+        .cds--date-picker--range .cds--date-picker-container, 
+        .cds--date-picker--range .cds--date-picker__input {
+            inline-size: 45rem;
+        }
+    }
+    .question-date-picker {
+        .cds--date-picker.cds--date-picker--single .cds--date-picker__input {
+            inline-size: 23.5rem;
+        }
+    }
+    .compare-option-wrap {
+        padding: 15px 10px;
+        border-radius: 5px;
+        margin: 0px 0px 2.5rem;
+        background: #000011;
+        box-shadow: 0 0 4px 1px rgba(64, 64, 64, 0.8);
+    }
+}
+.flatpickr-calendar.open {
+    inline-size: 23.5rem !important;
 }

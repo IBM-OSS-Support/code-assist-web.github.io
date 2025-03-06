@@ -105,7 +105,7 @@ const EvaluationMetrics = () => {
   return (
     <div className="evaluation-metrics-wrap">
         <Grid fullWidth narrow className="page-content">
-            <Column lg={16}>
+            <Column lg={16} md={8} sm={4}>
                 <div className="heading-wrap">
                     <h3>BigCodeBench {isHardSet ? "Hard" : "Full"} Result</h3>
                     <div>
@@ -118,7 +118,7 @@ const EvaluationMetrics = () => {
                     </div>
                 </div>
             </Column>
-            <Column lg={16}>
+            <Column lg={16} md={8} sm={4}>
                 <DataTable rows={paginatedData} headers={headers}>
                     {({ rows, headers, getHeaderProps }) => (
                     <>

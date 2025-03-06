@@ -46,9 +46,24 @@
 
     .cds--data-table {
         .top-rank {
-            background-color: #000031;
+            background-color: #0000314f;
             > td {
                 font-weight: bold;
+            }
+            &:first-child {
+                background: #0000314f url('../../../public/Gold1-icon.svg') no-repeat;
+                background-size: 1.75rem;
+                background-position: 2rem 0.5rem;
+            }
+            &:nth-child(2) {
+                background: #0000314f url('../../../public/Silver2-icon.svg') no-repeat;
+                background-size: 1.75rem;
+                background-position: 2rem 0.5rem;
+            }
+            &:nth-child(3) {
+                background: #0000314f url('../../../public/Bronze3-icon.svg') no-repeat;
+                background-size: 1.75rem;
+                background-position: 2rem 0.5rem;
             }
         }
     }

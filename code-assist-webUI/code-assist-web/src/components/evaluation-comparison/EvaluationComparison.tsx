@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Column, Grid, ComboBox, Button, Checkbox } from "@carbon/react";
-import data from "../../prompt_result.json";
+import React, { useEffect, useState } from "react";
+import { Column, Grid, ComboBox, Button, Checkbox, DatePickerSkeleton, DatePicker, DatePickerInput, RadioButton, RadioButtonGroup } from "@carbon/react";
 import "./_EvaluationComparison.scss";
 
 const ModelComparison = () => {
@@ -9,6 +8,12 @@ const ModelComparison = () => {
     const [compareClicked, setCompareClicked] = useState<boolean>(false);
     const [solidBackgrounds, setSolidBackgrounds] = useState<{ [modelName: string]: boolean }>({});
     const [selectedQuestions, setSelectedQuestions] = useState<{ [modelName: string]: string }>({});
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [selectedDates, setSelectedDates] = useState<{ [modelName: string]: string | null }>({});
+    const [compareOption, setCompareOption] = useState<string>("other"); // 'granite' or 'other'
+    const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
+    const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
+    const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
 
     interface Model {
         name: string;
@@ -16,21 +21,77 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
-    let modelsArray: Model[] = [];
-    Object.keys(data).forEach(key => {
-        modelsArray.push(...data[key as keyof typeof data]);
-    });
+    // Fetch available files on component mount
+    useEffect(() => {
+        const fetchFileNames = async () => {
+            try {
+                const response = await fetch("http://localhost:5001/api/files");
+                if (!response.ok) throw new Error("Failed to fetch files");
+                const files = await response.json();
+                setAvailableFiles(files);
+            } catch (error) {
+                console.error("Error fetching files:", error);
+                setApiError("Failed to fetch available files. Please try again later.");
+            }
+        };
+        fetchFileNames();
+    }, []);
 
-    const graniteModels = Array.from(new Set(modelsArray.filter(model => model.name.toLowerCase().includes("granite")).map(model => model.name)));
-    const otherModels = Array.from(new Set(modelsArray.filter(model => !model.name.toLowerCase().includes("granite")).map(model => model.name)));
+    // Fetch models data when compare option changes
+    useEffect(() => {
+        const fetchModelData = async () => {
+            setIsLoading(true);
+            setApiError(null);
+            try {
+                // Fetch data from all files
+                const responses = await Promise.all(
+                    availableFiles.map(file => 
+                        fetch(`http://localhost:5001/api/files/${file}`)
+                            .then(r => r.json())
+                    )
+                );
+
+                // Flatten the responses into a single array
+                const allModels = responses.flatMap(response => 
+                    Object.values(response).flat()
+                );
+                
+                setModelsData(allModels);
+            } catch (error) {
+                console.error("Error fetching models:", error);
+                setApiError("Failed to fetch models. Please try again later.");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        if (availableFiles.length > 0) {
+            fetchModelData();
+        }
+    }, [availableFiles]);
+
+    // Prepare model lists
+    const graniteModels = Array.from(new Set(
+        modelsData.filter(model => model.name.toLowerCase().includes("granite"))
+            .map(model => model.name)
+    ));
+    
+    const otherModels = Array.from(new Set(
+        modelsData.filter(model => !model.name.toLowerCase().includes("granite"))
+            .map(model => model.name)
+    ));
 
     const getModelDetails = (name: string): Model | undefined => {
-        return modelsArray.find((model) => model.name === name);
+        return modelsData.find((model) => model.name === name);
     };
 
     const handleCompare = () => {
         if (selectedGranite && selectedOther) {
-            setCompareClicked(true);
+            setIsLoading(true);
+            setTimeout(() => {
+                setCompareClicked(true);
+                setIsLoading(false);
+            }, 2000); // Simulate a delay for loading
         }
     };
 
@@ -93,9 +154,24 @@ const ModelComparison = () => {
                     </div>
                 </Column>
                 <Column lg={16}>
+                    <div className="compare-option-wrap">
+                        <RadioButtonGroup
+                            legendText="Compare with:"
+                            name="compare-option"
+                            defaultSelected="other"
+                            onChange={(value) => setCompareOption(value as string)}
+                            disabled={isLoading}
+                        >
+                            <RadioButton labelText="Compare with Other AI Models" value="other" id="other-radio" />
+                            <RadioButton labelText="Compare with Other Granite Models" value="granite" id="granite-radio" />
+                        </RadioButtonGroup>
+                    </div>
+                </Column>
+                <Column lg={16}>
                     <Grid narrow>
                         <Column lg={6}>
                             <ComboBox
+                                key={selectedGranite}
                                 id="granite-model-combo-box"
                                 items={graniteModels}
                                 itemToString={(item) => (item ? item : '')}
@@ -103,29 +179,46 @@ const ModelComparison = () => {
                                 selectedItem={selectedGranite} 
                                 titleText="Select a Granite Model"
                                 placeholder="Choose a Granite model"
+                                disabled={isLoading}
                             />
                         </Column>
                         <Column lg={6}>
                             <ComboBox
+                                key={selectedOther}
                                 id="other-model-combo-box"
-                                items={otherModels}
+                                items={compareOption === "granite" ? graniteModels : otherModels}
                                 itemToString={(item) => (item ? item : '')}
                                 onChange={({ selectedItem }) => setSelectedOther(selectedItem as string)}
                                 selectedItem={selectedOther} 
-                                titleText="Select Other AI Model"
-                                placeholder="Choose other AI model"
+                                titleText={compareOption === "granite" ? "Select Another Granite Model" : "Select Other AI Model"}
+                                placeholder={compareOption === "granite" ? "Choose another Granite model" : "Choose other AI model"}
+                                disabled={isLoading}
                             />
                         </Column>
                         <Column lg={4}>
                             <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-                                <Button onClick={handleCompare} disabled={!selectedGranite || !selectedOther}>Compare</Button>
-                                <Button onClick={handleClear} kind="danger" disabled={!selectedGranite && !selectedOther}>Clear</Button>
+                                <Button onClick={handleCompare} disabled={!selectedGranite || !selectedOther || isLoading}>Compare</Button>
+                                <Button onClick={handleClear} kind="danger" disabled={!selectedGranite && !selectedOther || isLoading}>Clear</Button>
                             </div>
                         </Column>
                     </Grid>
                 </Column>
 
-                {compareClicked && selectedGranite && selectedOther && (
+                {isLoading && 
+                    <Column lg={16}>
+                        <div className="skeleton-wrap" style={{ display: "flex", width: "300px", height: "560px", alignItems: "center", justifyContent: "center", margin: "4rem auto 0" }}>
+                            <DatePickerSkeleton range />
+                        </div>
+                    </Column>
+                }
+                {apiError && 
+                    <Column lg={16}>
+                        <div style={{ color: "red", textAlign: "center", marginTop: "20px" }}>
+                            {apiError}
+                        </div>
+                    </Column>
+                }
+                {compareClicked && selectedGranite && selectedOther && !isLoading && modelsData && (
                     <Column lg={16}>
                         <div style={{ display: "flex", justifyContent: "space-around", marginTop: "20px" }}>
                             {[selectedGranite, selectedOther].map((modelName) => {
@@ -144,15 +237,37 @@ const ModelComparison = () => {
                                         <p><strong>Description:</strong> {model.desc}</p>
 
                                         <div style={{ margin: "0.5rem 0"}}>
-                                            <ComboBox
-                                                id={`question-combo-box-${model.name}`}
-                                                className="question-combo-box"
-                                                items={questionNumbers}
-                                                itemToString={(item) => (item ? item : '')}
-                                                onChange={({ selectedItem }) => setSelectedQuestions((prev) => ({ ...prev, [model.name]: selectedItem as string }))}
-                                                selectedItem={selectedQuestion}
-                                                titleText="Select a Question"
-                                            />
+                                            <Grid fullWidth narrow>
+                                                <Column lg={8} md={8} sm={4}>
+                                                    <ComboBox
+                                                        id={`question-combo-box-${model.name}`}
+                                                        className="question-combo-box"
+                                                        items={questionNumbers}
+                                                        itemToString={(item) => (item ? item : '')}
+                                                        onChange={({ selectedItem }) => setSelectedQuestions((prev) => ({ ...prev, [model.name]: selectedItem as string }))}
+                                                        selectedItem={selectedQuestion}
+                                                        titleText="Select a Question"
+                                                    />
+                                                </Column>
+                                                <Column lg={8} md={8} sm={4}>
+                                                    <DatePicker 
+                                                        datePickerType="single"
+                                                        className="question-date-picker"
+                                                        maxDate={new Date().setDate(new Date().getDate())}
+                                                        onChange={(eventOrDates) => {
+                                                            const dateValue = Array.isArray(eventOrDates) ? eventOrDates[0] : eventOrDates;
+                                                            setSelectedDates((prev) => ({ ...prev, [model.name]: dateValue ? dateValue.toISOString() : null }));
+                                                        }}
+                                                    >
+                                                        <DatePickerInput
+                                                            id={`date-picker-${model.name}`}
+                                                            placeholder="mm/dd/yyyy"
+                                                            labelText="Select a Date"
+                                                            defaultValue={selectedDates[model.name] || ""}
+                                                        />
+                                                    </DatePicker>
+                                                </Column>
+                                            </Grid>
                                         </div>
                                         
                                         <p>
