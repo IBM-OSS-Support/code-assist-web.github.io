@@ -2,12 +2,28 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const os = require("os");
 
 const app = express();
 const PORT = 5001;
 
 // Enable CORS for React frontend
 app.use(cors());
+
+// Get the local IP address of the machine
+const getLocalIp = () => {
+    const interfaces = os.networkInterfaces();
+    for (const iface of Object.values(interfaces)) {
+        for (const config of iface) {
+            if (config.family === "IPv4" && !config.internal) {
+                return config.address;
+            }
+        }
+    }
+    return "localhost"; // Fallback if no IP is found
+};
+
+const LOCAL_IP = getLocalIp();
 
 // Define the folder where JSON files are stored
 const folderPath = path.join(__dirname, "src", "prompt-results");
@@ -34,6 +50,6 @@ app.get('/api/files/:filename', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+app.listen(PORT, LOCAL_IP, () => {
+    console.log(`Server running at http://${LOCAL_IP}:${PORT}`);
 });
