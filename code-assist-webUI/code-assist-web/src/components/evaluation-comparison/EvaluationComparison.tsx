@@ -14,7 +14,7 @@ const ModelComparison = () => {
     const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
-    const [serverIP, setServerIP] = useState<string>("");
+    const [serverIP, setServerIP] = useState<string>("localhost");
 
     interface Model {
         name: string;
@@ -26,22 +26,24 @@ const ModelComparison = () => {
     useEffect(() => {
         const fetchServerIP = async () => {
             try {
-                const response = await fetch("/server-ip"); // API exposed in backend
+                const response = await fetch("http://localhost:5001/server-ip");
                 const data = await response.json();
-                setServerIP(data.ip || "localhost"); // Fallback if IP is not found
+                console.log("Fetched Server IP:", data.ip); // Debugging log
+                setServerIP(data.ip || "localhost");
             } catch (error) {
                 console.error("Error fetching server IP:", error);
-                setServerIP("localhost"); // Default to localhost in case of failure
+                setServerIP("localhost");
             }
         };
-
+    
         fetchServerIP();
     }, []);
 
     // Fetch available files when server IP is set
     useEffect(() => {
         if (!serverIP) return;
-
+        console.log("Server IP:", serverIP);
+        
         const fetchFileNames = async () => {
             try {
                 const response = await fetch(`http://${serverIP}:5001/api/files`);
