@@ -14,7 +14,7 @@ const ModelComparison = () => {
     const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
-    const [serverIP, setServerIP] = useState<string>("10.51.3.126"); // 10.51.3.126 vm server ip
+    const [serverIP, setServerIP] = useState<string>("9.20.192.160"); // 9.20.192.160 vm server ip
 
     interface Model {
         name: string;
