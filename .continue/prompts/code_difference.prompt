@@ -1,0 +1,9 @@
+---
+name: Code-difference.
+description: Test cases for VSCode
+---
+
+<user>
+Can you tell me the difference between @documentation and @documentation_with_bugs 
+Which one do you think is ready to use right now?
+</user>
