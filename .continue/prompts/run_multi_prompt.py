@@ -20,14 +20,11 @@ def parse_prompt_file(file_path, config):
 
     with open(file_path, 'r') as file:
         content = file.read()
-    #with open(file_path, 'r') as file:
-       # content = file.read()
 
     # Split content into the configuration part and the user message
     parts = content.split('---')
     
     # Parse the configuration (YAML format)
-    #config = yaml.safe_load(parts[1].strip())
 
     # Extract configuration values
     model = config_data['models'][0]['model']
@@ -135,8 +132,17 @@ def main():
     if config_data:
     # List of .prompt files to process
         prompt_files = [
-            '/Users/hariji/repo/Continue.dev-Granite-manual-test-cases/.continue/prompts/lambda.prompt',
-            '/Users/hariji/repo/Continue.dev-Granite-manual-test-cases/.continue/prompts/optimize.prompt',
+            'binary_search.prompt',
+            'bugs.prompt',
+            'const_dest.prompt',
+            'documentation.prompt',
+            'lambda.prompt',
+            'optimize.prompt',
+            'port.prompt',
+            'quick_sort.prompt',
+            'refactor.prompt',
+            'review_code.prompt',
+            'unit_test.prompt'
         ]
 
     # Process each prompt file
