@@ -1,0 +1,54 @@
+
+.evaluation-report {
+  padding: 1rem 0 0 3rem;
+  display: flex;
+  flex-direction: column;
+
+  .main-heading {
+    float: left;
+    padding: 1rem;
+    font-size: 2.5rem;
+    height: 175px;
+    color: #ffffff;
+    background: radial-gradient(circle, rgba(2,2,64,1) 0%, rgba(0,0,0,1) 100%);
+    display: flex;
+    align-items: center;
+  }
+
+  .cds--table-container {
+    margin-top: 1.5rem;
+  }
+
+  .cds--btn {
+    margin-bottom: 2rem;
+
+    &.card-btn {
+      width: 100%;
+      min-width: 100%;
+      min-height: 200px;
+      text-align: center;
+      display: flex;
+      align-content: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 500;
+
+      &.active, &:hover, &:focus {
+          background: radial-gradient(circle, rgb(2, 2, 64) 0%, rgb(0, 0, 0) 100%);
+          color: #fff;
+      }
+    }
+  }
+}
+.view-all-btn {
+  margin-bottom: 1.5rem !important;
+  align-items: center;
+}
+
+.gauge-tile {
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1.8rem 1rem 1.8rem 0;
+}
