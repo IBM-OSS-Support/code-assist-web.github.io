@@ -32,10 +32,10 @@ const ModelComparison = () => {
                 const data = await response.json();
                 console.log("Server IP Data:", data);
                 
-                setServerIP(data.ip || "server-ip"); // Fallback if IP is not found
+                setServerIP(data.ip || "9.20.192.160"); // Fallback if IP is not found
             } catch (error) {
                 console.error("Error fetching server IP:", error);
-                setServerIP("server-ip"); // Default to localhost in case of failure
+                setServerIP("9.20.192.160"); // Default to localhost in case of failure
             }
         };
 
