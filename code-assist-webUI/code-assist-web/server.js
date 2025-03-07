@@ -10,23 +10,23 @@ const PORT = 5001;
 // Enable CORS for React frontend
 app.use(cors());
 
-// Get the local IP address of the machine
-const getLocalIp = () => {
+// Define the folder where JSON files are stored
+const folderPath = path.join(__dirname, "src", "prompt-results");
+
+// Function to get local IP address
+const getLocalIP = () => {
     const interfaces = os.networkInterfaces();
     for (const iface of Object.values(interfaces)) {
-        for (const config of iface) {
-            if (config.family === "IPv4" && !config.internal) {
-                return config.address;
+        for (const info of iface) {
+            if (info.family === "IPv4" && !info.internal) {
+                return info.address;
             }
         }
     }
-    return "localhost"; // Fallback if no IP is found
+    return "localhost";
 };
 
-const LOCAL_IP = getLocalIp();
-
-// Define the folder where JSON files are stored
-const folderPath = path.join(__dirname, "src", "prompt-results");
+const localIP = getLocalIP(); // Fetch machine IP
 
 // API to get list of JSON files
 app.get("/api/files", (req, res) => {
@@ -39,9 +39,11 @@ app.get("/api/files", (req, res) => {
     });
 });
 
+// API to fetch JSON file content
 app.get('/api/files/:filename', (req, res) => {
     const { filename } = req.params;
-    const filePath = path.join(folderPath, filename); // Update the file path to use folderPath
+    const filePath = path.join(folderPath, filename);
+    
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Failed to read file' });
@@ -50,6 +52,12 @@ app.get('/api/files/:filename', (req, res) => {
     });
 });
 
-app.listen(PORT, LOCAL_IP, () => {
-    console.log(`Server running at http://${LOCAL_IP}:${PORT}`);
+// API to provide machine's IP address
+app.get("/server-ip", (req, res) => {
+    res.json({ ip: localIP });
+});
+
+// Start server with machine IP
+app.listen(PORT, () => {
+    console.log(`Server running at http://${localIP}:${PORT}`);
 });
