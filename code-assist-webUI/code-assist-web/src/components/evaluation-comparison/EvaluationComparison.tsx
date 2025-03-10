@@ -47,7 +47,7 @@ const ModelComparison = () => {
                 // Fetch data from all files
                 const responses = await Promise.all(
                     availableFiles.map(file => 
-                        fetch(`http://9.20.192.160:5001/api/files/${file}`)
+                        fetch(`http://${serverIP}:5001/api/files/${file}`)
                             .then(r => r.json())
                     )
                 );
@@ -69,7 +69,7 @@ const ModelComparison = () => {
         if (availableFiles.length > 0) {
             fetchModelData();
         }
-    }, [availableFiles]);
+    }, [availableFiles, serverIP]);
 
     // Prepare model lists
     const graniteModels = Array.from(new Set(
