@@ -14,7 +14,7 @@ const ModelComparison = () => {
     const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
-    const [serverIP, setServerIP] = useState<string>("localhost");
+    const [serverIP, setServerIP] = useState<string>("");
 
     interface Model {
         name: string;
@@ -22,31 +22,11 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
-    // Fetch the machine's IP address from backend
+    // Fetch available files on component mount
     useEffect(() => {
-        const fetchServerIP = async () => {
-            try {
-                const response = await fetch("http://localhost:5001/server-ip");
-                const data = await response.json();
-                console.log("Fetched Server IP:", data.ip); // Debugging log
-                setServerIP(data.ip || "localhost");
-            } catch (error) {
-                console.error("Error fetching server IP:", error);
-                setServerIP("localhost");
-            }
-        };
-    
-        fetchServerIP();
-    }, []);
-
-    // Fetch available files when server IP is set
-    useEffect(() => {
-        if (!serverIP) return;
-        console.log("Server IP:", serverIP);
-        
         const fetchFileNames = async () => {
             try {
-                const response = await fetch(`http://${serverIP}:5001/api/files`);
+                const response = await fetch("http://9.20.192.160:5001/api/files");
                 if (!response.ok) throw new Error("Failed to fetch files");
                 const files = await response.json();
                 setAvailableFiles(files);
@@ -55,31 +35,28 @@ const ModelComparison = () => {
                 setApiError("Failed to fetch available files. Please try again later.");
             }
         };
-
         fetchFileNames();
-    }, [serverIP]);
+    }, []);
 
-    // Fetch models data when availableFiles changes
+    // Fetch models data when compare option changes
     useEffect(() => {
-        if (!serverIP || availableFiles.length === 0) return;
-
         const fetchModelData = async () => {
             setIsLoading(true);
             setApiError(null);
-
             try {
+                // Fetch data from all files
                 const responses = await Promise.all(
-                    availableFiles.map(file =>
-                        fetch(`http://${serverIP}:5001/api/files/${file}`)
-                            .then(r => r.ok ? r.json() : Promise.reject("Invalid response"))
+                    availableFiles.map(file => 
+                        fetch(`http://9.20.192.160:5001/api/files/${file}`)
+                            .then(r => r.json())
                     )
                 );
 
-                // Flatten and validate data
-                const allModels = responses.flatMap(response =>
-                    Array.isArray(response) ? response : []
+                // Flatten the responses into a single array
+                const allModels = responses.flatMap(response => 
+                    Object.values(response).flat()
                 );
-
+                
                 setModelsData(allModels);
             } catch (error) {
                 console.error("Error fetching models:", error);
@@ -89,23 +66,24 @@ const ModelComparison = () => {
             }
         };
 
-        fetchModelData();
-    }, [serverIP, availableFiles]);
+        if (availableFiles.length > 0) {
+            fetchModelData();
+        }
+    }, [availableFiles]);
 
-    // Filter model lists
+    // Prepare model lists
     const graniteModels = Array.from(new Set(
-        modelsData.filter(model => model.name?.toLowerCase().includes("granite"))
+        modelsData.filter(model => model.name.toLowerCase().includes("granite"))
             .map(model => model.name)
     ));
-
+    
     const otherModels = Array.from(new Set(
-        modelsData.filter(model => !model.name?.toLowerCase().includes("granite"))
+        modelsData.filter(model => !model.name.toLowerCase().includes("granite"))
             .map(model => model.name)
     ));
 
-    // Get model details
     const getModelDetails = (name: string): Model | undefined => {
-        return modelsData.find(model => model.name === name);
+        return modelsData.find((model) => model.name === name);
     };
 
     const handleCompare = () => {
