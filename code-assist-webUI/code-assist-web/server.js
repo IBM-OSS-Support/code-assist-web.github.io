@@ -7,26 +7,11 @@ const os = require("os");
 const app = express();
 const PORT = 5001;
 
-// Enable CORS for React frontend
+// Enable CORS for all routes
 app.use(cors());
 
 // Define the folder where JSON files are stored
 const folderPath = path.join(__dirname, "src", "prompt-results");
-
-// Function to get local IP address
-const getLocalIP = () => {
-    const interfaces = os.networkInterfaces();
-    for (const iface of Object.values(interfaces)) {
-        for (const info of iface) {
-            if (info.family === "IPv4" && !info.internal) {
-                return info.address;
-            }
-        }
-    }
-    return "localhost";
-};
-
-const localIP = getLocalIP(); // Fetch machine IP
 
 // API to get list of JSON files
 app.get("/api/files", (req, res) => {
@@ -34,30 +19,50 @@ app.get("/api/files", (req, res) => {
         if (err) {
             return res.status(500).json({ error: "Unable to scan directory" });
         }
-        // Filter only .json files
         res.json(files.filter(file => file.endsWith(".json")));
     });
 });
 
-// API to fetch JSON file content
-app.get('/api/files/:filename', (req, res) => {
+// API to get JSON file content
+app.get("/api/files/:filename", (req, res) => {
     const { filename } = req.params;
     const filePath = path.join(folderPath, filename);
     
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    fs.readFile(filePath, "utf8", (err, data) => {
         if (err) {
-            return res.status(500).json({ error: 'Failed to read file' });
+            return res.status(500).json({ error: "Failed to read file" });
         }
         res.json(JSON.parse(data));
     });
 });
 
-// API to provide machine's IP address
+// ✅ Get second non-internal IPv4 address
+const getMachineIP = () => {
+    const interfaces = os.networkInterfaces();
+    let nonInternalIPs = [];
+
+    for (const iface of Object.values(interfaces)) {
+        for (const entry of iface) {
+            if (entry.family === "IPv4" && !entry.internal) {
+                nonInternalIPs.push(entry.address); // Collect all non-internal IPs
+            }
+        }
+    }
+
+    if (nonInternalIPs.length >= 2) {
+        return nonInternalIPs[1]; // Return the second non-internal IP if available
+    }
+    return nonInternalIPs[0] || "127.0.0.1"; // Fallback to first or localhost
+};
+
+const machineIP = getMachineIP();
+
+// API to get server IP
 app.get("/server-ip", (req, res) => {
-    res.json({ ip: localIP });
+    res.json({ ip: machineIP, port: PORT });
 });
 
-// Start server with machine IP
-app.listen(PORT, () => {
-    console.log(`Server running at http://${localIP}:${PORT}`);
+// ✅ Bind to 0.0.0.0 instead of localhost
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server Running at your local IP and port at ${PORT}`);
 });

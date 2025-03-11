@@ -14,7 +14,8 @@ const ModelComparison = () => {
     const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
-    const [serverIP, setServerIP] = useState<string>("");
+    const [serverIP, setServerIP] = useState("localhost");
+    const [serverPort, setServerPort] = useState<number>(5001); // Default to 5001
 
     interface Model {
         name: string;
@@ -22,11 +23,45 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
+    const getBackendURL = () => {
+        // Use the frontend's origin to determine backend URL
+        if (window.location.hostname === "localhost") {
+            console.log("🚀 Local Development");
+            return "http://localhost:5001"; // Local development
+        } else {
+            console.log("🔥 Fyre Machine");
+            return "http://9.20.192.160:5001"; // Fyre Machine IP
+        }
+    };
+    
+    const fetchServerIP = async () => {
+        try {
+            const backendURL = getBackendURL();
+            const response = await fetch(`${backendURL}/server-ip`);
+            const data = await response.json();
+    
+            if (data.ip) {
+                return data.ip;
+            } else {
+                console.warn("⚠️ No IP found in response:", data);
+                return "localhost";
+            }
+        } catch (error) {
+            console.error("❌ Error fetching server IP:", error);
+            return "localhost";
+        }
+    };
+
+    // Fetch server IP on component mount
+    useEffect(() => {
+        fetchServerIP().then(ip => setServerIP(ip));
+    }, []);
+
     // Fetch available files on component mount
     useEffect(() => {
         const fetchFileNames = async () => {
             try {
-                const response = await fetch("http://9.20.192.160:5001/api/files");
+                const response = await fetch(`http://${serverIP}:${serverPort}/api/files`);
                 if (!response.ok) throw new Error("Failed to fetch files");
                 const files = await response.json();
                 setAvailableFiles(files);
@@ -35,8 +70,10 @@ const ModelComparison = () => {
                 setApiError("Failed to fetch available files. Please try again later.");
             }
         };
-        fetchFileNames();
-    }, []);
+        if (serverIP !== "localhost") {
+            fetchFileNames();
+        }
+    }, [serverIP, serverPort]);
 
     // Fetch models data when compare option changes
     useEffect(() => {
@@ -47,7 +84,7 @@ const ModelComparison = () => {
                 // Fetch data from all files
                 const responses = await Promise.all(
                     availableFiles.map(file => 
-                        fetch(`http://9.20.192.160:5001/api/files/${file}`)
+                        fetch(`http://${serverIP}:${serverPort}/api/files/${file}`)
                             .then(r => r.json())
                     )
                 );
@@ -69,7 +106,7 @@ const ModelComparison = () => {
         if (availableFiles.length > 0) {
             fetchModelData();
         }
-    }, [availableFiles]);
+    }, [availableFiles, serverIP, serverPort]);
 
     // Prepare model lists
     const graniteModels = Array.from(new Set(
