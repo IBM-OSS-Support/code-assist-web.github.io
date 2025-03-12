@@ -312,16 +312,16 @@ const ModelComparison = () => {
 
                                 const questionNumbers = ["All", ...model.prompt.map((_, index) => `Question ${index + 1}`)];
                                 const selectedQuestion = selectedQuestions[model.name] || "All";
-debugger
-const filteredPrompts = model.prompt.filter(prompt => {
-    if (!selectedDates[model.name]) return true; // Show all prompts if no date is selected
 
-    const createdAtDate = model.created_at ? new Date(model.created_at) : null;
-    if (!createdAtDate || isNaN(createdAtDate.getTime())) return false;
+                                const filteredPrompts = model.prompt.filter(prompt => {
+                                    if (!selectedDates[model.name]) return true; // Show all prompts if no date is selected
 
-    const formattedDate = createdAtDate.toLocaleDateString('en-GB').split('/').reverse().join('-');  // Convert to DD-MM-YYYY
-    return formattedDate === selectedDates[model.name]; // Ensure date formats match
-});
+                                    const createdAtDate = model.created_at ? new Date(model.created_at) : null;
+                                    if (!createdAtDate || isNaN(createdAtDate.getTime())) return false;
+
+                                    const formattedDate = createdAtDate.toLocaleDateString('en-GB').split('/').reverse().join('-');  // Convert to DD-MM-YYYY
+                                    return formattedDate === selectedDates[model.name]; // Ensure date formats match
+                                });
 
                                 
 
@@ -390,7 +390,7 @@ const filteredPrompts = model.prompt.filter(prompt => {
                                         <div className={solidBackgrounds[model.name] ? "chat-screen solid-bg" : "chat-screen"}>
                                             {filteredPrompts.length === 0 ? (
                                                 <div style={{ color: "#fff", background: "#606060cc", borderRadius: "4px", padding: "0.7rem", textAlign: "center", marginTop: "20px" }}>
-                                                    No results found for the selected date.
+                                                    No results found for the selected date. <br /><br /> Please select another date or Clear the date filter to view all prompts.
                                                 </div>
                                             ) : (
                                                 <ul>
