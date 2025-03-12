@@ -141,8 +141,15 @@
         }
     }
     .question-date-picker {
-        .cds--date-picker.cds--date-picker--single .cds--date-picker__input {
-            inline-size: 23.5rem;
+        .cds--date-picker.cds--date-picker--single {
+          width: 100%;
+          .cds--date-picker-container, .cds--date-picker-input__wrapper, .cds--date-picker-container .cds--date-picker-input__wrapper > span {
+            width: 100%;
+          }
+          .cds--date-picker__input {
+            inline-size: initial;
+            width: 100%;
+          }
         }
     }
     .compare-option-wrap {
@@ -153,6 +160,6 @@
         box-shadow: 0 0 4px 1px rgba(64, 64, 64, 0.8);
     }
 }
-.flatpickr-calendar.open {
-    inline-size: 23.5rem !important;
-}
+// .flatpickr-calendar.open {
+//     inline-size: 23.5rem !important;
+// }

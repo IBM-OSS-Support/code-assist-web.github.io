@@ -11,16 +11,17 @@ const ModelComparison = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [selectedDates, setSelectedDates] = useState<{ [modelName: string]: string | null }>({});
     const [compareOption, setCompareOption] = useState<string>("other"); // 'granite' or 'other'
-    const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
+    const [modelsData, setModelsData] = useState<Model[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
+    const [noResultsFound, setNoResultsFound] = useState<boolean>(false); // State to indicate no results found
     const [serverIP, setServerIP] = useState("localhost");
     const [serverPort, setServerPort] = useState<number>(5001); // Default to 5001
 
     interface Model {
         name: string;
-        desc: string;
-        prompt: { user: string; assistant: string; }[];
+        created_at: string;
+        prompt: { user: string; assistant: string; created_at?: string }[];
     }
 
     const getBackendURL = () => {
@@ -57,11 +58,11 @@ const ModelComparison = () => {
         fetchServerIP().then(ip => setServerIP(ip));
     }, []);
 
-    // Fetch available files on component mount
+    // Fetch available files (model names) on component mount
     useEffect(() => {
         const fetchFileNames = async () => {
             try {
-                const response = await fetch(`http://${serverIP}:${serverPort}/api/files`);
+                const response = await fetch(`http://${serverIP}:${serverPort}/api/models`);
                 if (!response.ok) throw new Error("Failed to fetch files");
                 const files = await response.json();
                 setAvailableFiles(files);
@@ -70,30 +71,40 @@ const ModelComparison = () => {
                 setApiError("Failed to fetch available files. Please try again later.");
             }
         };
-        if (serverIP !== "localhost") {
-            fetchFileNames();
-        }
+        fetchFileNames();
     }, [serverIP, serverPort]);
 
-    // Fetch models data when compare option changes
+    // Fetch models data when compare option changes or date changes
     useEffect(() => {
         const fetchModelData = async () => {
             setIsLoading(true);
             setApiError(null);
+            setNoResultsFound(false);
             try {
-                // Fetch data from all files
                 const responses = await Promise.all(
-                    availableFiles.map(file => 
-                        fetch(`http://${serverIP}:${serverPort}/api/files/${file}`)
-                            .then(r => r.json())
-                    )
+                    availableFiles.map(async file => {
+                        const date = selectedDates[file] || null;
+                        let fileNames = await fetch(`http://${serverIP}:${serverPort}/api/models/${file}/files`).then(r => r.json());
+                        fileNames = fileNames.flat();
+                        
+                        const fileResponses: any[] = await Promise.all(
+                            fileNames.map(async (fileName: string) => {
+                                return fetch(`http://${serverIP}:${serverPort}/api/models/${file}/files/${fileName}`)
+                                    .then((r: Response) => r.json());
+                            })
+                        );
+        
+                        return fileResponses.flat();
+                    })
                 );
-
-                // Flatten the responses into a single array
+        
+                // Normalize response structure
                 const allModels = responses.flatMap(response => 
                     Object.values(response).flat()
                 );
-                
+        
+                console.log("Normalized Models:", allModels);
+        
                 setModelsData(allModels);
             } catch (error) {
                 console.error("Error fetching models:", error);
@@ -106,22 +117,56 @@ const ModelComparison = () => {
         if (availableFiles.length > 0) {
             fetchModelData();
         }
-    }, [availableFiles, serverIP, serverPort]);
+    }, [availableFiles, serverIP, serverPort, selectedDates]);
 
     // Prepare model lists
+    const flattenedModels = modelsData.flatMap(item => Object.values(item).flat());
+
     const graniteModels = Array.from(new Set(
-        modelsData.filter(model => model.name.toLowerCase().includes("granite"))
-            .map(model => model.name)
-    ));
-    
-    const otherModels = Array.from(new Set(
-        modelsData.filter(model => !model.name.toLowerCase().includes("granite"))
+        flattenedModels
+            .filter(model => model.name && model.name.toLowerCase().includes("granite"))
             .map(model => model.name)
     ));
 
+    const otherModels = Array.from(new Set(
+        flattenedModels
+            .filter(model => model.name && !model.name.toLowerCase().includes("granite"))
+            .map(model => model.name)
+    ));
+
+    console.log("Granite Models:", graniteModels);
+    console.log("Other Models:", otherModels);
+
     const getModelDetails = (name: string): Model | undefined => {
-        return modelsData.find((model) => model.name === name);
+        if (!modelsData || modelsData.length === 0) {
+            console.warn("modelsData is empty or not populated");
+            return undefined;
+        }
+    
+        // Flattening again to avoid issues with nested structure
+        const flattenedModels = modelsData.flatMap(item => Object.values(item).flat());
+    
+        const model = flattenedModels.find((model) => model.name === name);
+    
+        if (!model) {
+            console.warn(`Model with name ${name} not found`);
+        } else {
+            console.log("Model found:", model);
+        }
+    
+        return model;
     };
+    
+
+    const extractDateFromFileName = (fileName: string): string | null => {
+        const match = fileName.match(/_(\d{8}T\d{6})\.json$/);
+        return match ? match[1] : null; // Extracted format should match the expected input
+    };
+    
+
+    console.log("modelsData:", modelsData);
+    console.log("Potentially problematic models:", modelsData.filter(model => !model.name));
+
 
     const handleCompare = () => {
         if (selectedGranite && selectedOther) {
@@ -139,10 +184,12 @@ const ModelComparison = () => {
         setCompareClicked(false);
         setSolidBackgrounds({});
         setSelectedQuestions({});
+        setSelectedDates({});
+        setNoResultsFound(false);
     };
 
     const formatPromptWithCodeTags = (prompt: string): React.ReactNode => {
-        const regex = /'''(.*?)'''/gs;
+        const regex = /```(.*?)```/gs;
         let lastIndex = 0;
         const parts: React.ReactNode[] = [];
 
@@ -157,7 +204,7 @@ const ModelComparison = () => {
             );
 
             parts.push(
-                <code key={offset} style={{ backgroundColor: "#101010", padding: "2px 10px", borderRadius: "4px", display: "block" }}>
+                <code key={offset} style={{ backgroundColor: "#101010", padding: "2px 10px", borderRadius: "4px", display: "block", wordBreak: "break-word" }}>
                     {codeBlock.split("\n").map((line: string, index: number) => (
                         <React.Fragment key={`${offset}-code-${index}`}>
                             {line}
@@ -265,6 +312,22 @@ const ModelComparison = () => {
 
                                 const questionNumbers = ["All", ...model.prompt.map((_, index) => `Question ${index + 1}`)];
                                 const selectedQuestion = selectedQuestions[model.name] || "All";
+debugger
+const filteredPrompts = model.prompt.filter(prompt => {
+    if (!selectedDates[model.name]) return true; // Show all prompts if no date is selected
+
+    const createdAtDate = model.created_at ? new Date(model.created_at) : null;
+    if (!createdAtDate || isNaN(createdAtDate.getTime())) return false;
+
+    const formattedDate = createdAtDate.toLocaleDateString('en-GB').split('/').reverse().join('-');  // Convert to DD-MM-YYYY
+    return formattedDate === selectedDates[model.name]; // Ensure date formats match
+});
+
+                                
+
+                                console.log(`Model: ${model.name}, Selected Date: ${selectedDates[model.name]}`);
+                                console.log(`Prompts:`, model.prompt);
+                                console.log(`Filtered Prompts:`, filteredPrompts);
 
                                 return (
                                     <div key={model.name} style={{ flex: 1, padding: "10px", border: "1px solid #ddd", borderRadius: "8px", margin: "0 5px" }}>
@@ -272,7 +335,7 @@ const ModelComparison = () => {
                                             <h4 style={{ textTransform: "capitalize", marginBottom: "10px", marginTop: "0" }}>{model.name}</h4>
                                         </div>
                                         
-                                        <p><strong>Description:</strong> {model.desc}</p>
+                                        <p><strong>Description:</strong> Currently No Description Available.</p>
 
                                         <div style={{ margin: "0.5rem 0"}}>
                                             <Grid fullWidth narrow>
@@ -291,17 +354,20 @@ const ModelComparison = () => {
                                                     <DatePicker 
                                                         datePickerType="single"
                                                         className="question-date-picker"
+                                                        dateFormat="d/m/Y"
                                                         maxDate={new Date().setDate(new Date().getDate())}
+                                                        value={selectedDates[model.name] ? new Date(selectedDates[model.name] as string) : undefined}
                                                         onChange={(eventOrDates) => {
                                                             const dateValue = Array.isArray(eventOrDates) ? eventOrDates[0] : eventOrDates;
-                                                            setSelectedDates((prev) => ({ ...prev, [model.name]: dateValue ? dateValue.toISOString() : null }));
+                                                            const formattedDate = dateValue ? new Date(dateValue).toLocaleDateString('en-CA') : null;
+                                                            console.log(`Selected date for ${model.name}: ${formattedDate}`);
+                                                            setSelectedDates((prev) => ({ ...prev, [model.name]: formattedDate }));
                                                         }}
                                                     >
                                                         <DatePickerInput
                                                             id={`date-picker-${model.name}`}
-                                                            placeholder="mm/dd/yyyy"
+                                                            placeholder="dd/mm/yyyy"
                                                             labelText="Select a Date"
-                                                            defaultValue={selectedDates[model.name] || ""}
                                                         />
                                                     </DatePicker>
                                                 </Column>
@@ -322,33 +388,43 @@ const ModelComparison = () => {
                                             />
                                         </div>
                                         <div className={solidBackgrounds[model.name] ? "chat-screen solid-bg" : "chat-screen"}>
-                                            <ul>
-                                                {selectedQuestion === "All" ? (
-                                                    model.prompt.map((prompt, index) => (
-                                                        <li key={index}>
-                                                            <div className="user-message-bubble">
-                                                                <strong>User</strong>
-                                                                {formatPromptWithCodeTags(prompt.user)}
-                                                            </div>
-                                                            <div className="assistant-message-bubble">
-                                                                <strong>Assistant</strong>
-                                                                {formatPromptWithCodeTags(prompt.assistant)}
-                                                            </div>
-                                                        </li>
-                                                    ))
-                                                ) : (
-                                                    <li>
-                                                        <div className="user-message-bubble">
-                                                            <strong>User</strong>
-                                                            {formatPromptWithCodeTags(model.prompt[parseInt(selectedQuestion.split(" ")[1]) - 1].user)}
-                                                        </div>
-                                                        <div className="assistant-message-bubble">
-                                                            <strong>Assistant</strong>
-                                                            {formatPromptWithCodeTags(model.prompt[parseInt(selectedQuestion.split(" ")[1]) - 1].assistant)}
-                                                        </div>
-                                                    </li>
-                                                )}
-                                            </ul>
+                                            {filteredPrompts.length === 0 ? (
+                                                <div style={{ color: "#fff", background: "#606060cc", borderRadius: "4px", padding: "0.7rem", textAlign: "center", marginTop: "20px" }}>
+                                                    No results found for the selected date.
+                                                </div>
+                                            ) : (
+                                                <ul>
+                                                    {selectedQuestion === "All" ? (
+                                                        filteredPrompts.map((prompt, index) => (
+                                                            <li key={index}>
+                                                                <div className="user-message-bubble">
+                                                                    <strong>User</strong>
+                                                                    {formatPromptWithCodeTags(prompt.user)}
+                                                                </div>
+                                                                <div className="assistant-message-bubble">
+                                                                    <strong>Assistant</strong>
+                                                                    {formatPromptWithCodeTags(prompt.assistant)}
+                                                                </div>
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        filteredPrompts
+                                                            .filter((_, index) => index === parseInt(selectedQuestion.split(" ")[1]) - 1)
+                                                            .map((prompt, index) => (
+                                                                <li key={index}>
+                                                                    <div className="user-message-bubble">
+                                                                        <strong>User</strong>
+                                                                        {formatPromptWithCodeTags(prompt.user)}
+                                                                    </div>
+                                                                    <div className="assistant-message-bubble">
+                                                                        <strong>Assistant</strong>
+                                                                        {formatPromptWithCodeTags(prompt.assistant)}
+                                                                    </div>
+                                                                </li>
+                                                            ))
+                                                    )}
+                                                </ul>
+                                            )}
                                         </div>
                                     </div>
                                 );
