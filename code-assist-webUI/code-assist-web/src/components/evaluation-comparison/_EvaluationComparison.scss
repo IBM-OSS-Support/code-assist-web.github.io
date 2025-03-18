@@ -152,12 +152,28 @@
           }
         }
     }
+    .result-combo-box,
+    .question-date-picker {
+      margin: 0.8rem 0 0 0;
+    }
     .compare-option-wrap {
-        padding: 15px 10px;
-        border-radius: 5px;
-        margin: 0px 0px 2.5rem;
-        background: #000011;
-        box-shadow: 0 0 4px 1px rgba(64, 64, 64, 0.8);
+      padding: 15px 10px;
+      border-radius: 5px;
+      margin: 0px 0px 2.5rem;
+      background: #000011;
+      box-shadow: 0 0 4px 1px rgba(64, 64, 64, 0.8);
+    }
+    .date-capsule-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0.2rem 0 0.8rem;
+
+      .date-capsule {
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
     }
 }
 // .flatpickr-calendar.open {

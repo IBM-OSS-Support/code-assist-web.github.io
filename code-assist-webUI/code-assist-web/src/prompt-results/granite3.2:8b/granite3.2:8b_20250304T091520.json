@@ -3,6 +3,7 @@
         {
             "name": "granite3.2:8b",
             "created_at": "20250304T091520",
+            "file_name": "granite3.2:8b_20250304T091520.json",
             "prompt": [
                 {
                     "user": "I.Write a code for Binary Search along with the documentation of the code.",

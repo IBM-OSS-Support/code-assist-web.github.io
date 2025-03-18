@@ -2,10 +2,11 @@
   "0": [
     {
       "name": "gpt-4o",
-      "date": "20250311T204733",
+      "created_at": "20250311T204733",
+      "file_name": "gpt-4o_20250311T204733.json",
       "prompt": [
         {
-          "user": "how are you?",
+          "user": "Hi, how are you?",
           "assistant": "I'm just a computer program, but I'm here and ready to help you with any questions or tasks! How can I assist you today?"
         },
         {

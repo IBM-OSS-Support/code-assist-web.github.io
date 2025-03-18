@@ -2,7 +2,8 @@
   "0": [
     {
       "name": "gpt-4o",
-      "date": "20250311T203629",
+      "created_at": "20250311T203629",
+      "file_name": "gpt-4o_20250311T203629.json",
       "prompt": [
         {
           "user": "how are you?",

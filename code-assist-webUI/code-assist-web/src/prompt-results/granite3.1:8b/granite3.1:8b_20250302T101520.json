@@ -16,7 +16,8 @@
                     "user": "3.Optimize this code @code_to_optimize.py",
                     "assistant": "The provided Python function `algo` implements the Bubble Sort algorithm to sort an array in ascending order. This implementation is already quite efficient for small arrays due to its simplicity and low overhead, but we can make a few minor improvements to enhance readability and performance:\n\n1. Use more descriptive variable names.\n2. Add type hints for better understanding of the function's input and output.\n3. Implement an early termination condition when no swaps are made during a pass through the array (i.e., the array is already sorted). This can be done by adding a boolean flag `swapped` to track whether any elements were moved in each iteration.\n4. Use list comprehension for more concise code.\n\nHere's the optimized version of your function:\n\n```python\nfrom typing import List\n\ndef bubble_sort(arr: List[int]) -> List[int]:\n    n = len(arr)\n    swapped = True\n\n    while not swapped:\n        swapped = False\n\n        for i in range(1, n):\n            if arr[i] < arr[i - 1]:\n                arr[i], arr[i - 1] = arr[i - 1], arr[i]\n                swapped = True\n    return arr\n```\n\nThis optimized version of the Bubble Sort algorithm has the same time complexity (O(n^2)) as your original implementation, but it's more readable and includes an early termination condition to improve performance for nearly sorted arrays."
                 }
-            ]
+            ],
+            "file_name": "granite3.1:2b_20250302T101520.json"
         }
     ]
 }
