@@ -288,44 +288,59 @@ const parseFileName = (fileName: string) => {
     };
 
     const formatPromptWithCodeTags = (prompt: string): React.ReactNode => {
+        // Remove <user> and <assistant> tags from the prompt
+        const cleanedPrompt = prompt.replace(/<\/?(user|assistant)>/g, '');
         const regex = /```(.*?)```/gs;
         let lastIndex = 0;
         const parts: React.ReactNode[] = [];
-
-        prompt.replace(regex, (match, codeBlock, offset) => {
+    
+        cleanedPrompt.replace(regex, (match, codeBlock, offset) => {
+            // Add text before code block
             parts.push(
-                prompt.slice(lastIndex, offset).split("\n").map((line, index) => (
+                cleanedPrompt.slice(lastIndex, offset).split("\n").map((line, index) => (
                     <React.Fragment key={`${offset}-text-${index}`}>
                         {line}
                         <br />
                     </React.Fragment>
                 ))
             );
-
+    
+            // Add code block
             parts.push(
-                <code key={offset} style={{ backgroundColor: "#101010", padding: "2px 10px", borderRadius: "4px", display: "block", wordBreak: "break-word" }}>
+                <code key={offset} style={{ 
+                    backgroundColor: "#101010", 
+                    padding: "2px 10px", 
+                    borderRadius: "4px", 
+                    display: "block", 
+                    wordBreak: "break-word",
+                    margin: "8px 0",
+                    overflowX: "auto",
+                    letterSpacing: "0.025em",
+                    WebkitOverflowScrolling: "touch"
+                }}>
                     {codeBlock.split("\n").map((line: string, index: number) => (
                         <React.Fragment key={`${offset}-code-${index}`}>
-                            {line}
+                            <span>{line}</span>
                             <br />
                         </React.Fragment>
                     ))}
                 </code>
             );
-
+    
             lastIndex = offset + match.length;
             return match;
         });
-
+    
+        // Add remaining text after last code block
         parts.push(
-            prompt.slice(lastIndex).split("\n").map((line, index) => (
+            cleanedPrompt.slice(lastIndex).split("\n").map((line, index) => (
                 <React.Fragment key={`end-text-${index}`}>
                     {line}
-                    <br />
+                    <div></div>
                 </React.Fragment>
             ))
         );
-
+    
         return <>{parts}</>;
     };
 
