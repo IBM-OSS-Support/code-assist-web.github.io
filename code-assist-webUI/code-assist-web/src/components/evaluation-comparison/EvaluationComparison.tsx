@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Column, Grid, ComboBox, Button, Checkbox, DatePickerSkeleton, DatePicker, DatePickerInput, RadioButton, RadioButtonGroup, Tag } from "@carbon/react";
+import { Column, Grid, ComboBox, Button, Checkbox, DatePickerSkeleton, DatePicker, DatePickerInput, RadioButton, RadioButtonGroup, Tag, Dropdown } from "@carbon/react";
 import "./_EvaluationComparison.scss";
 import { format } from 'date-fns';
 
@@ -261,6 +261,27 @@ const parseFileName = (fileName: string) => {
 
         return filesCount;
     };
+
+    // To handle auto-selection of single results
+    useEffect(() => {
+        [selectedGranite, selectedOther].forEach(modelName => {
+          if (!modelName) return;
+          
+          const { modelJsonFiles } = getModelDetails(modelName);
+          const hasExistingSelection = !!selectedResults[modelName];
+          
+          // Only auto-select if:
+          // - No existing selection
+          // - Not in reset state (date is null)
+          // - Files available
+          if (!hasExistingSelection && selectedDates[modelName] && modelJsonFiles?.length === 1) {
+            setSelectedResults(prev => ({
+              ...prev,
+              [modelName]: modelJsonFiles[0]
+            }));
+          }
+        });
+      }, [availableFiles, selectedDates]);
     
     console.log("modelsData:", modelsData);
     console.log("Potentially problematic models:", modelsData.filter(model => !model.name));
@@ -530,11 +551,11 @@ const parseFileName = (fileName: string) => {
                                                     </DatePicker>
                                                 </Column>
                                                 <Column lg={8} md={8} sm={4}>
-                                                    <ComboBox
+                                                    <Dropdown
                                                         id={`result-combo-box-${model?.model?.name}`}
                                                         className="result-combo-box"
                                                         items={model?.modelJsonFiles || []}
-                                                        itemToString={(item) => item ? `Result-${model?.modelJsonFiles?.indexOf(item) + 1}` : ''}
+                                                        itemToString={item => item ? `Result-${model?.modelJsonFiles?.indexOf(item) + 1}` : 'Select Result'}
                                                         onChange={({ selectedItem }) => {
                                                             const currentModelName = model?.model?.name as string;
                                                             setSelectedResults(prev => ({
@@ -542,34 +563,63 @@ const parseFileName = (fileName: string) => {
                                                             [currentModelName]: selectedItem as string
                                                             }));
                                                         }}
-                                                        selectedItem={selectedResults[model?.model?.name as string] || 
-                                                            (model?.modelJsonFiles?.length === 1 ? model.modelJsonFiles[0] : '')}
+                                                        selectedItem={selectedResults[model?.model?.name as string] || null}
                                                         titleText="Select a Result"
-                                                        placeholder="Choose a result"
+                                                        label="Choose a result"
                                                         disabled={!model?.modelJsonFiles?.length}
                                                     />
                                                     {/* <p id="result-warn-message" style={{ display: "block", color: "red", margin: "0.4rem 0", fontSize: "0.75rem" }}>Please select a result from dropdown.</p> */}
                                                 </Column>
                                             </Grid>
 
-                                            {model?.modelJsonFiles?.length > 0 && (selectedResults[model?.model?.name as string] || model?.modelJsonFiles?.length === 1) && (
-                                                <Grid fullWidth narrow>
-                                                    <Column lg={8} md={8} sm={4}>
-                                                        <ComboBox
-                                                            id={`question-combo-box-${model?.model?.name}`}
-                                                            className="question-combo-box"
-                                                            items={questionNumbers}
-                                                            itemToString={(item) => (item ? item : '')}
-                                                            onChange={({ selectedItem }) => setSelectedQuestions((prev) => ({
+                                            
+                                            <Grid fullWidth narrow>
+                                                <Column lg={8} md={8} sm={4}>
+                                                    <Dropdown
+                                                        id={`question-combo-box-${model?.model?.name}`}
+                                                        className="question-combo-box"
+                                                        items={questionNumbers}
+                                                        itemToString={(item) => (item ? item : '')}
+                                                        onChange={({ selectedItem }) => setSelectedQuestions((prev) => ({
                                                             ...prev,
                                                             [model?.model?.name || 'default_key']: selectedItem as string
-                                                            }))}
-                                                            selectedItem={selectedQuestion}
-                                                            titleText="Select a Question"
-                                                        />
-                                                    </Column>
-                                                </Grid>
-                                            )}
+                                                        }))}
+                                                        selectedItem={selectedQuestion}
+                                                        titleText="Select a Question"
+                                                        label="Choose a question"
+                                                        // disabled={!filteredPrompts?.length || !selectedResults[model?.model?.name as string]}
+                                                    />
+                                                </Column>
+                                                {(selectedResults[model?.model?.name as string] || model?.modelJsonFiles?.length === 1) && (
+                                                <Column lg={8} md={8} sm={4}>
+                                                    <Button
+                                                        kind="danger--tertiary"
+                                                        size="sm"
+                                                        onClick={() => {
+                                                            const modelName = model?.model?.name as string;
+                                                            setSelectedQuestions(prev => ({ ...prev, [modelName]: "All" }));
+                                                            setSelectedResults(prev => ({ ...prev, [modelName]: '' }));
+                                                            setSelectedDates(prev => ({ ...prev, [modelName]: null }));
+                                                        }}
+                                                        disabled={
+                                                            selectedQuestion === "All" &&
+                                                            !selectedResults[model?.model?.name as string] &&
+                                                            !selectedDates[model?.model?.name as string]
+                                                        }
+                                                        style={{ 
+                                                            marginTop: "1.7rem",
+                                                            padding: "0.5rem 1rem",
+                                                            width: "10rem",
+                                                            height: "2.5rem",
+                                                            alignItems: "center",
+                                                            justifyContent: "center"
+                                                        }}
+                                                    >
+                                                        Reset Filter
+                                                    </Button>
+                                                </Column>
+                                                )}
+                                            </Grid>
                                         </div>
                                         <p>
                                             <strong>Prompt:</strong>
