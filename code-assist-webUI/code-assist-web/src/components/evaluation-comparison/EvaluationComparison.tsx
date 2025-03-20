@@ -11,7 +11,7 @@ const ModelComparison = () => {
     const [selectedQuestions, setSelectedQuestions] = useState<{ [modelName: string]: string }>({});
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [selectedDates, setSelectedDates] = useState<{ [modelName: string]: string | null }>({});
-    const [compareOption, setCompareOption] = useState<string>("other"); // 'granite' or 'other'
+    // const [compareOption, setCompareOption] = useState<string>("other"); // 'granite' or 'other'
     const [modelsData, setModelsData] = useState<Model[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
@@ -19,10 +19,12 @@ const ModelComparison = () => {
     const [noResultsFound, setNoResultsFound] = useState<boolean>(false); // State to indicate no results found
     const [serverIP, setServerIP] = useState("localhost");
     const [serverPort, setServerPort] = useState<number>(5005); // Default to 5001
-    const [selectedResult, setSelectedResult] = useState<string | null>(null);
-    const [availableResults, setAvailableResults] = useState<string[]>([]);
+    // const [selectedResult, setSelectedResult] = useState<string | null>(null);
+    // const [availableResults, setAvailableResults] = useState<string[]>([]);
     const [filteredFileNames, setFilteredFileNames] = useState<string[]>([]);
     const [selectedResults, setSelectedResults] = useState<{ [key: string]: string }>({});
+    const [codeAssistData, setCodeAssistData] = useState<any>(null);
+    const [modelScores, setModelScores] = useState<{[key: string]: string}>({});
 
     interface Model {
         name: string;
@@ -180,45 +182,28 @@ const parseFileName = (fileName: string) => {
     // Updating getModelDetails function
     const getModelDetails = (name: string): { model: Model | undefined; modelJsonFiles: string[] } => {
         if (!modelsData || allFileNames.length === 0) {
-          return { model: undefined, modelJsonFiles: [] };
+            return { model: undefined, modelJsonFiles: [] };
         }
-      
-        // Get selected date for this model
-        const selectedDate = selectedDates[name];
-
-        // Convert selected date to YYYYMMDD format
-        const formattedSelectedDate = selectedDate 
-        ? new Date(selectedDate)
-            .toISOString()
-            .replace(/-/g, '')
-            .substring(0, 8)
-        : null;
-      
-        // Filter files based on model name and selected date
-        const modelJsonFiles = allFileNames
-        .map(fileName => parseFileName(fileName))
-        .filter(file => {
-          if (!file) return false;
-          const baseName = getModelBaseName(file.modelName);
-          const modelMatches = baseName.toLowerCase() === name.toLowerCase();
-          
-          if (!selectedDate) return false;
     
-          const fileDate = file.timestamp.substring(0, 8);
-          
-          return modelMatches && fileDate === formattedSelectedDate;
-        })    
-        .sort((a, b) => (a?.timestamp || '').localeCompare(b?.timestamp || ''))
-        .map(file => file?.fullName || '');
-      
+        // Filter files based on model name only
+        const modelJsonFiles = allFileNames
+            .map(fileName => parseFileName(fileName))
+            .filter(file => {
+                if (!file) return false;
+                const baseName = getModelBaseName(file.modelName);
+                return baseName.toLowerCase() === name.toLowerCase();
+            })    
+            .sort((a, b) => (a?.timestamp || '').localeCompare(b?.timestamp || ''))
+            .map(file => file?.fullName || '');
+    
         // Find model data for selected result
         const selectedResult = selectedResults[name];
         const modelData = selectedResult 
-          ? flattenedModels.find(m => m.file_name === selectedResult)
-          : flattenedModels.find(m => m.name === name);
-      
+            ? flattenedModels.find(m => m.file_name === selectedResult)
+            : flattenedModels.find(m => m.name === name);
+    
         return { model: modelData, modelJsonFiles };
-      };
+    };
     
     // update filtered files when dates change
     useEffect(() => {
@@ -285,6 +270,46 @@ const parseFileName = (fileName: string) => {
     
     console.log("modelsData:", modelsData);
     console.log("Potentially problematic models:", modelsData.filter(model => !model.name));
+
+    // for fetching pass@1 score fron code-assist-data.json file
+    useEffect(() => {
+        const fetchCodeAssistData = async () => {
+            try {
+                const backendURL = getBackendURL();
+                const response = await fetch(`${backendURL}/api/code-assist`);
+                const data = await response.json();
+                setCodeAssistData(data);
+                
+                // Create score mapping
+                const scores: {[key: string]: string} = {};
+                Object.values(data).forEach((modelGroup: any) => {
+                    modelGroup.forEach((model: any) => {
+                        const validScores = model.Data.filter((d: any) => d["Pass@1"] && d["Pass@1"] !== "Not applicable")
+                            .map((d: any) => parseFloat(d["Pass@1"]));
+                        
+                        if (validScores.length > 0) {
+                            const averageScore = validScores.reduce((sum: number, score: number) => sum + score, 0) / validScores.length;
+                            const percentage = Math.min(Math.max(averageScore * 100, 0), 100);
+                            scores[model.Name] = `${percentage.toFixed(1)}%`;
+                        }
+                    });
+                });
+                setModelScores(scores);
+            } catch (error) {
+                console.error("Error fetching code assist data:", error);
+            }
+        };
+
+        fetchCodeAssistData();
+    }, []);
+
+    // Add this utility function to normalize model names
+    const normalizeModelName = (name: string) => {
+        return name.toLowerCase()
+            .replace(/[.:]/g, '-')
+            .replace(/\s+/g, '-')
+            .replace(/-+instruct/g, '');
+    };
 
 
     const handleCompare = () => {
@@ -368,14 +393,14 @@ const parseFileName = (fileName: string) => {
     return (
         <div className="evaluation-comparison-wrap">
             <Grid fullWidth narrow className="page-content">
-                <Column lg={16}>
+                <Column sm={4} md={8} lg={16}>
                     <div className="heading-wrap">
                         <h3>Select Models for Comparison</h3>
                     </div>
                 </Column>
-                <Column lg={16}>
+                <Column sm={4} md={8} lg={16}>
                     <div className="compare-option-wrap">
-                        <RadioButtonGroup
+                        {/* <RadioButtonGroup
                             legendText="Compare with:"
                             name="compare-option"
                             defaultSelected="other"
@@ -384,49 +409,53 @@ const parseFileName = (fileName: string) => {
                         >
                             <RadioButton labelText="Compare with Other AI Models" value="other" id="other-radio" />
                             <RadioButton labelText="Compare with Other Granite Models" value="granite" id="granite-radio" />
-                        </RadioButtonGroup>
-                    </div>
-                </Column>
-                <Column lg={16}>
-                    <Grid narrow>
-                        <Column lg={6}>
-                            <ComboBox
-                                key={selectedGranite}
-                                id="granite-model-combo-box"
-                                items={graniteModels}
-                                itemToString={(item) => (item ? item : '')}
-                                onChange={({ selectedItem }) => setSelectedGranite(selectedItem as string)}
-                                selectedItem={selectedGranite} 
-                                titleText="Select a Granite Model"
-                                placeholder="Choose a Granite model"
-                                disabled={isLoading}
-                            />
-                        </Column>
-                        <Column lg={6}>
-                            <ComboBox
-                                key={selectedOther}
-                                id="other-model-combo-box"
-                                items={compareOption === "granite" ? graniteModels : otherModels}
-                                itemToString={(item) => (item ? item : '')}
-                                onChange={({ selectedItem }) => setSelectedOther(selectedItem as string)}
-                                selectedItem={selectedOther} 
-                                titleText={compareOption === "granite" ? "Select Another Granite Model" : "Select Other AI Model"}
-                                placeholder={compareOption === "granite" ? "Choose another Granite model" : "Choose other AI model"}
-                                disabled={isLoading}
-                            />
+                        </RadioButtonGroup> */}
+                        <Grid narrow>
+                            <Column sm={4} md={4} lg={6}>
+                                <ComboBox
+                                    key={selectedGranite}
+                                    id="granite-model-combo-box"
+                                    items={[...graniteModels, ...otherModels]}  // Combine both lists
+                                    itemToString={(item) => (item ? item : '')}
+                                    onChange={({ selectedItem }) => setSelectedGranite(selectedItem as string)}
+                                    selectedItem={selectedGranite} 
+                                    titleText="Select First Model"
+                                    placeholder="Choose any model"
+                                    disabled={isLoading}
+                                    shouldFilterItem={({ item, inputValue }) => 
+                                        item.toLowerCase().includes(inputValue?.toLowerCase() || '')
+                                    }
+                                />
+                            </Column>
+                            <Column sm={4} md={4} lg={6}>
+                                <ComboBox
+                                    key={selectedOther}
+                                    id="other-model-combo-box"
+                                    items={[...graniteModels, ...otherModels]}  // Combine both lists
+                                    itemToString={(item) => (item ? item : '')}
+                                    onChange={({ selectedItem }) => setSelectedOther(selectedItem as string)}
+                                    selectedItem={selectedOther} 
+                                    titleText="Select Second Model"
+                                    placeholder="Choose any model"
+                                    disabled={isLoading}
+                                    shouldFilterItem={({ item, inputValue }) => 
+                                        item.toLowerCase().includes(inputValue?.toLowerCase() || '')
+                                    }
+                                />
 
-                        </Column>
-                        <Column lg={4}>
-                            <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-                                <Button onClick={handleCompare} disabled={!selectedGranite || !selectedOther || isLoading}>Compare</Button>
-                                <Button onClick={handleClear} kind="danger" disabled={!selectedGranite && !selectedOther || isLoading}>Clear</Button>
-                            </div>
-                        </Column>
-                    </Grid>
+                            </Column>
+                            <Column sm={4} md={8} lg={4}>
+                                <div style={{ marginTop: "1.6rem", display: "flex", gap: "0.8rem" }}>
+                                    <Button onClick={handleCompare} disabled={!selectedGranite || !selectedOther || isLoading}>Compare</Button>
+                                    <Button onClick={handleClear} kind="danger" disabled={!selectedGranite && !selectedOther || isLoading}>Clear</Button>
+                                </div>
+                            </Column>
+                        </Grid>
+                    </div>
                 </Column>
 
                 {isLoading && 
-                    <Column lg={16}>
+                    <Column sm={4} md={8} lg={16}>
                         <div className="skeleton-wrap" style={{ display: "flex", width: "300px", height: "560px", alignItems: "center", justifyContent: "center", margin: "4rem auto 0" }}>
                             <DatePickerSkeleton range />
                         </div>
@@ -434,15 +463,15 @@ const parseFileName = (fileName: string) => {
                 }
 
                 {apiError && 
-                    <Column lg={16}>
+                    <Column sm={4} md={8} lg={16}>
                         <div style={{ color: "red", textAlign: "center", marginTop: "20px" }}>
                             {apiError}
                         </div>
                     </Column>
                 }
 
-                {compareClicked && selectedGranite && selectedOther && !isLoading && (
-                    <Column lg={16}>
+                {compareClicked && selectedGranite && selectedOther && !isLoading ? (
+                    <Column sm={4} md={8} lg={16}>
                         <div style={{ display: "flex", justifyContent: "space-around", marginTop: "20px" }}>
                             {[selectedGranite, selectedOther].map((modelName) => {
                                 console.log("1.modelName:::>>", modelName);
@@ -503,16 +532,40 @@ const parseFileName = (fileName: string) => {
                                 console.log(`Filtered Prompts:`, filteredPrompts);
 
                                 return (
-                                    <div id={`chat-outter-wrap-${model.model?.name}`} key={model?.model?.name} style={{ flex: 1, padding: "10px", border: "1px solid #ddd", borderRadius: "8px", margin: "0 5px" }}>
+                                    <div id={`chat-outter-wrap-${model.model?.name}`} className="chat-outter-wrap" key={model?.model?.name}>
+                                        
+                                        {/* { modelScores[selectedGranite] && modelScores[selectedOther] 
+                                            ? parseFloat(modelScores[model?.model?.name ?? '']) > parseFloat(modelScores[selectedGranite === model?.model?.name ? selectedOther : selectedGranite]) 
+                                                ? (
+                                                    <div className="ribbon">
+                                                        <span className="ribbon4">Recommented Model</span>
+                                                    </div>
+                                                ) 
+                                                : (null) 
+                                            : (null)
+                                        } */}
+                                        
                                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                             <h4 style={{ textTransform: "capitalize", marginBottom: "10px", marginTop: "0" }}>{model?.model?.name}</h4>
                                         </div>
 
                                         <p><strong>Description:</strong> Currently No Description Available.</p>
+                                        
+                                        <div className="score-wrapper">
+                                            <strong>Pass@1 Score</strong>
+                                            <Tag className="score-capsule" size="md" type={
+                                                modelScores[selectedGranite] && modelScores[selectedOther] 
+                                                ? parseFloat(modelScores[model?.model?.name ?? '']) > parseFloat(modelScores[selectedGranite === model?.model?.name ? selectedOther : selectedGranite]) 
+                                                    ? 'green' 
+                                                    : 'red'
+                                                : 'cyan'
+                                            }>{modelScores[model?.model?.name ?? ''] || 'N/A'}</Tag>
+                                            
+                                        </div>
 
                                         <div style={{ margin: "0.5rem 0"}}>
                                             <Grid fullWidth narrow>
-                                                <Column lg={8} md={8} sm={4}>
+                                                {/* <Column lg={8} md={8} sm={4}>
                                                     <DatePicker 
                                                         datePickerType="single"
                                                         className="question-date-picker"
@@ -549,31 +602,7 @@ const parseFileName = (fileName: string) => {
                                                             labelText="Select a Date"
                                                         />
                                                     </DatePicker>
-                                                </Column>
-                                                <Column lg={8} md={8} sm={4}>
-                                                    <Dropdown
-                                                        id={`result-combo-box-${model?.model?.name}`}
-                                                        className="result-combo-box"
-                                                        items={model?.modelJsonFiles || []}
-                                                        itemToString={item => item ? `Result-${model?.modelJsonFiles?.indexOf(item) + 1}` : 'Select Result'}
-                                                        onChange={({ selectedItem }) => {
-                                                            const currentModelName = model?.model?.name as string;
-                                                            setSelectedResults(prev => ({
-                                                            ...prev,
-                                                            [currentModelName]: selectedItem as string
-                                                            }));
-                                                        }}
-                                                        selectedItem={selectedResults[model?.model?.name as string] || null}
-                                                        titleText="Select a Result"
-                                                        label="Choose a result"
-                                                        disabled={!model?.modelJsonFiles?.length}
-                                                    />
-                                                    {/* <p id="result-warn-message" style={{ display: "block", color: "red", margin: "0.4rem 0", fontSize: "0.75rem" }}>Please select a result from dropdown.</p> */}
-                                                </Column>
-                                            </Grid>
-
-                                            
-                                            <Grid fullWidth narrow>
+                                                </Column> */}
                                                 <Column lg={8} md={8} sm={4}>
                                                     <Dropdown
                                                         id={`question-combo-box-${model?.model?.name}`}
@@ -587,32 +616,75 @@ const parseFileName = (fileName: string) => {
                                                         selectedItem={selectedQuestion}
                                                         titleText="Select a Question"
                                                         label="Choose a question"
-                                                        // disabled={!filteredPrompts?.length || !selectedResults[model?.model?.name as string]}
                                                     />
                                                 </Column>
-                                                {(selectedResults[model?.model?.name as string] || model?.modelJsonFiles?.length === 1) && (
                                                 <Column lg={8} md={8} sm={4}>
+                                                    <ComboBox
+                                                        id={`result-combo-box-${model?.model?.name}`}
+                                                        className="result-combo-box"
+                                                        items={model?.modelJsonFiles || []}
+                                                        itemToString={(item) => {
+                                                            if (!item) return 'Select Result';
+                                                            const parsed = parseFileName(item);
+                                                            if (!parsed) return item;
+                                                            
+                                                            // Format timestamp to DD-MM-YYYY HH:MM am/pm
+                                                            const datePart = parsed.timestamp.substring(0, 8);
+                                                            const timePart = parsed.timestamp.substring(9);
+                                                            const year = datePart.substring(0, 4);
+                                                            const month = datePart.substring(4, 6);
+                                                            const day = datePart.substring(6, 8);
+                                                            
+                                                            const hours = parseInt(timePart.substring(0, 2));
+                                                            const minutes = timePart.substring(2, 4);
+                                                            const ampm = hours >= 12 ? 'pm' : 'am';
+                                                            const twelveHour = hours % 12 || 12;
+
+                                                            return `${parsed.modelName}-${day}-${month}-${year} ${twelveHour}:${minutes}${ampm}`;
+                                                        }}
+                                                        onChange={({ selectedItem }) => {
+                                                            const currentModelName = model?.model?.name as string;
+                                                            setSelectedResults(prev => ({
+                                                                ...prev,
+                                                                [currentModelName]: selectedItem as string
+                                                            }));
+                                                        }}
+                                                        selectedItem={selectedResults[model?.model?.name as string] || null}
+                                                        titleText="Select a Result"
+                                                        placeholder="Choose a result version"
+                                                        shouldFilterItem={({ item, inputValue }) => 
+                                                            item.toLowerCase().includes(inputValue?.toLowerCase() || '')
+                                                        }
+                                                        disabled={!model?.modelJsonFiles?.length}
+                                                    />
+                                                    {/* <p id="result-warn-message" style={{ display: "block", color: "red", margin: "0.4rem 0", fontSize: "0.75rem" }}>Please select a result from dropdown.</p> */}
+                                                </Column>
+                                            </Grid>
+
+                                            
+                                            <Grid fullWidth narrow>
+                                                {(selectedResults[model?.model?.name as string] || model?.modelJsonFiles?.length === 1) && (
+                                                <Column lg={16} md={8} sm={4}>
                                                     <Button
                                                         kind="danger--tertiary"
                                                         size="sm"
-                                                        onClick={() => {
+                                                        onClick={() => {debugger
                                                             const modelName = model?.model?.name as string;
                                                             setSelectedQuestions(prev => ({ ...prev, [modelName]: "All" }));
                                                             setSelectedResults(prev => ({ ...prev, [modelName]: '' }));
                                                             setSelectedDates(prev => ({ ...prev, [modelName]: null }));
                                                         }}
                                                         disabled={
-                                                            selectedQuestion === "All" &&
                                                             !selectedResults[model?.model?.name as string] &&
                                                             !selectedDates[model?.model?.name as string]
                                                         }
                                                         style={{ 
-                                                            marginTop: "1.7rem",
+                                                            marginTop: "0.8rem",
                                                             padding: "0.5rem 1rem",
                                                             width: "10rem",
-                                                            height: "2.5rem",
                                                             alignItems: "center",
-                                                            justifyContent: "center"
+                                                            justifyContent: "center",
+                                                            float: "right"
                                                         }}
                                                     >
                                                         Reset Filter
@@ -651,7 +723,7 @@ const parseFileName = (fileName: string) => {
                                             </div>
                                             {filteredPrompts && filteredPrompts.length === 0 ? (
                                                 <div style={{ color: "#fff", background: "#606060cc", borderRadius: "4px", padding: "0.7rem", textAlign: "center", marginTop: "20px" }}>
-                                                    No results found for the selected date. <br /><br /> Please select another date or Clear the date filter to see the latest prompt result.
+                                                    No results found. <br /><br /> Please select another model or Click reset filter button to see the latest prompt result.
                                                 </div>
                                             ) : (
                                                 <ul>
@@ -692,7 +764,14 @@ const parseFileName = (fileName: string) => {
                             })}
                         </div>
                     </Column>
-                )}
+                ) : (
+                    <Column sm={4} md={8} lg={16}>
+                        <div style={{ color: "#fff", background: "#262626", border: "0.4px solid #514f4f", borderRadius: "4px", padding: "0.7rem", textAlign: "center", boxShadow: "0 0 6px 1px rgb(0 0 17)",  margin: "1.2rem auto", width: "50%" }}>
+                            <p>No comparison found. <br /> Please select models to compare.</p>
+                        </div>
+                    </Column>
+                )
+                }
             </Grid>
         </div>
     );
