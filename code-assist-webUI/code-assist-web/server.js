@@ -119,3 +119,16 @@ app.get("/server-ip", (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`✅ Server Running at ${machineIP}:${PORT}`);
 });
+
+app.get("/api/code-assist", (req, res) => {
+    const filePath = path.join(__dirname, "src", "code-assist-data.json");
+    
+    if (!fs.existsSync(filePath)) {
+        return res.status(404).json({ error: "Code assist data not found" });
+    }
+
+    fs.readFile(filePath, "utf8", (err, data) => {
+        if (err) return res.status(500).json({ error: "Failed to read code assist data" });
+        res.json(JSON.parse(data));
+    });
+});
