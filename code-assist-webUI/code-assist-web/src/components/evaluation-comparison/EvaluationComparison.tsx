@@ -546,7 +546,13 @@ const parseFileName = (fileName: string) => {
                                         } */}
                                         
                                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                                            <h4 style={{ textTransform: "capitalize", marginBottom: "10px", marginTop: "0" }}>{model?.model?.name}</h4>
+                                            <h4 style={{ textTransform: "capitalize", marginBottom: "10px", marginTop: "0" }}>{model?.model?.name} {
+                                                modelScores[selectedGranite] && modelScores[selectedOther] 
+                                                ? parseFloat(modelScores[model?.model?.name ?? '']) > parseFloat(modelScores[selectedGranite === model?.model?.name ? selectedOther : selectedGranite]) 
+                                                    ? (<span style={{ fontSize: '0.8rem', padding: '0.4rem', color: '#069d37', borderRadius: '10rem' }}>Recommended</span>)
+                                                    : ('')
+                                                : ('')
+                                            }</h4>
                                         </div>
 
                                         <p><strong>Description:</strong> Currently No Description Available.</p>
@@ -662,13 +668,13 @@ const parseFileName = (fileName: string) => {
                                             </Grid>
 
                                             
-                                            <Grid fullWidth narrow>
+                                            <Grid fullWidth narrow> 
                                                 {(selectedResults[model?.model?.name as string] || model?.modelJsonFiles?.length === 1) && (
                                                 <Column lg={16} md={8} sm={4}>
                                                     <Button
                                                         kind="danger--tertiary"
                                                         size="sm"
-                                                        onClick={() => {debugger
+                                                        onClick={() => {
                                                             const modelName = model?.model?.name as string;
                                                             setSelectedQuestions(prev => ({ ...prev, [modelName]: "All" }));
                                                             setSelectedResults(prev => ({ ...prev, [modelName]: '' }));
@@ -684,7 +690,9 @@ const parseFileName = (fileName: string) => {
                                                             width: "10rem",
                                                             alignItems: "center",
                                                             justifyContent: "center",
-                                                            float: "right"
+                                                            float: "right",
+                                                            display: !selectedResults[model?.model?.name as string] &&
+                                                            !selectedDates[model?.model?.name as string] ? "none" : "block"
                                                         }}
                                                     >
                                                         Reset Filter
