@@ -723,7 +723,7 @@ const parseFileName = (fileName: string) => {
 
                                         <div className={solidBackgrounds[model?.model?.name ?? 'default'] ? "chat-screen solid-bg" : "chat-screen"}>
                                             <div className="date-capsule-wrap">
-                                                <Tag className="date-capsule" type="warm-grey">
+                                                <Tag className="date-capsule" type="warm-gray">
                                                     {selectedDates[model?.model?.name ?? 'default'] 
                                                     ? format(new Date(selectedDates[model?.model?.name ?? 'default'] || ''), 'dd-MM-yyyy')
                                                     : 'Today'}
