@@ -74,10 +74,15 @@ const ModelComparison = () => {
     useEffect(() => {
         const fetchFileNames = async () => {
             try {
-                const githubToken = "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"; // Replace with your GitHub token
+                const githubToken = process.env.REACT_APP_API_KEY; // Fetch token from environment variable
+
+                if (!githubToken) {
+                    throw new Error("GitHub token is not defined in the environment variables.");
+                }
+
                 const owner = "IBM-OSS-Support"; // Replace with the repository owner
-                const repo = "code-assist-ui.github.io"; // Replace with the repository name
-                const branch = "main"; // Replace with the branch name
+                const repo = "code-assist-web.github.io"; // Replace with the repository name
+                const branch = "git-api-integration"; // Replace with the branch name
 
                 const url = `https://api.github.com/repos/${owner}/${repo}/contents/prompt-results?ref=${branch}`;
                 console.log(`Fetching file names from GitHub API: ${url}`);
@@ -122,10 +127,15 @@ const ModelComparison = () => {
             setIsLoading(true);
             setApiError(null);
             try {
-                const githubToken = "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"; // Replace with your GitHub token
+                const githubToken = process.env.REACT_APP_API_KEY; // Fetch token from environment variable
+
+                if (!githubToken) {
+                    throw new Error("GitHub token is not defined in the environment variables.");
+                }
+                
                 const owner = "IBM-OSS-Support"; // Replace with the repository owner
-                const repo = "code-assist-ui.github.io"; // Replace with the repository name
-                const branch = "main"; // Replace with the branch name
+                const repo = "code-assist-web.github.io"; // Replace with the repository name
+                const branch = "git-api-integration"; // Replace with the branch name
 
                 console.log("Fetching models data for files:", availableFiles);
 
@@ -192,10 +202,15 @@ const ModelComparison = () => {
             setApiError(null);
             setNoResultsFound(false);
             try {
-                const githubToken = "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"; // Replace with your GitHub token
+                const githubToken = process.env.REACT_APP_API_KEY; // Fetch token from environment variable
+
+                if (!githubToken) {
+                    throw new Error("GitHub token is not defined in the environment variables.");
+                }
+                
                 const owner = "IBM-OSS-Support"; // Replace with the repository owner
-                const repo = "code-assist-ui.github.io"; // Replace with the repository name
-                const branch = "main"; // Replace with the branch name
+                const repo = "code-assist-web.github.io"; // Replace with the repository name
+                const branch = "git-api-integration"; // Replace with the branch name
 
                 const responses = await Promise.all(
                     availableFiles.map(async (file) => {
