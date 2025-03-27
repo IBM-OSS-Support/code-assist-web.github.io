@@ -54,7 +54,7 @@ llama_model_loader: - kv  27:                tokenizer.ggml.bos_token_id u32    
 llama_model_loader: - kv  28:                tokenizer.ggml.eos_token_id u32              = 0
 llama_model_loader: - kv  29:            tokenizer.ggml.unknown_token_id u32              = 0
 llama_model_loader: - kv  30:            tokenizer.ggml.padding_token_id u32              = 0
-llama_model_loader: - kv  31:                    tokenizer.chat_template str              = {% for message in messages %}\n{% if m...
+llama_model_loader: - kv  31:                    tokenizer.chat_template str              = {% for message in messages %}\n{% if m...}
 llama_model_loader: - kv  32:               general.quantization_version u32              = 2
 llama_model_loader: - type  f32:  325 tensors
 llama_model_loader: - type q4_0:  252 tensors
