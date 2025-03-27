@@ -25,6 +25,8 @@ const ModelComparison = () => {
     const [selectedResults, setSelectedResults] = useState<{ [key: string]: string }>({});
     const [codeAssistData, setCodeAssistData] = useState<any>(null);
     const [modelScores, setModelScores] = useState<{[key: string]: string}>({});
+    const [graniteModels, setGraniteModels] = useState<string[]>([]);
+    const [otherModels, setOtherModels] = useState<string[]>([]);
 
     interface Model {
         name: string;
@@ -72,19 +74,116 @@ const ModelComparison = () => {
     useEffect(() => {
         const fetchFileNames = async () => {
             try {
-                const response = await fetch(`http://${serverIP}:${serverPort}/api/models`);
-                if (!response.ok) throw new Error("Failed to fetch files");
+                const githubToken = "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"; // Replace with your GitHub token
+                const owner = "IBM-OSS-Support"; // Replace with the repository owner
+                const repo = "code-assist-ui.github.io"; // Replace with the repository name
+                const branch = "main"; // Replace with the branch name
+
+                const url = `https://api.github.com/repos/${owner}/${repo}/contents/prompt-results?ref=${branch}`;
+                console.log(`Fetching file names from GitHub API: ${url}`);
+
+                const response = await fetch(url, {
+                    headers: {
+                        Authorization: `Bearer ${githubToken}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    console.error(`Failed to fetch file names from GitHub API, Status: ${response.status}`);
+                    throw new Error("Failed to fetch files");
+                }
+
                 const files = await response.json();
-                setAvailableFiles(files);
+                const fileNames = files.map((file: any) => file.name);
+                console.log("Fetched file names:", fileNames);
+                setAvailableFiles(fileNames);
             } catch (error) {
-                console.error("Error fetching files:", error);
+                console.error("Error fetching files from GitHub API:", error);
                 setApiError("Failed to fetch available files. Please try again later.");
             }
         };
 
         fetchFileNames();
-    }, [serverIP, serverPort]);
+    }, []);
 
+    // Debugging logs for availableFiles and modelsData
+    useEffect(() => {
+        console.log("Available Files:", availableFiles);
+    }, [availableFiles]);
+
+    useEffect(() => {
+        console.log("Models Data:", modelsData);
+    }, [modelsData]);
+
+    // Ensure modelsData is updated correctly after fetching availableFiles
+    useEffect(() => {
+        const fetchModelData = async () => {
+            if (availableFiles.length === 0) return; // Skip if no files are available
+            setIsLoading(true);
+            setApiError(null);
+            try {
+                const githubToken = "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"; // Replace with your GitHub token
+                const owner = "IBM-OSS-Support"; // Replace with the repository owner
+                const repo = "code-assist-ui.github.io"; // Replace with the repository name
+                const branch = "main"; // Replace with the branch name
+
+                console.log("Fetching models data for files:", availableFiles);
+
+                const responses = await Promise.all(
+                    availableFiles.map(async (file) => {
+                        const url = `https://api.github.com/repos/${owner}/${repo}/contents/prompt-results/${file}?ref=${branch}`;
+                        console.log(`Fetching data from GitHub API: ${url}`);
+
+                        const response = await fetch(url, {
+                            headers: {
+                                Authorization: `Bearer ${githubToken}`,
+                            },
+                        });
+
+                        if (!response.ok) {
+                            console.error(`Failed to fetch data for file: ${file}, Status: ${response.status}`);
+                            throw new Error(`Failed to fetch data for file: ${file}`);
+                        }
+
+                        const fileData = await response.json();
+
+                        // Check if the content is base64-encoded
+                        if (fileData.encoding === "base64") {
+                            const decodedContent = atob(fileData.content); // Decode base64 content
+                            try {
+                                const parsedContent = JSON.parse(decodedContent); // Parse JSON content
+                                console.log(`Parsed content for file ${file}:`, parsedContent);
+                                return parsedContent;
+                            } catch (parseError) {
+                                console.error(`Failed to parse JSON for file: ${file}`, parseError);
+                                return null;
+                            }
+                        } else {
+                            console.warn(`File ${file} is not base64-encoded. Skipping.`);
+                            return null;
+                        }
+                    })
+                );
+
+                const validResponses = responses.filter((response) => response !== null);
+                console.log("Fetched models data successfully:", validResponses);
+                setModelsData(validResponses.flat());
+            } catch (error) {
+                console.error("Error fetching models data from GitHub API:", error);
+                setApiError("Failed to fetch models data. Please try again later.");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchModelData();
+    }, [availableFiles]);
+
+    // Debugging logs for graniteModels and otherModels
+    useEffect(() => {
+        console.log("Granite Models:", selectedGranite);
+        console.log("Other Models:", selectedOther);
+    }, [selectedGranite, selectedOther]);
 
     // Fetch models data when compare option changes or date changes
     useEffect(() => {
@@ -93,27 +192,56 @@ const ModelComparison = () => {
             setApiError(null);
             setNoResultsFound(false);
             try {
-                const responses = await Promise.all(
-                    availableFiles.map(async file => {
-                        const date = selectedDates[file] || null;
-                        let fileNames = await fetch(`http://${serverIP}:${serverPort}/api/models/${file}/files`).then(r => r.json());
-                        fileNames = fileNames.flat();
+                const githubToken = "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"; // Replace with your GitHub token
+                const owner = "IBM-OSS-Support"; // Replace with the repository owner
+                const repo = "code-assist-ui.github.io"; // Replace with the repository name
+                const branch = "main"; // Replace with the branch name
 
-                        // setAllFileNames(fileNames);
-                        // console.log("fileNames::>", allFileNames);
-                        
+                const responses = await Promise.all(
+                    availableFiles.map(async (file) => {
+                        const date = selectedDates[file] || null;
+
+                        // Fetch file list from GitHub
+                        const fileListResponse = await fetch(
+                            `https://api.github.com/repos/${owner}/${repo}/contents/prompt-results/${file}?ref=${branch}`,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${githubToken}`,
+                                },
+                            }
+                        );
+                        if (!fileListResponse.ok) throw new Error("Failed to fetch file list from GitHub");
+                        const fileList = await fileListResponse.json();
+
+                        const fileNames = fileList.map((file: any) => file.name);
 
                         const fileResponses: any[] = await Promise.all(
                             fileNames.map(async (fileName: string) => {
-                                return fetch(`http://${serverIP}:${serverPort}/api/models/${file}/files/${fileName}`)
-                                    .then((r: Response) => r.json());
+                                // Fetch file content from GitHub
+                                const fileResponse = await fetch(
+                                    `https://api.github.com/repos/${owner}/${repo}/contents/prompt-results/${file}/${fileName}?ref=${branch}`,
+                                    {
+                                        headers: {
+                                            Authorization: `Bearer ${githubToken}`,
+                                        },
+                                    }
+                                );
+                                if (!fileResponse.ok) throw new Error(`Failed to fetch file: ${fileName}`);
+                                const fileData = await fileResponse.json();
+
+                                const jsonContent = atob(fileData.content);
+                                // Decode base64 content
+                                const content = JSON.parse(jsonContent);
+                                console.log("Content:", content);
+                                
+                                return content;
                             })
                         );
 
-                        setAllFileNames(prev =>
-                            [...prev, ...fileNames].reduce((acc, fileName) => 
-                              acc.includes(fileName) ? acc : [...acc, fileName], [])
-                          );
+                        setAllFileNames((prev) =>
+                            [...prev, ...fileNames].reduce((acc, fileName) =>
+                                acc.includes(fileName) ? acc : [...acc, fileName], [])
+                        );
                         console.log("fileNames::>>", allFileNames);
 
                         return fileResponses.flat();
@@ -121,7 +249,7 @@ const ModelComparison = () => {
                 );
 
                 // Normalize response structure
-                const allModels = responses.flatMap(response => 
+                const allModels = responses.flatMap((response) =>
                     Object.values(response).flat()
                 );
 
@@ -140,27 +268,40 @@ const ModelComparison = () => {
         }
     }, [availableFiles, serverIP, serverPort, selectedDates]);
 
+    // Update model lists whenever modelsData changes
+    useEffect(() => {
+        const extractModels = (data: any[]): Model[] => {
+            const extractedModels: Model[] = [];
+            data.forEach((item) => {
+                if (item[0] && Array.isArray(item[0])) {
+                    // Handle nested array structure
+                    extractedModels.push(...item[0]);
+                } else if (typeof item === "object" && item !== null) {
+                    // Handle flat object structure
+                    Object.values(item).forEach((nestedItem) => {
+                        if (Array.isArray(nestedItem)) {
+                            extractedModels.push(...nestedItem);
+                        }
+                    });
+                }
+            });
+            return extractedModels;
+        };
 
+        const flattenedModels = extractModels(modelsData);
 
-    // Prepare model lists
-    const flattenedModels = modelsData.flatMap(item => Object.values(item).flat());
+        console.log("Flattened Models:", flattenedModels);
 
-    const graniteModels = Array.from(new Set(
-        flattenedModels
-            .filter(model => model.name && model.name.toLowerCase().includes("granite"))
-            .map(model => model.name)
-    ));
+        const allModelNames = Array.from(
+            new Set(flattenedModels.map((model) => model.name).filter(Boolean))
+        );
 
+        setGraniteModels(allModelNames); // Include all models in graniteModels
+        setOtherModels(allModelNames); // Include all models in otherModels
 
-    const otherModels = Array.from(new Set(
-        flattenedModels
-            .filter(model => model.name && !model.name.toLowerCase().includes("granite"))
-            .map(model => model.name)
-    ));
-
-    console.log("Granite Models:", graniteModels);
-    console.log("Other Models:", otherModels);
-
+        console.log("Granite Models:", graniteModels);
+        console.log("Other Models:", otherModels);
+    }, [modelsData]);
 
     // Add utility functions for filename parsing
 const parseFileName = (fileName: string) => {
@@ -198,6 +339,14 @@ const parseFileName = (fileName: string) => {
     
         // Find model data for selected result
         const selectedResult = selectedResults[name];
+        const flattenedModels = modelsData.flatMap(item => {
+            if (Array.isArray(item)) {
+                return item;
+            } else if (typeof item === "object" && item !== null) {
+                return Object.values(item).flat();
+            }
+            return [];
+        });
         const modelData = selectedResult 
             ? flattenedModels.find(m => m.file_name === selectedResult)
             : flattenedModels.find(m => m.name === name);
@@ -415,7 +564,7 @@ const parseFileName = (fileName: string) => {
                                 <ComboBox
                                     key={selectedGranite}
                                     id="granite-model-combo-box"
-                                    items={[...graniteModels, ...otherModels]}  // Combine both lists
+                                    items={graniteModels} // Use graniteModels array
                                     itemToString={(item) => (item ? item : '')}
                                     onChange={({ selectedItem }) => setSelectedGranite(selectedItem as string)}
                                     selectedItem={selectedGranite} 
@@ -431,7 +580,7 @@ const parseFileName = (fileName: string) => {
                                 <ComboBox
                                     key={selectedOther}
                                     id="other-model-combo-box"
-                                    items={[...graniteModels, ...otherModels]}  // Combine both lists
+                                    items={otherModels} // Use otherModels array
                                     itemToString={(item) => (item ? item : '')}
                                     onChange={({ selectedItem }) => setSelectedOther(selectedItem as string)}
                                     selectedItem={selectedOther} 
@@ -456,7 +605,7 @@ const parseFileName = (fileName: string) => {
 
                 {isLoading && 
                     <Column sm={4} md={8} lg={16}>
-                        <div className="skeleton-wrap" style={{ display: "flex", width: "300px", height: "560px", alignItems: "center", justifyContent: "center", margin: "4rem auto 0" }}>
+                        <div className="skeleton-wrap" style={{ display: "flex", width: "300px", height: "350px", alignItems: "center", justifyContent: "center", margin: "4rem auto 0rem" }}>
                             <DatePickerSkeleton range />
                         </div>
                     </Column>
@@ -705,7 +854,7 @@ const parseFileName = (fileName: string) => {
                                             <strong>Prompt:</strong>
                                         </p>
 
-                                        <div>
+                                                                                        <div>
                                             <Checkbox
                                                 id={`solid-background-toggle-${model?.model?.name}`}
                                                 className="solid-background-toggle"
@@ -774,11 +923,13 @@ const parseFileName = (fileName: string) => {
                     </Column>
                 ) : (
                     <Column sm={4} md={8} lg={16}>
-                        <div style={{ color: "#fff", background: "#262626", border: "0.4px solid #514f4f", borderRadius: "4px", padding: "0.7rem", textAlign: "center", boxShadow: "0 0 6px 1px rgb(0 0 17)",  margin: "1.2rem auto", width: "50%" }}>
-                            <p>No comparison found. <br /> Please select models to compare.</p>
-                        </div>
+                        {!isLoading && (
+                            <div style={{ color: "#fff", background: "#262626", border: "0.4px solid #514f4f", borderRadius: "4px", padding: "0.7rem", textAlign: "center", boxShadow: "0 0 6px 1px rgb(0 0 17)", margin: "1.2rem auto", width: "50%" }}>
+                                <p>No comparison found. <br /> Please select models to compare.</p>
+                            </div>
+                        )}
                     </Column>
-                )
+                    )
                 }
             </Grid>
         </div>
