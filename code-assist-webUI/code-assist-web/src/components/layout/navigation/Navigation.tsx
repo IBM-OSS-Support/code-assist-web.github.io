@@ -20,13 +20,13 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 
   React.useEffect(() => {
-    if (location.pathname === '/' || location.pathname === '/dashboard') {
+    if (location.pathname === '/#/' || location.pathname === '/#/dashboard') {
       setActiveTab('Dashboard');
-    } else if (location.pathname === '/summary') {
+    } else if (location.pathname === '/#/summary') {
       setActiveTab('Summary');
-    } else if (location.pathname === '/leaderboard') {
+    } else if (location.pathname === '/#/leaderboard') {
       setActiveTab('Leaderboard');
-    } else if (location.pathname === '/model-comparison') {
+    } else if (location.pathname === '/#/model-comparison') {
       setActiveTab('EvaluationComparison');
     }
   }, [location]);
@@ -58,16 +58,16 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             isRail
           >
             <SideNavItems>
-              <SideNavLink renderIcon={Home} href="/dashboard" onClick={() => handleNavLinkClick('Dashboard')}>
+              <SideNavLink renderIcon={Home} href="/#/dashboard" onClick={() => handleNavLinkClick('Dashboard')}>
                 Dashboard
               </SideNavLink>
-              <SideNavLink renderIcon={Folders} href="/summary" onClick={() => handleNavLinkClick('Summary')}>
+              <SideNavLink renderIcon={Folders} href="/#/summary" onClick={() => handleNavLinkClick('Summary')}>
                 Summary
               </SideNavLink>
-              <SideNavLink renderIcon={Group} href="/leaderboard" onClick={() => handleNavLinkClick('Leaderboard')}>
+              <SideNavLink renderIcon={Group} href="/#/leaderboard" onClick={() => handleNavLinkClick('Leaderboard')}>
                 BigCodeBench Leaderboard
               </SideNavLink>
-              <SideNavLink renderIcon={GroupResource} href="/model-comparison" onClick={() => handleNavLinkClick('EvaluationComparison')}>
+              <SideNavLink renderIcon={GroupResource} href="/#/model-comparison" onClick={() => handleNavLinkClick('EvaluationComparison')}>
                 Model Comparison
               </SideNavLink>
             </SideNavItems>

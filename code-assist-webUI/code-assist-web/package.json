@@ -9,6 +9,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
+    "gh-pages": "^6.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^7.1.3",
@@ -16,6 +17,8 @@
     "typescript": "^4.4.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b main -d build",
     "start": "node server.js & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -43,5 +46,6 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "sass": "^1.83.4"
-  }
+  },
+  "homepage": "https://github.com/IBM-OSS-Support/code-assist-web.github.io/"
 }
