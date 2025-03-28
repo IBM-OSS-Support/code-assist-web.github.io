@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Theme } from '@carbon/react';
 import EvaluationReport from './components/evaluation-report/EvaluationReport';
 import Navigation from './components/layout/navigation/Navigation';
@@ -17,11 +17,11 @@ const App: React.FC = () => {
               <MainHeader />
             </Navigation>
             <Routes>
-              <Route path="/#/" element={<Dashboard />} />
-              <Route path="/#/dashboard" element={<Dashboard />} />
-              <Route path="/#/summary" element={<EvaluationReport />} />
-              <Route path='/#/leaderboard' element={<Leaderboard />} />
-              <Route path='/#/model-comparison' element={<EvaluationComparison />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/summary" element={<EvaluationReport />} />
+              <Route path='/leaderboard' element={<Leaderboard />} />
+              <Route path='/model-comparison' element={<EvaluationComparison />} />
             </Routes>
           </Router>
         </div>
